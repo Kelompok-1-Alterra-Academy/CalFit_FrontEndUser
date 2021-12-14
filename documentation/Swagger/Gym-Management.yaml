@@ -377,7 +377,7 @@ paths:
                   data:
                     type: array
                     items:
-                      $ref: "#/components/schemas/Classes"
+                      $ref: "#/components/schemas/Class"
         "400":
           $ref: "#/components/responses/400"
         "500":
@@ -504,7 +504,18 @@ paths:
         "400":
           description: bad input parameter
 
-  /gyms/{id}/classes/{id}:
+  /gyms/{gymId}/classes/{classId}:
+    parameters:
+      - name: gymId
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: classId
+        in: path
+        required: true
+        schema:
+          type: integer
     get:
       tags:
         - Super Admins
@@ -532,7 +543,47 @@ paths:
                   data:
                     type: array
                     items:
-                      $ref: "#/components/schemas/Classes"
+                      $ref: "#/components/schemas/Class"
+
+  /gyms/{gymId}/classes/{classId}/bookings:
+    parameters:
+      - name: gymId
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: classId
+        in: path
+        required: true
+        schema:
+          type: integer
+    get:
+      tags:
+        - Super Admins
+        - Admins
+      summary: Get all bookings on spesific class
+      description: Get all bookings on spesific class
+      responses:
+        "200":
+          description: succesfull operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: successfully get class details
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Booking"
 
   /memberships:
     get:
@@ -718,7 +769,6 @@ paths:
                 password:
                   type: string
                   example: johnDoe12312
-              # $ref: '#/components/schemas/UserLogin'
         description: User credentials
 
   /users:
@@ -841,6 +891,36 @@ components:
                 example: Internal server error
 
   schemas:
+    Address:
+      type: object
+      required:
+        - address
+        - district
+        - city
+        - postalCode
+        - createdAt
+        - updatedAt
+      properties:
+        address:
+          type: string
+          example: Jalan Kusuma No.9
+        district:
+          type: string
+          example: Grogol Petamburan
+        city:
+          type: string
+          example: Jakarta Barat
+        postalCode:
+          type: string
+          example: 11450
+        createdAt:
+          type: string
+          format: date-time
+          example: 2016-08-29T09:12:33.001Z
+        updatedAt:
+          type: string
+          format: date-time
+          example: 2016-08-29T09:12:33.001Z
     Admin:
       type: object
       required:
@@ -851,8 +931,8 @@ components:
         username:
           type: string
           example: john_doe
-        # gym:
-        #   $ref:  '#/components/schemas/Gym'
+        gym:
+          $ref:  '#/components/schemas/Gym'
         created_at:
           type: string
           format: date-time
@@ -881,8 +961,8 @@ components:
           $ref: "#/components/schemas/AdminRelation"
         user:
           $ref: "#/components/schemas/UserRelation"
-        # class:
-        #   $ref:  '#/components/schemas/Class'
+        class:
+          $ref:  '#/components/schemas/Class'
         amount:
           type: integer
         status:
@@ -896,12 +976,13 @@ components:
           type: string
           format: date-time
           example: 2016-08-29T09:12:33.001Z
-    Classes:
+    Class:
       type: object
       properties:
         gym:
           type: array
-          $ref: "#/components/schemas/GymRelation"
+          items:
+            $ref: "#/components/schemas/GymRelation"
         name:
           type: string
           example: zumba
@@ -939,8 +1020,8 @@ components:
         name:
           type: string
           example: Gelud Gym
-        # address:
-        #   $ref:  '#/components/schemas/Address'
+        address:
+          $ref:  '#/components/schemas/Address'
         telephone:
           type: string
           example: 081234567890
@@ -1015,10 +1096,10 @@ components:
         photo:
           type: string
           example: https://images.unsplash.com/photo-1607990281513-2c110a25bd8c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=634&q=80
-        # address:
-        #   $ref: '#/components/schemas/Address'
-        # membership:
-        #   $ref: '#/components/schemas/Address'
+        address:
+          $ref: '#/components/schemas/Address'
+        membership:
+          $ref: '#/components/schemas/Membership'
         created_at:
           type: string
           format: date-time
@@ -1033,7 +1114,6 @@ components:
         username:
           type: string
           example: john_doe
-      # UserLogin:
     VideoContents:
       type: object
       properties:
@@ -1056,15 +1136,3 @@ components:
           type: string
           format: date-time
           example: 2016-08-29T09:12:33.001Z
-
-    #   type: object
-    #   required:
-    #     - username
-    #     - password
-    #   properties:
-    #     username:
-    #       type: string
-    #       example: john_doe
-    #     password:
-    #       type: string
-    #       example: johnDoe12312
