@@ -8,7 +8,7 @@ import theme from "../styles/theme";
 import { createEmotionCache } from "../src/utils/createEmotionCache";
 import DateAdapter from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
-// import { RootLayout } from '../src/components/Layout/RootLayout';
+import { RootLayout } from '../src/components/Layout/RootLayout';
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -28,9 +28,9 @@ export default function MyApp({
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
         <LocalizationProvider dateAdapter={DateAdapter}>
-          {/* <RootLayout> */}
-          <Component {...pageProps} />
-          {/* </RootLayout> */}
+          <RootLayout>
+            <Component {...pageProps} />
+          </RootLayout>
         </LocalizationProvider>
       </ThemeProvider>
     </CacheProvider>
