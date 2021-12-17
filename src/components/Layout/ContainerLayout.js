@@ -1,16 +1,7 @@
-import React from 'react';
-import { Container, Box } from '@mui/material';
-import { makeStyles } from '@mui/styles';
-import PropTypes from 'prop-types';
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flow-root',
-    minHeight: '100vh',
-    maxWidth: '600px',
-    margin: '64px auto',
-  },
-}));
+import React from "react";
+import { Container, Box } from "@mui/material";
+import PropTypes from "prop-types";
+import { useStyles } from "./ContainerLayoutStyles";
 
 export const ContainerLayout = ({ children }) => {
   const classes = useStyles();
