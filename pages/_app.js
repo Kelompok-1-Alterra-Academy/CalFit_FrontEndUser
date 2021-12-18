@@ -8,7 +8,7 @@ import theme from "../styles/theme";
 import { createEmotionCache } from "../src/utils/createEmotionCache";
 import DateAdapter from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
-import { RootLayout } from "../src/components/Layout/RootLayout";
+import { RootLayout } from "../src/components/layout/rootLayout";
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
