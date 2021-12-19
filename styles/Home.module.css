@@ -12,6 +12,12 @@
   align-items: center;
 }
 
+.header {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .footer {
   display: flex;
   flex: 1;
