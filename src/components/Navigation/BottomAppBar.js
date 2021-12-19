@@ -6,7 +6,7 @@ import OndemandVideoIcon from "@mui/icons-material/OndemandVideo";
 import DateRangeIcon from "@mui/icons-material/DateRange";
 import PersonIcon from "@mui/icons-material/Person";
 import { useRouter } from "next/dist/client/router";
-import { useStyles } from "./bottomAppBarStyles";
+import { useStyles } from "./BottomAppBarStyles";
 
 const routeIndex = [
   { selected: ["/"], path: "/", label: "Home", icon: <HomeIcon />, index: 1 },

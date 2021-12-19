@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Box, Snackbar, Alert } from "@mui/material";
 import PropTypes from "prop-types";
-import { BottomAppBar } from "../navigation/bottomAppBar";
-import { ContainerLayout } from "./containerLayout";
+import { BottomAppBar } from "../Navigation/BottomAppBar";
+import { ContainerLayout } from "./ContainerLayout";
 
 export const RootLayout = ({ children }) => {
   const [open, setOpen] = useState(false);

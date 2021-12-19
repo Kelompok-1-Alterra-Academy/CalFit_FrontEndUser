@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Box } from "@mui/material";
 import PropTypes from "prop-types";
-import { useStyles } from "./containerLayoutStyles";
+import { useStyles } from "./ContainerLayoutStyles";
 
 export const ContainerLayout = ({ children }) => {
   const classes = useStyles();
