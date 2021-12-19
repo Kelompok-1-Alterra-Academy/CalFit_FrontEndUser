@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
+import Link from "next/link";
 import styles from "../../styles/home.module.css";
 
 export default function Account() {
@@ -13,6 +14,18 @@ export default function Account() {
 
       <main className={styles.main}>
         <h1>Account</h1>
+        <Link href="/login" passHref>
+            <div className={styles.newsdetail}>Login Account</div>
+        </Link>
+        <Link href="/account/bookings" passHref>
+            <div className={styles.newsdetail}>My Bookings</div>
+        </Link>
+        <Link href="/account/payments" passHref>
+            <div className={styles.newsdetail}>Payment Method</div>
+        </Link>
+        <Link href="/account/address" passHref>
+            <div className={styles.newsdetail}>Saved Address</div>
+        </Link>
       </main>
 
       <footer className={styles.footer}>

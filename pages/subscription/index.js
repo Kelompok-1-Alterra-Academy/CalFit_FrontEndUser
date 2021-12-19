@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../../styles/home.module.css";
+import Link from "next/link";
 
 export default function Subscription() {
   return (
@@ -13,6 +14,9 @@ export default function Subscription() {
 
       <main className={styles.main}>
         <h1>Subscription</h1>
+        <Link href="/" passHref>
+            <div className={styles.backtohome}>Back to Home</div>
+        </Link>
       </main>
 
       <footer className={styles.footer}>

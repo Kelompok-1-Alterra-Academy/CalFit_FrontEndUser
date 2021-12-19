@@ -24,6 +24,22 @@ export const useStyles = makeStyles((theme) => ({
   div1:{
     padding: "200px 25px 60px"
   },
+  div2:{
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    color: "#fefefe",
+  },
+  div3:{
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    color: "#fefefe",
+  },
+  viewall: {
+    fontSize: "12px",
+    fontWeight: "400",
+  },
   subsbutton: {
     display: "flex",
     alignItems: "center",

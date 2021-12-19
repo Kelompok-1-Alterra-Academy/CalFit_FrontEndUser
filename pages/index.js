@@ -26,6 +26,18 @@ export default function Home() {
             <Button className={styles.subsbutton} variant="contained">Our Membership Plan</Button>
           </Link>
         </div>
+        <div className={styles.div2}>
+          <h2>Browse Clubs</h2>
+          <Link href="/clubs" passHref>
+            <div className={styles.viewall}>View All</div>
+          </Link>
+        </div>
+        <div className={styles.div3}>
+          <h2>Browse Classes</h2>
+          <Link href="/classes" passHref>
+            <div className={styles.viewall}>View All</div>
+          </Link>
+        </div>
       </main>
     </div>
   );

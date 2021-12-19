@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
+import Link from "next/link";
 import styles from "../../styles/home.module.css";
 
 export default function Clubs() {
@@ -12,7 +13,10 @@ export default function Clubs() {
       </Head>
 
       <main className={styles.main}>
-        <h1>Club</h1>
+        <h1>Clubs</h1>
+        <Link href="/clubs/details" passHref>
+            <div className={styles.newsdetail}>Club Details</div>
+        </Link>
       </main>
 
       <footer className={styles.footer}>
