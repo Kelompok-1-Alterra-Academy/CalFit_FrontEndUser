@@ -12,8 +12,8 @@ export const useStyles = makeStyles((theme) => ({
     margin: "0 auto",
     backgroundColor: theme.palette.background.dark,
     opacity: 0.85,
-    backdropFilter: "blur(9px)",
-    WebkitBackdropFilter: "blur(9px)",
+    backdropFilter: "blur(9px) !important",
+    WebkitBackdropFilter: "blur(9px) !important",
   },
   bottomNavigation: {
     margin: "auto",
@@ -23,12 +23,12 @@ export const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "space-between",
     backgroundColor: theme.palette.background.dark,
-    backdropFilter: "blur(9px)",
-    WebkitBackdropFilter: "blur(9px)",
+    backdropFilter: "blur(9px) !important",
+    WebkitBackdropFilter: "blur(9px) !important",
   },
   bottomNavigationAction: {
-    backdropFilter: "blur(9px)",
-    WebkitBackdropFilter: "blur(9px)",
+    backdropFilter: "blur(9px) !important",
+    WebkitBackdropFilter: "blur(9px) !important",
     color: theme.palette.secondary.main,
   },
 }));
