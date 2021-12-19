@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
-import { useStyles } from "./HomeStyles";
+import { useStyles } from "./HomepageStyles";
 import Link from "next/link";
 import { Button } from "@mui/material";
 
