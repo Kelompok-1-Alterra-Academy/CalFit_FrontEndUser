@@ -1,11 +1,10 @@
 import Head from "next/head";
 import Image from "next/image";
-import { useStyles } from "./HomepageStyles";
+import styles from "../styles/Home.module.css";
 import Link from "next/link";
 import { Button } from "@mui/material";
 
 export default function Home() {
-  const styles = useStyles()
   return (
     <div className={styles.root}>
       <Head>
