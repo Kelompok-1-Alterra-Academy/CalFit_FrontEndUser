@@ -14,7 +14,7 @@ export default function BookingDetails() {
 
       <main className={styles.main}>
         <Link href="/" passHref>
-            <div className={styles.newsdetail}>Back to Home</div>
+          <div className={styles.newsdetail}>Back to Home</div>
         </Link>
       </main>
 

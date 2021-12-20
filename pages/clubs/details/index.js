@@ -15,7 +15,7 @@ export default function ClubDetails() {
       <main className={styles.main}>
         <h1>Club Details</h1>
         <Link href="/clubs" passHref>
-            <div className={styles.newsdetail}>Back to Clubs</div>
+          <div className={styles.newsdetail}>Back to Clubs</div>
         </Link>
       </main>
 

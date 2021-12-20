@@ -15,7 +15,7 @@ export default function Classes() {
       <main className={styles.main}>
         <h1>Classes</h1>
         <Link href="/classes/details" passHref>
-            <div className={styles.newsdetail}>Class Details</div>
+          <div className={styles.newsdetail}>Class Details</div>
         </Link>
       </main>
 
