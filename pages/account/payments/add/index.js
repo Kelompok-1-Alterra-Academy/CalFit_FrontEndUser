@@ -15,10 +15,10 @@ export default function AddPaymentMethods() {
       <main className={styles.main}>
         <h1>Add Payment Methods</h1>
         <Link href="/account" passHref>
-            <div className={styles.newsdetail}>Back to Account</div>
+          <div className={styles.newsdetail}>Back to Account</div>
         </Link>
         <Link href="/account/payments" passHref>
-            <div className={styles.newsdetail}>Back to Payment Methods</div>
+          <div className={styles.newsdetail}>Back to Payment Methods</div>
         </Link>
       </main>
 

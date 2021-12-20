@@ -15,10 +15,10 @@ export default function OrderSuccess() {
       <main className={styles.main}>
         <h1>Payment Successful</h1>
         <Link href="/order/booking-details" passHref>
-            <div className={styles.newsdetail}>Booking Details</div>
+          <div className={styles.newsdetail}>Booking Details</div>
         </Link>
         <Link href="/" passHref>
-            <div className={styles.newsdetail}>Back to Home</div>
+          <div className={styles.newsdetail}>Back to Home</div>
         </Link>
       </main>
 

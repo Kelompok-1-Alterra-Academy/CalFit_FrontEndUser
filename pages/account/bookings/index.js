@@ -15,7 +15,7 @@ export default function MyBookings() {
       <main className={styles.main}>
         <h1>My Bookings</h1>
         <Link href="/account" passHref>
-            <div className={styles.newsdetail}>Back to Account</div>
+          <div className={styles.newsdetail}>Back to Account</div>
         </Link>
       </main>
 

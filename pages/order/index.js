@@ -15,7 +15,7 @@ export default function OrderPage() {
       <main className={styles.main}>
         <h1>Order</h1>
         <Link href="/order/success" passHref>
-            <div className={styles.newsdetail}>Confirm Payment</div>
+          <div className={styles.newsdetail}>Confirm Payment</div>
         </Link>
       </main>
 

@@ -15,7 +15,7 @@ export default function NewsDetails() {
       <main className={styles.main}>
         <h1>News Details</h1>
         <Link href="/news" passHref>
-            <div className={styles.news}>Back to News</div>
+          <div className={styles.news}>Back to News</div>
         </Link>
       </main>
 

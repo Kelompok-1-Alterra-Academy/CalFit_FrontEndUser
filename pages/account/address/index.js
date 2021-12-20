@@ -15,10 +15,10 @@ export default function SavedAddress() {
       <main className={styles.main}>
         <h1>Saved Address</h1>
         <Link href="/account" passHref>
-            <div className={styles.newsdetail}>Back to Account</div>
+          <div className={styles.newsdetail}>Back to Account</div>
         </Link>
         <Link href="/account/address/add" passHref>
-            <div className={styles.newsdetail}>New Address</div>
+          <div className={styles.newsdetail}>New Address</div>
         </Link>
       </main>
 
