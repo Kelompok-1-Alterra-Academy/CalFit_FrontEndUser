@@ -1,6 +1,7 @@
 import * as React from "react";
 import PropTypes from "prop-types";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { CacheProvider } from "@emotion/react";
@@ -9,6 +10,7 @@ import { createEmotionCache } from "../src/utils/createEmotionCache";
 import DateAdapter from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import { RootLayout } from "../src/components/Layout/RootLayout";
+import Login from "./login";
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -18,6 +20,7 @@ export default function MyApp({
   emotionCache = clientSideEmotionCache,
   pageProps,
 }) {
+  const router = useRouter();
   return (
     <CacheProvider value={emotionCache}>
       <Head>
@@ -28,9 +31,13 @@ export default function MyApp({
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
         <LocalizationProvider dateAdapter={DateAdapter}>
-          <RootLayout>
-            <Component {...pageProps} />
-          </RootLayout>
+          {router.pathname === "/login" ? (
+            <Login />
+          ) : (
+            <RootLayout>
+              <Component {...pageProps} />
+            </RootLayout>
+          )}
         </LocalizationProvider>
       </ThemeProvider>
     </CacheProvider>
