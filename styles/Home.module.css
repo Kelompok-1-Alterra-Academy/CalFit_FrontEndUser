@@ -11,11 +11,11 @@
 .bghome {
   position: absolute;
   top: 0;
-  left: 0;
   width: 100vw;
   height: auto;
   z-index: 0;
 }
+
 
 .div1 {
   padding: 200px 25px 60px;
@@ -195,5 +195,19 @@
   .grid {
     width: 100%;
     flex-direction: column;
+  }
+  .bghome{
+    left: 0;
+  }
+}
+@media (min-width: 601px) {
+  .bghome{
+    margin-left: -20px;
+    height: 300px;
+    width: 576px;
+  }
+  .bghome img{
+    width: 576px !important;
+    height: auto;
   }
 }
