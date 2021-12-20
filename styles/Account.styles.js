@@ -65,5 +65,5 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
     margin: "16px auto",
     width: "100%",
-  }
+  },
 }));
