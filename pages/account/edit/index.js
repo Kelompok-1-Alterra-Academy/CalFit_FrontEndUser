@@ -15,7 +15,7 @@ export default function EditAccount() {
       <main className={styles.main}>
         <h1>Edit Account</h1>
         <Link href="/account" passHref>
-            <div className={styles.newsdetail}>Back to Account</div>
+          <div className={styles.newsdetail}>Back to Account</div>
         </Link>
       </main>
 

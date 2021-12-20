@@ -15,7 +15,7 @@ export default function Subscription() {
       <main className={styles.main}>
         <h1>Subscription</h1>
         <Link href="/" passHref>
-            <div className={styles.backtohome}>Back to Home</div>
+          <div className={styles.backtohome}>Back to Home</div>
         </Link>
       </main>
 

@@ -15,10 +15,10 @@ export default function NewAddress() {
       <main className={styles.main}>
         <h1>Add New Address</h1>
         <Link href="/account" passHref>
-            <div className={styles.newsdetail}>Back to Account</div>
+          <div className={styles.newsdetail}>Back to Account</div>
         </Link>
         <Link href="/account/address" passHref>
-            <div className={styles.newsdetail}>Back to Saved Address</div>
+          <div className={styles.newsdetail}>Back to Saved Address</div>
         </Link>
       </main>
 
