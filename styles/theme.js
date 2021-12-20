@@ -28,12 +28,20 @@ const theme = createTheme({
       fontSize: '28px',
       fontWeight: 'bold',
     },
+    h3: {
+      fontSize: '21px',
+      fontWeight: 'bold',
+    },
     subtitle1: {
       fontSize: '20px',
       fontWeight: 600,
     },
     subtitle2: {
       fontSize: '16px',
+      fontWeight: 600,
+    },
+    subtitle3: {
+      fontSize: '11px',
       fontWeight: 400,
     },
     body1: {
@@ -44,6 +52,10 @@ const theme = createTheme({
       fontSize: '14px',
       fontWeight: 400,
     },
+    body3: {
+      fontSize: "9px",
+      fontWeight: 400,
+    }
   },
 });
 

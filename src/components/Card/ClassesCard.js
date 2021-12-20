@@ -1,36 +1,31 @@
 import * as React from 'react';
 import { Card, CardContent, CardMedia, CardActionArea, Typography } from '@mui/material';
-
+import { useStyles } from './CardStyles';
 
 export default function ClassesCard() {
+  const styles = useStyles();
   return (
-    <Card sx={{ maxWidth: 320 }}>
+    <Card sx={{ maxWidth: 220, maxHeight: 220 }}>
       <CardActionArea>
+      <div>
+        <div className={styles.darkFilter}/>
         <CardMedia
           component="img"
-          height="160"
+          height="220"
           image="/classes-example.png"
           alt="Gelud Gym"
         />
-        <CardContent>
-            <Typography variant="body2" color="text.secondary">
+      </div>
+        <CardContent className={styles.cardContent}>
+            <Typography variant="subtitle3">
                 DANCE
             </Typography>
-            <Typography variant="h2" component="div">
+            <Typography variant="h3" component="div">
                 Zumba
             </Typography>
-            <Typography variant="body2" color="text.secondary">
+            <Typography variant="body3">
                 60 mins
             </Typography>
-            {/* <Typography className={styles.clubtime} variant="body2" color="text.secondary">
-                DANCE
-            </Typography>
-            <Typography className={styles.clubname} gutterBottom variant="h5" component="div">
-                Zumba
-            </Typography>
-            <Typography className={styles.clubloc} variant="body2" color="text.secondary">
-                60 mins
-            </Typography> */}
         </CardContent>
       </CardActionArea>
     </Card>
