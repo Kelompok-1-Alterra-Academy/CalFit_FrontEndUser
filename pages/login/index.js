@@ -62,10 +62,6 @@ const useStyles = makeStyles((theme) => ({
     color: "white",
     width: "100%",
   },
-  logo: {
-    width: "301px",
-    height: "71px",
-  },
 }));
 
 export default function Login() {
@@ -79,10 +75,11 @@ export default function Login() {
         <title>Login Page</title>
       </Head>
       <div className={classes.waveContainer}>
-        <img
+        <Image
           src="/calfit-logo.pnadg"
-          className={classes.logo}
           alt="CalFit Logo"
+          width={301}
+          height={71}
         />
         <div className={classes.waveImg}>
           <svg
