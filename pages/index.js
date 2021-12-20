@@ -13,16 +13,36 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={styles.bghome}>
-        <Image src="/backdrop-home.png" className={styles.bdhome} alt="Backdrop Home" width={414} height={402}/>
+        <Image
+          src="/backdrop-home.png"
+          className={styles.bdhome}
+          alt="Backdrop Home"
+          width={414}
+          height={402}
+        />
       </div>
       <header className={styles.header}>
-        <Image src="/calfit-logo.png" className={styles.logo} alt="CalFit Logo" width={65} height={12}/>
-        <Image src="/dummy-pp.png" className={styles.ppdummy} alt="Profile Picture Dummy" width={65} height={65}/>        
+        <Image
+          src="/calfit-logo.png"
+          className={styles.logo}
+          alt="CalFit Logo"
+          width={65}
+          height={12}
+        />
+        <Image
+          src="/dummy-pp.png"
+          className={styles.ppdummy}
+          alt="Profile Picture Dummy"
+          width={65}
+          height={65}
+        />
       </header>
       <main className={styles.main}>
         <div className={styles.div1}>
           <Link href="/subscription" passHref>
-            <Button className={styles.subsbutton} variant="contained">Our Membership Plan</Button>
+            <Button className={styles.subsbutton} variant="contained">
+              Our Membership Plan
+            </Button>
           </Link>
         </div>
         <div className={styles.div2}>

@@ -15,10 +15,10 @@ export default function ClassDetails() {
       <main className={styles.main}>
         <h1>Class Details</h1>
         <Link href="/order" passHref>
-            <div className={styles.newsdetail}>Book Now</div>
+          <div className={styles.newsdetail}>Book Now</div>
         </Link>
         <Link href="/classes" passHref>
-            <div className={styles.newsdetail}>Back to Classes</div>
+          <div className={styles.newsdetail}>Back to Classes</div>
         </Link>
       </main>
 

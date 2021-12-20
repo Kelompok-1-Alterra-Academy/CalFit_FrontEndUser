@@ -15,7 +15,7 @@ export default function LoginPage() {
       <main className={styles.main}>
         <h1>Login</h1>
         <Link href="/" passHref>
-            <div className={styles.newsdetail}>Home</div>
+          <div className={styles.newsdetail}>Home</div>
         </Link>
       </main>
 
