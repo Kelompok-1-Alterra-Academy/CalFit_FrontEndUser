@@ -1,0 +1,60 @@
+import { makeStyles } from "@mui/styles";
+
+export const useStyles = makeStyles((theme) => ({
+  root: {
+    backgroundColor: theme.palette.background.light,
+    display: "flow-root",
+    minHeight: "100vh",
+    maxWidth: "576px",
+    margin: "10px auto",
+    padding: "40px 20px",
+    border: "1px solid black",
+    textAlign: "center",
+  },
+  textField: {
+    margin: "20px 0",
+    width: "100%",
+    "& label.Mui-focused": {
+      color: "#6200EE",
+    },
+    "& .MuiOutlinedInput-root": {
+      "&.Mui-focused fieldset": {
+        borderColor: "#6200EE",
+      },
+    },
+  },
+  loginForm: {
+    margin: "0 10%",
+  },
+  waveContainer: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    position: "relative",
+    backgroundImage: `url("/login_page.jpg")`,
+    backgroundRepeat: "no-repeat",
+    height: "100vh",
+  },
+  waveImg: {
+    position: "absolute",
+    bottom: "0",
+    left: "0",
+    overflow: "hidden",
+    lineHeight: "0",
+    transform: "rotate(180deg)",
+    "& svg": {
+      position: "relative",
+      display: "block",
+      width: "calc(157% + 1.3px)",
+      height: "76px",
+    },
+    "& path": {
+      fill: "#ffffff",
+    },
+  },
+  button: {
+    backgroundColor: "black",
+    color: "white",
+    width: "100%",
+  },
+}));
