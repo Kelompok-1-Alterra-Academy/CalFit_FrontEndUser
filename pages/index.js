@@ -33,8 +33,22 @@ export default function Home() {
             <div className={styles.viewall}>View All</div>
           </Link>
         </div>
-        <div className="carousel-clubs">
-          <ClubsCard/>
+        <div className={styles.slides}>
+          <div name="clubslide-1" id="clubslide-1">
+            <ClubsCard/>
+          </div>
+          <div name="clubslide-2" id="clubslide-2">
+            <ClubsCard/>
+          </div>
+          <div name="clubslide-3" id="clubslide-3">
+            <ClubsCard/>
+          </div>
+          <div name="clubslide-4" id="clubslide-4">
+            <ClubsCard/>
+          </div>
+          <div name="clubslide-5" id="clubslide-5">
+            <ClubsCard/>
+          </div>
         </div>
         <div className={styles.div3}>
           <h2>Explore Classes</h2>
@@ -42,8 +56,22 @@ export default function Home() {
             <div className={styles.viewall}>View All</div>
           </Link>
         </div>
-        <div className="carousel-classes">
-          <ClassesCard/>
+        <div className={styles.slides}>
+          <div name="classslide-1" id="classslide-1">
+            <ClassesCard/>
+          </div>
+          <div name="classslide-2" id="classslide-2">
+            <ClassesCard/>
+          </div>
+          <div name="classslide-3" id="classslide-3">
+            <ClassesCard/>
+          </div>
+          <div name="classslide-4" id="classslide-4">
+            <ClassesCard/>
+          </div>
+          <div name="classslide-5" id="classslide-5">
+            <ClassesCard/>
+          </div>
         </div>
       </main>
     </div>

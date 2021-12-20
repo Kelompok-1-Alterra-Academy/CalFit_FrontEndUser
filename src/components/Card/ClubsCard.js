@@ -4,19 +4,19 @@ import { Card, CardContent, CardMedia, CardActionArea, Typography } from '@mui/m
 
 export default function ClubsCard() {
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 320 }}>
       <CardActionArea>
         <CardMedia
           component="img"
           height="160"
-          image="/public/clubs-example.png"
+          image="/clubs-example.png"
           alt="Gelud Gym"
         />
         <CardContent>
             <Typography variant="body2" color="text.secondary">
                 MON-SUN, 07.00 - 21.30
             </Typography>
-            <Typography gutterBottom variant="h5" component="div">
+            <Typography variant="h2" component="div">
                 Gelud Gym
             </Typography>
             <Typography variant="body2" color="text.secondary">
