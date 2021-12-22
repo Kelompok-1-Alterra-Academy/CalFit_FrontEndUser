@@ -6,8 +6,7 @@ export const useStyles = makeStyles((theme) => ({
     display: "flow-root",
     minHeight: "100vh",
     maxWidth: "576px",
-    margin: "10px auto",
-    padding: "40px 20px",
+    margin: "0 auto",
     border: "1px solid black",
     textAlign: "center",
   },
@@ -33,7 +32,7 @@ export const useStyles = makeStyles((theme) => ({
     position: "relative",
     backgroundImage: `url("/login_page.jpg")`,
     backgroundRepeat: "no-repeat",
-    height: "100vh",
+    minHeight: "576px",
   },
   waveImg: {
     position: "absolute",

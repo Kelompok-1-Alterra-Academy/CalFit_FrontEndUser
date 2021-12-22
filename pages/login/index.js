@@ -17,7 +17,7 @@ export default function Login() {
       </Head>
       <div className={classes.waveContainer}>
         <Image
-          src="/calfit-logo.pnadg"
+          src="/calfit-logo.png"
           alt="CalFit Logo"
           width={301}
           height={71}
