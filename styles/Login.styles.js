@@ -7,7 +7,6 @@ export const useStyles = makeStyles((theme) => ({
     minHeight: "100vh",
     maxWidth: "576px",
     margin: "0 auto",
-    border: "1px solid black",
     textAlign: "center",
   },
   textField: {
