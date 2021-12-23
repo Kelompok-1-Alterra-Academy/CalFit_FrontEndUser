@@ -1,9 +1,17 @@
 import { useState } from "react";
-import { TextField, Button, InputAdornment, IconButton } from "@mui/material";
+import {
+  TextField,
+  Button,
+  InputAdornment,
+  IconButton,
+  Link as MaterialLink,
+} from "@mui/material";
 import { VisibilityOff, Visibility, Google } from "@mui/icons-material";
 import Head from "next/head";
 import Image from "next/image";
 import { useStyles } from "../../styles/Login.styles";
+import { signIn } from "next-auth/react";
+import Link from "next/link";
 
 export default function Login() {
   const classes = useStyles();
@@ -60,11 +68,22 @@ export default function Login() {
         <Button variant="contained" className={classes.button}>
           Login
         </Button>
+        <h4>
+          Dont have account?{" "}
+          <Link href="http://localhost:3000/sign-up">
+            <MaterialLink className={classes.link}>Sign Up Here</MaterialLink>
+          </Link>
+        </h4>
         <h3>Or</h3>
         <Button
           variant="contained"
           className={classes.button}
           startIcon={<Google />}
+          onClick={() =>
+            signIn("google", {
+              callbackUrl: `http://localhost:3000/`,
+            })
+          }
         >
           Login with Google
         </Button>

@@ -11,6 +11,7 @@ import DateAdapter from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import { RootLayout } from "../src/components/Layout/RootLayout";
 import Login from "./login";
+import { SessionProvider } from "next-auth/react";
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -18,7 +19,7 @@ const clientSideEmotionCache = createEmotionCache();
 export default function MyApp({
   Component,
   emotionCache = clientSideEmotionCache,
-  pageProps,
+  pageProps: { session, ...pageProps },
 }) {
   const router = useRouter();
   return (
@@ -27,19 +28,21 @@ export default function MyApp({
         <title>Spill</title>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
-      <ThemeProvider theme={theme}>
-        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-        <CssBaseline />
-        <LocalizationProvider dateAdapter={DateAdapter}>
-          {router.pathname === "/login" ? (
-            <Login />
-          ) : (
-            <RootLayout>
-              <Component {...pageProps} />
-            </RootLayout>
-          )}
-        </LocalizationProvider>
-      </ThemeProvider>
+      <SessionProvider session={session}>
+        <ThemeProvider theme={theme}>
+          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+          <CssBaseline />
+          <LocalizationProvider dateAdapter={DateAdapter}>
+            {router.pathname === "/login" ? (
+              <Login />
+            ) : (
+              <RootLayout>
+                <Component {...pageProps} />
+              </RootLayout>
+            )}
+          </LocalizationProvider>
+        </ThemeProvider>
+      </SessionProvider>
     </CacheProvider>
   );
 }
