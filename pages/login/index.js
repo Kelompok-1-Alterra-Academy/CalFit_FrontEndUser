@@ -70,7 +70,7 @@ export default function Login() {
         </Button>
         <h4>
           Dont have account?{" "}
-          <Link href="http://localhost:3000/sign-up">
+          <Link href="http://localhost:3000">
             <MaterialLink className={classes.link}>Sign Up Here</MaterialLink>
           </Link>
         </h4>
