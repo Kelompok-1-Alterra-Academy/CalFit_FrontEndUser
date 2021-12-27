@@ -6,10 +6,7 @@ import {
   IconButton,
   Link as MaterialLink,
   FormControl,
-  FormLabel,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
+  Typography,
   Box,
 } from "@mui/material";
 import { VisibilityOff, Visibility, Google } from "@mui/icons-material";
@@ -49,7 +46,7 @@ export default function Login() {
       </div>
       <Box component="form" className={classes.loginForm}>
         <FormControl variant="standard" component="fieldset">
-          <h1>Login</h1>
+          <Typography variant="h1">Login</Typography>
           <TextField
             className={classes.textField}
             label="Email"
