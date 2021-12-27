@@ -85,59 +85,57 @@ export default function Login() {
         className={classes.loginForm}
         onSubmit={(e) => handleOnSubmit(e)}
       >
-        <FormControl variant="standard" component="fieldset">
-          <Typography variant="h1">Login</Typography>
-          <TextField
-            className={classes.textField}
-            label="Email"
-            name="email"
-            type="text"
-            onChange={(e) => handleOnChange(e)}
-            error={error.email.status}
-            helperText={error.email.message}
-          ></TextField>
-          <TextField
-            className={classes.textField}
-            label="Password"
-            name="password"
-            type={showPassword ? "text" : "password"}
-            onChange={(e) => handleOnChange(e)}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton
-                    onClick={handleClickShowPassword}
-                    onMouseDown={handleMouseDownPassword}
-                  >
-                    {showPassword ? <Visibility /> : <VisibilityOff />}
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-          ></TextField>
-          <Button type="submit" variant="contained" className={classes.button}>
-            Login
-          </Button>
-          <h4>
-            Dont have account?{" "}
-            <Link href="http://localhost:3000">
-              <MaterialLink className={classes.link}>Sign Up Here</MaterialLink>
-            </Link>
-          </h4>
-          <h3>Or</h3>
-          <Button
-            variant="contained"
-            className={classes.button}
-            startIcon={<Google />}
-            onClick={() =>
-              signIn("google", {
-                callbackUrl: `http://localhost:3000/`,
-              })
-            }
-          >
-            Login with Google
-          </Button>
-        </FormControl>
+        <Typography variant="h1">Login</Typography>
+        <TextField
+          className={classes.textField}
+          label="Email"
+          name="email"
+          type="text"
+          onChange={(e) => handleOnChange(e)}
+          error={error.email.status}
+          helperText={error.email.message}
+        ></TextField>
+        <TextField
+          className={classes.textField}
+          label="Password"
+          name="password"
+          type={showPassword ? "text" : "password"}
+          onChange={(e) => handleOnChange(e)}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                >
+                  {showPassword ? <Visibility /> : <VisibilityOff />}
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
+        ></TextField>
+        <Button type="submit" variant="contained" className={classes.button}>
+          Login
+        </Button>
+        <h4>
+          Dont have account?{" "}
+          <Link href="http://localhost:3000">
+            <MaterialLink className={classes.link}>Sign Up Here</MaterialLink>
+          </Link>
+        </h4>
+        <h3>Or</h3>
+        <Button
+          variant="contained"
+          className={classes.button}
+          startIcon={<Google />}
+          onClick={() =>
+            signIn("google", {
+              callbackUrl: `http://localhost:3000/`,
+            })
+          }
+        >
+          Login with Google
+        </Button>
       </Box>
     </div>
   );
