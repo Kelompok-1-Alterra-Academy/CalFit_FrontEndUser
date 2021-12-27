@@ -45,7 +45,7 @@ export default function Login() {
         <h1>Login</h1>
         <TextField
           className={classes.textField}
-          label="Username"
+          label="Email"
           type="text"
         ></TextField>
         <TextField
