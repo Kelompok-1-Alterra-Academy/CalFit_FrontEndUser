@@ -15,12 +15,48 @@ import Image from "next/image";
 import { useStyles } from "../../styles/Login.styles";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 export default function Login() {
   const classes = useStyles();
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
+  const [data, setData] = useState({
+    email: "",
+    password: "",
+  });
+  const [error, setError] = useState({
+    email: {
+      status: false,
+      message: "",
+    },
+    password: false,
+  });
+  const emailValidation = /\S+@\S+\.\S+/;
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const handleMouseDownPassword = () => setShowPassword(!showPassword);
+
+  const handleOnChange = (e) => {
+    switch (e.target.name) {
+      case "email":
+        setData({ ...data, email: e.target.value });
+        emailValidation.test(e.target.value)
+          ? setError({ ...error, email: { status: false, message: "" } })
+          : setError({
+              ...error,
+              email: { status: true, message: "wrong email format" },
+            });
+        break;
+      case "password":
+        setData({ ...data, password: e.target.value });
+    }
+  };
+
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+    router.push("/");
+  };
+
   return (
     <div className={classes.root}>
       <Head>
@@ -44,18 +80,28 @@ export default function Login() {
           </svg>
         </div>
       </div>
-      <Box component="form" className={classes.loginForm}>
+      <Box
+        component="form"
+        className={classes.loginForm}
+        onSubmit={(e) => handleOnSubmit(e)}
+      >
         <FormControl variant="standard" component="fieldset">
           <Typography variant="h1">Login</Typography>
           <TextField
             className={classes.textField}
             label="Email"
+            name="email"
             type="text"
+            onChange={(e) => handleOnChange(e)}
+            error={error.email.status}
+            helperText={error.email.message}
           ></TextField>
           <TextField
             className={classes.textField}
             label="Password"
+            name="password"
             type={showPassword ? "text" : "password"}
+            onChange={(e) => handleOnChange(e)}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
@@ -69,7 +115,7 @@ export default function Login() {
               ),
             }}
           ></TextField>
-          <Button variant="contained" className={classes.button}>
+          <Button type="submit" variant="contained" className={classes.button}>
             Login
           </Button>
           <h4>
