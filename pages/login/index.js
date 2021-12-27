@@ -5,7 +5,6 @@ import {
   InputAdornment,
   IconButton,
   Link as MaterialLink,
-  FormControl,
   Typography,
   Box,
 } from "@mui/material";
@@ -15,11 +14,9 @@ import Image from "next/image";
 import { useStyles } from "../../styles/Login.styles";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
-import { useRouter } from "next/router";
 
 export default function Login() {
   const classes = useStyles();
-  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [data, setData] = useState({
     email: "",
@@ -30,9 +27,13 @@ export default function Login() {
       status: false,
       message: "",
     },
-    password: false,
+    password: {
+      status: false,
+      message: "",
+    },
   });
   const emailValidation = /\S+@\S+\.\S+/;
+  const passwordValidation = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/;
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const handleMouseDownPassword = () => setShowPassword(!showPassword);
 
@@ -49,12 +50,21 @@ export default function Login() {
         break;
       case "password":
         setData({ ...data, password: e.target.value });
+        passwordValidation.test(e.target.value)
+          ? setError({ ...error, password: { status: false, message: "" } })
+          : setError({
+              ...error,
+              password: {
+                status: true,
+                message:
+                  "password must be at least 6 char contain number, lowercase and uppercase letter",
+              },
+            });
     }
   };
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    router.push("/");
   };
 
   return (
@@ -101,6 +111,8 @@ export default function Login() {
           name="password"
           type={showPassword ? "text" : "password"}
           onChange={(e) => handleOnChange(e)}
+          error={error.password.status}
+          helperText={error.password.message}
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
