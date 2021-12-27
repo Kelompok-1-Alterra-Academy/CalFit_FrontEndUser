@@ -5,6 +5,12 @@ import {
   InputAdornment,
   IconButton,
   Link as MaterialLink,
+  FormControl,
+  FormLabel,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
+  Box,
 } from "@mui/material";
 import { VisibilityOff, Visibility, Google } from "@mui/icons-material";
 import Head from "next/head";
@@ -41,53 +47,55 @@ export default function Login() {
           </svg>
         </div>
       </div>
-      <div className={classes.loginForm}>
-        <h1>Login</h1>
-        <TextField
-          className={classes.textField}
-          label="Email"
-          type="text"
-        ></TextField>
-        <TextField
-          className={classes.textField}
-          label="Password"
-          type={showPassword ? "text" : "password"}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton
-                  onClick={handleClickShowPassword}
-                  onMouseDown={handleMouseDownPassword}
-                >
-                  {showPassword ? <Visibility /> : <VisibilityOff />}
-                </IconButton>
-              </InputAdornment>
-            ),
-          }}
-        ></TextField>
-        <Button variant="contained" className={classes.button}>
-          Login
-        </Button>
-        <h4>
-          Dont have account?{" "}
-          <Link href="http://localhost:3000">
-            <MaterialLink className={classes.link}>Sign Up Here</MaterialLink>
-          </Link>
-        </h4>
-        <h3>Or</h3>
-        <Button
-          variant="contained"
-          className={classes.button}
-          startIcon={<Google />}
-          onClick={() =>
-            signIn("google", {
-              callbackUrl: `http://localhost:3000/`,
-            })
-          }
-        >
-          Login with Google
-        </Button>
-      </div>
+      <Box component="form" className={classes.loginForm}>
+        <FormControl variant="standard" component="fieldset">
+          <h1>Login</h1>
+          <TextField
+            className={classes.textField}
+            label="Email"
+            type="text"
+          ></TextField>
+          <TextField
+            className={classes.textField}
+            label="Password"
+            type={showPassword ? "text" : "password"}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                  >
+                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+          ></TextField>
+          <Button variant="contained" className={classes.button}>
+            Login
+          </Button>
+          <h4>
+            Dont have account?{" "}
+            <Link href="http://localhost:3000">
+              <MaterialLink className={classes.link}>Sign Up Here</MaterialLink>
+            </Link>
+          </h4>
+          <h3>Or</h3>
+          <Button
+            variant="contained"
+            className={classes.button}
+            startIcon={<Google />}
+            onClick={() =>
+              signIn("google", {
+                callbackUrl: `http://localhost:3000/`,
+              })
+            }
+          >
+            Login with Google
+          </Button>
+        </FormControl>
+      </Box>
     </div>
   );
 }
