@@ -6,9 +6,7 @@ export const useStyles = makeStyles((theme) => ({
     display: "flow-root",
     minHeight: "100vh",
     maxWidth: "576px",
-    margin: "10px auto",
-    padding: "40px 20px",
-    border: "1px solid black",
+    margin: "auto",
     textAlign: "center",
   },
   textField: {
@@ -24,7 +22,7 @@ export const useStyles = makeStyles((theme) => ({
     },
   },
   loginForm: {
-    margin: "0 10%",
+    margin: "30px 10%",
   },
   waveContainer: {
     display: "flex",
@@ -33,7 +31,7 @@ export const useStyles = makeStyles((theme) => ({
     position: "relative",
     backgroundImage: `url("/login_page.jpg")`,
     backgroundRepeat: "no-repeat",
-    height: "100vh",
+    minHeight: "576px",
   },
   waveImg: {
     position: "absolute",
@@ -56,5 +54,10 @@ export const useStyles = makeStyles((theme) => ({
     backgroundColor: "black",
     color: "white",
     width: "100%",
+  },
+  link: {
+    color: theme.palette.secondary,
+    textDecoration: "none",
+    cursor: "pointer",
   },
 }));

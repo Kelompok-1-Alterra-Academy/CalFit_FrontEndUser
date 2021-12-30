@@ -1,15 +1,72 @@
 import { useState } from "react";
-import { TextField, Button, InputAdornment, IconButton } from "@mui/material";
+import {
+  TextField,
+  Button,
+  InputAdornment,
+  IconButton,
+  Link as MaterialLink,
+  Typography,
+  Box,
+} from "@mui/material";
 import { VisibilityOff, Visibility, Google } from "@mui/icons-material";
 import Head from "next/head";
 import Image from "next/image";
 import { useStyles } from "../../styles/Login.styles";
+import { signIn } from "next-auth/react";
+import Link from "next/link";
 
 export default function Login() {
   const classes = useStyles();
   const [showPassword, setShowPassword] = useState(false);
+  const [data, setData] = useState({
+    email: "",
+    password: "",
+  });
+  const [error, setError] = useState({
+    email: {
+      status: false,
+      message: "",
+    },
+    password: {
+      status: false,
+      message: "",
+    },
+  });
+  const emailValidation = /\S+@\S+\.\S+/;
+  const passwordValidation = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/;
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const handleMouseDownPassword = () => setShowPassword(!showPassword);
+
+  const handleOnChange = (e) => {
+    switch (e.target.name) {
+      case "email":
+        setData({ ...data, email: e.target.value });
+        emailValidation.test(e.target.value)
+          ? setError({ ...error, email: { status: false, message: "" } })
+          : setError({
+              ...error,
+              email: { status: true, message: "wrong email format" },
+            });
+        break;
+      case "password":
+        setData({ ...data, password: e.target.value });
+        passwordValidation.test(e.target.value)
+          ? setError({ ...error, password: { status: false, message: "" } })
+          : setError({
+              ...error,
+              password: {
+                status: true,
+                message:
+                  "password must be at least 6 char contain number, lowercase and uppercase letter",
+              },
+            });
+    }
+  };
+
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <div className={classes.root}>
       <Head>
@@ -17,7 +74,7 @@ export default function Login() {
       </Head>
       <div className={classes.waveContainer}>
         <Image
-          src="/calfit-logo.pnadg"
+          src="/calfit-logo.png"
           alt="CalFit Logo"
           width={301}
           height={71}
@@ -33,17 +90,29 @@ export default function Login() {
           </svg>
         </div>
       </div>
-      <div className={classes.loginForm}>
-        <h1>Login</h1>
+      <Box
+        component="form"
+        className={classes.loginForm}
+        onSubmit={(e) => handleOnSubmit(e)}
+      >
+        <Typography variant="h1">Login</Typography>
         <TextField
           className={classes.textField}
-          label="Username"
+          label="Email"
+          name="email"
           type="text"
+          onChange={(e) => handleOnChange(e)}
+          error={error.email.status}
+          helperText={error.email.message}
         ></TextField>
         <TextField
           className={classes.textField}
           label="Password"
+          name="password"
           type={showPassword ? "text" : "password"}
+          onChange={(e) => handleOnChange(e)}
+          error={error.password.status}
+          helperText={error.password.message}
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
@@ -57,18 +126,29 @@ export default function Login() {
             ),
           }}
         ></TextField>
-        <Button variant="contained" className={classes.button}>
+        <Button type="submit" variant="contained" className={classes.button}>
           Login
         </Button>
+        <h4>
+          Dont have account?{" "}
+          <Link href="http://localhost:3000">
+            <MaterialLink className={classes.link}>Sign Up Here</MaterialLink>
+          </Link>
+        </h4>
         <h3>Or</h3>
         <Button
           variant="contained"
           className={classes.button}
           startIcon={<Google />}
+          onClick={() =>
+            signIn("google", {
+              callbackUrl: `http://localhost:3000/`,
+            })
+          }
         >
           Login with Google
         </Button>
-      </div>
+      </Box>
     </div>
   );
 }
