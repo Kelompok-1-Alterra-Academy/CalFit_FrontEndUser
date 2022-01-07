@@ -12,6 +12,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { useStyles } from "../../styles/Auth.style";
 import Link from "next/link";
+import axios from "axios";
 
 export default function Register() {
   const classes = useStyles();
@@ -63,6 +64,17 @@ export default function Register() {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
+    axios
+      .post("http://localhost:8080/api/v1/auth/register", {
+        email: data.email,
+        password: data.password,
+      })
+      .then(() => {
+        setData({ email: "", password: "" });
+      })
+      .catch((error) => {
+        console.error(error.response.status);
+      });
   };
 
   return (
