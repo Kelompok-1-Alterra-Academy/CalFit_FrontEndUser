@@ -2,7 +2,7 @@ import { makeStyles } from "@mui/styles";
 
 export const useStyles = makeStyles((theme) => ({
   root: {
-    backgroundColor: theme.palette.background.light,
+    backgroundColor: "white",
     display: "flow-root",
     minHeight: "100vh",
     maxWidth: "576px",

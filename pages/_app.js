@@ -12,6 +12,7 @@ import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import { RootLayout } from "../src/components/Layout/RootLayout";
 import Login from "./login";
 import { SessionProvider } from "next-auth/react";
+import Register from "./register";
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -35,6 +36,8 @@ export default function MyApp({
           <LocalizationProvider dateAdapter={DateAdapter}>
             {router.pathname === "/login" ? (
               <Login />
+            ) : router.pathname === "/register" ? (
+              <Register />
             ) : (
               <RootLayout>
                 <Component {...pageProps} />

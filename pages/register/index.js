@@ -4,18 +4,16 @@ import {
   Button,
   InputAdornment,
   IconButton,
-  Link as MaterialLink,
   Typography,
   Box,
 } from "@mui/material";
-import { VisibilityOff, Visibility, Google } from "@mui/icons-material";
+import { VisibilityOff, Visibility } from "@mui/icons-material";
 import Head from "next/head";
 import Image from "next/image";
 import { useStyles } from "../../styles/Auth.style";
-import { signIn } from "next-auth/react";
 import Link from "next/link";
 
-export default function Login() {
+export default function Register() {
   const classes = useStyles();
   const [showPassword, setShowPassword] = useState(false);
   const [data, setData] = useState({
@@ -70,7 +68,7 @@ export default function Login() {
   return (
     <div className={classes.root}>
       <Head>
-        <title>Login Page</title>
+        <title>Register Page</title>
       </Head>
       <div className={classes.waveContainer}>
         <Image
@@ -95,7 +93,7 @@ export default function Login() {
         className={classes.loginForm}
         onSubmit={(e) => handleOnSubmit(e)}
       >
-        <Typography variant="h1">Login</Typography>
+        <Typography variant="h1">Register</Typography>
         <TextField
           className={classes.textField}
           label="Email"
@@ -127,27 +125,14 @@ export default function Login() {
           }}
         ></TextField>
         <Button type="submit" variant="contained" className={classes.button}>
-          Login
+          Register
         </Button>
-        <h4>
-          Dont have account?{" "}
-          <Link href="/register">
-            <MaterialLink className={classes.link}>Register Here</MaterialLink>
-          </Link>
-        </h4>
-        <h3>Or</h3>
-        <Button
-          variant="contained"
-          className={classes.button}
-          startIcon={<Google />}
-          onClick={() =>
-            signIn("google", {
-              callbackUrl: `http://localhost:3000/`,
-            })
-          }
-        >
-          Login with Google
-        </Button>
+        <h4>Already Have An Account?</h4>
+        <Link href="/login">
+          <Button variant="contained" className={classes.button}>
+            Login
+          </Button>
+        </Link>
       </Box>
     </div>
   );
