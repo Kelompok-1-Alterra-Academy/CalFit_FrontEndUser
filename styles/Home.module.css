@@ -1,6 +1,6 @@
 .container {
   padding: 0 2rem;
-  background-color: #111D2C;
+  background-color: #111d2c;
 }
 
 .main {
@@ -17,20 +17,19 @@
   z-index: 0;
 }
 
-
 .div1 {
   padding: 200px 25px 60px;
   text-align: center;
 }
 
-.div2{
+.div2 {
   display: flex;
   align-items: center;
   justify-content: space-between;
   color: #fefefe;
 }
 
-.div3{
+.div3 {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -197,18 +196,18 @@
     width: 100%;
     flex-direction: column;
   }
-  .bghome{
+  .bghome {
     left: 0;
   }
 }
 @media (min-width: 601px) {
-  .bghome{
+  .bghome {
     margin-left: -20px;
     height: 400px;
     width: 576px;
     overflow: hidden;
   }
-  .bghome img{
+  .bghome img {
     width: 576px !important;
     height: auto;
     z-index: 0;

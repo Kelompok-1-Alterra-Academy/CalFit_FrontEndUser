@@ -3,8 +3,9 @@ import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import Link from "next/link";
 import { Button } from "@mui/material";
-import ClubsCard from "../src/components/Card/ClubsCard";
-import ClassesCard from "../src/components/Card/ClassesCard";
+import ClubsCard from "../src/components/card/ClubsCard";
+import ClassesCard from "../src/components/card/ClassesCard";
+import ClubsCardSlides from "../src/components/card/ClubsCardSlides";
 
 export default function Home() {
   return (
@@ -53,23 +54,7 @@ export default function Home() {
             <div className={styles.viewall}>View All</div>
           </Link>
         </div>
-        <div className={styles.slides}>
-          <div name="clubslide-1" id="clubslide-1">
-            <ClubsCard/>
-          </div>
-          <div name="clubslide-2" id="clubslide-2">
-            <ClubsCard/>
-          </div>
-          <div name="clubslide-3" id="clubslide-3">
-            <ClubsCard/>
-          </div>
-          <div name="clubslide-4" id="clubslide-4">
-            <ClubsCard/>
-          </div>
-          <div name="clubslide-5" id="clubslide-5">
-            <ClubsCard/>
-          </div>
-        </div>
+        <ClubsCardSlides count={5} />
         <div className={styles.div3}>
           <h2>Explore Classes</h2>
           <Link href="/classes" passHref>
@@ -78,19 +63,19 @@ export default function Home() {
         </div>
         <div className={styles.slides}>
           <div name="classslide-1" id="classslide-1">
-            <ClassesCard/>
+            <ClassesCard />
           </div>
           <div name="classslide-2" id="classslide-2">
-            <ClassesCard/>
+            <ClassesCard />
           </div>
           <div name="classslide-3" id="classslide-3">
-            <ClassesCard/>
+            <ClassesCard />
           </div>
           <div name="classslide-4" id="classslide-4">
-            <ClassesCard/>
+            <ClassesCard />
           </div>
           <div name="classslide-5" id="classslide-5">
-            <ClassesCard/>
+            <ClassesCard />
           </div>
         </div>
       </main>
