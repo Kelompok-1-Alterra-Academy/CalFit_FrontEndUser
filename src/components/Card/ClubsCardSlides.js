@@ -1,6 +1,6 @@
-import * as React from 'react';
+import * as React from "react";
 // import { useStyles } from './CardSlidesStyles';
-import ClubsCard from './ClubsCard';
+import ClubsCard from "./ClubsCard";
 import styles from "../../../styles/Home.module.css";
 
 export default function ClubsCardSlides({ count }) {
@@ -10,10 +10,9 @@ export default function ClubsCardSlides({ count }) {
   // const [slidesCount, setSlidesCount] = React.useState(0);
 
   return (
-
     <div className={styles.slides}>
       {/* loop card slides with count */}
-      {Array.from(Array(count).keys()).map(i => (
+      {Array.from(Array(count).keys()).map((i) => (
         <div key={i}>
           <ClubsCard />
         </div>
