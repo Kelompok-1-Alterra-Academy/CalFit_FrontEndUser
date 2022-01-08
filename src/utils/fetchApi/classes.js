@@ -1,6 +1,10 @@
 import baseApi from "./api";
 
-export const getAllClasses = async (setLoadingState, setData, { limit, page }) => {
+export const getAllClasses = async (
+  setLoadingState,
+  setData,
+  { limit, page }
+) => {
   setLoadingState(true);
   return baseApi
     .get(`/classes?limit=${limit}&page=${page}`)

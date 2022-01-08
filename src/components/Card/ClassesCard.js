@@ -10,7 +10,7 @@ import { useStyles } from "./CardStyles";
 
 export default function ClassesCard({ slide }) {
   const styles = useStyles();
-  console.log(slide)
+
   return (
     <Card sx={{ maxWidth: 220, maxHeight: 220 }}>
       <CardActionArea>

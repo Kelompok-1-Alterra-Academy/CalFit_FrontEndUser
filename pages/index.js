@@ -1,9 +1,9 @@
+/* eslint-disable @next/next/link-passhref */
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import Link from "next/link";
 import { Button } from "@mui/material";
-// import ClassesCard from "../src/components/card/ClassesCard";
 import ClubsCardSlides from "../src/components/card/ClubsCardSlides";
 import ClassesCardSlides from "../src/components/card/ClassesCardSlides";
 
@@ -32,13 +32,15 @@ export default function Home() {
           width={65}
           height={12}
         />
-        <Image
-          src="/dummy-pp.png"
-          className={styles.ppdummy}
-          alt="Profile Picture Dummy"
-          width={65}
-          height={65}
-        />
+        <Link href="/account">
+          <Image
+            src="/dummy-pp.png"
+            className={styles.ppdummy}
+            alt="Profile Picture Dummy"
+            width={65}
+            height={65}
+          />
+        </Link>
       </header>
       <main className={styles.main}>
         <div className={styles.div1}>
@@ -62,25 +64,9 @@ export default function Home() {
           </Link>
         </div>
         <ClassesCardSlides count={5} />
-        {/* <div className={styles.slides}>
-          <div name="classslide-1" id="classslide-1">
-            <ClassesCard />
-          </div>
-          <div name="classslide-2" id="classslide-2">
-            <ClassesCard />
-          </div>
-          <div name="classslide-3" id="classslide-3">
-            <ClassesCard />
-          </div>
-          <div name="classslide-4" id="classslide-4">
-            <ClassesCard />
-          </div>
-          <div name="classslide-5" id="classslide-5">
-            <ClassesCard />
-          </div>
-        </div> */}
       </main>
-      <br /><br />
+      <br />
+      <br />
     </div>
   );
 }

@@ -15,10 +15,7 @@ export default function ClassesCardSlides({ count }) {
     <div className={styles.slides}>
       {/* loop card slides with count */}
       {slides.map((slide, index) => (
-        <ClassesCard
-          key={index}
-          index={index}
-          slide={slide} />
+        <ClassesCard key={index} index={index} slide={slide} />
       ))}
     </div>
   );
