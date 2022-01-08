@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   TextField,
   Button,
@@ -13,9 +13,12 @@ import Image from "next/image";
 import { useStyles } from "../../styles/Auth.style";
 import Link from "next/link";
 import axios from "axios";
+import { CustomAlert } from "../../src/components/Alert/Alert";
+import { useRouter } from "next/router";
 
 export default function Register() {
   const classes = useStyles();
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [data, setData] = useState({
     email: "",
@@ -31,11 +34,16 @@ export default function Register() {
       message: "",
     },
   });
+  const [alert, setAlert] = useState({
+    status: false,
+    message: "",
+  });
+
   const emailValidation = /\S+@\S+\.\S+/;
   const passwordValidation = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/;
+
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const handleMouseDownPassword = () => setShowPassword(!showPassword);
-
   const handleOnChange = (e) => {
     switch (e.target.name) {
       case "email":
@@ -61,24 +69,43 @@ export default function Register() {
             });
     }
   };
-
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    axios
-      .post("http://localhost:8080/api/v1/auth/register", {
-        email: data.email,
-        password: data.password,
-      })
-      .then(() => {
-        setData({ email: "", password: "" });
-      })
-      .catch((error) => {
-        console.error(error.response.status);
+    if (data.email === "" || data.password == "") {
+      setAlert({
+        status: true,
+        message: "please fill all fields",
       });
+    } else {
+      axios
+        .post(`${process.env.BASE_URL}/auth/register`, {
+          email: data.email,
+          password: data.password,
+        })
+        .then(() => {
+          setData({ email: "", password: "" });
+          router.push("/login");
+        })
+        .catch((e) => {
+          setAlert({
+            status: true,
+            message: e.response.data.message,
+          });
+        });
+    }
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setAlert({
+        status: false,
+      });
+    }, 10000);
+  }, [alert.status]);
 
   return (
     <div className={classes.root}>
+      <CustomAlert data={alert} />
       <Head>
         <title>Register Page</title>
       </Head>
