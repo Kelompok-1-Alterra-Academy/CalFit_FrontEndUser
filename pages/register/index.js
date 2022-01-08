@@ -1,22 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   TextField,
   Button,
   InputAdornment,
   IconButton,
-  Link as MaterialLink,
   Typography,
   Box,
 } from "@mui/material";
-import { VisibilityOff, Visibility, Google } from "@mui/icons-material";
+import { VisibilityOff, Visibility } from "@mui/icons-material";
 import Head from "next/head";
 import Image from "next/image";
 import { useStyles } from "../../styles/Auth.style";
-import { signIn } from "next-auth/react";
 import Link from "next/link";
+import axios from "axios";
+import { CustomAlert } from "../../src/components/Alert/Alert";
+import { useRouter } from "next/router";
 
-export default function Login() {
+export default function Register() {
   const classes = useStyles();
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [data, setData] = useState({
     email: "",
@@ -32,11 +34,16 @@ export default function Login() {
       message: "",
     },
   });
+  const [alert, setAlert] = useState({
+    status: false,
+    message: "",
+  });
+
   const emailValidation = /\S+@\S+\.\S+/;
   const passwordValidation = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/;
+
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const handleMouseDownPassword = () => setShowPassword(!showPassword);
-
   const handleOnChange = (e) => {
     switch (e.target.name) {
       case "email":
@@ -62,15 +69,45 @@ export default function Login() {
             });
     }
   };
-
   const handleOnSubmit = (e) => {
     e.preventDefault();
+    if (data.email === "" || data.password == "") {
+      setAlert({
+        status: true,
+        message: "please fill all fields",
+      });
+    } else {
+      axios
+        .post(`${process.env.BASE_URL}/auth/register`, {
+          email: data.email,
+          password: data.password,
+        })
+        .then(() => {
+          setData({ email: "", password: "" });
+          router.push("/login");
+        })
+        .catch((e) => {
+          setAlert({
+            status: true,
+            message: e.response.data.message,
+          });
+        });
+    }
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setAlert({
+        status: false,
+      });
+    }, 10000);
+  }, [alert.status]);
 
   return (
     <div className={classes.root}>
+      <CustomAlert data={alert} />
       <Head>
-        <title>Login Page</title>
+        <title>Register Page</title>
       </Head>
       <div className={classes.waveContainer}>
         <Image
@@ -95,7 +132,7 @@ export default function Login() {
         className={classes.loginForm}
         onSubmit={(e) => handleOnSubmit(e)}
       >
-        <Typography variant="h1">Login</Typography>
+        <Typography variant="h1">Register</Typography>
         <TextField
           className={classes.textField}
           label="Email"
@@ -127,27 +164,14 @@ export default function Login() {
           }}
         ></TextField>
         <Button type="submit" variant="contained" className={classes.button}>
-          Login
+          Register
         </Button>
-        <h4>
-          Dont have account?{" "}
-          <Link href="/register">
-            <MaterialLink className={classes.link}>Register Here</MaterialLink>
-          </Link>
-        </h4>
-        <h3>Or</h3>
-        <Button
-          variant="contained"
-          className={classes.button}
-          startIcon={<Google />}
-          onClick={() =>
-            signIn("google", {
-              callbackUrl: `http://localhost:3000/`,
-            })
-          }
-        >
-          Login with Google
-        </Button>
+        <h4>Already Have An Account?</h4>
+        <Link href="/login">
+          <Button variant="contained" className={classes.button}>
+            Login
+          </Button>
+        </Link>
       </Box>
     </div>
   );
