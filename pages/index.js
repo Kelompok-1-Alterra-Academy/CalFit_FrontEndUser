@@ -3,7 +3,6 @@ import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import Link from "next/link";
 import { Button } from "@mui/material";
-import ClubsCard from "../src/components/card/ClubsCard";
 import ClassesCard from "../src/components/card/ClassesCard";
 import ClubsCardSlides from "../src/components/card/ClubsCardSlides";
 
@@ -79,6 +78,7 @@ export default function Home() {
           </div>
         </div>
       </main>
+      <br /><br />
     </div>
   );
 }
