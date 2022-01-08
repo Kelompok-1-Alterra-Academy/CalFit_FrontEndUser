@@ -1,7 +1,19 @@
+/* eslint-disable @next/next/link-passhref */
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import styles from "../../styles/Home.module.css";
+import { Grid, Paper, Typography } from "@mui/material";
+import { styled } from '@mui/material/styles';
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
+import ClubsCard from "../../src/components/Card/ClubsCard";
+import styles from "../../styles/clubs/Index.module.css";
+
+const Item = styled(Paper)(({ theme }) => ({
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
 
 export default function Clubs() {
   return (
@@ -12,25 +24,63 @@ export default function Clubs() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
-        <h1>Clubs</h1>
-        <Link href="/clubs/details" passHref>
-          <div className={styles.newsdetail}>Club Details</div>
-        </Link>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{" "}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer>
-    </div>
+      <main style={{
+        display: "flex",
+        flexDirection: "column",
+        color: "#FEFEFE",
+        minHeight: "100vh",
+        zIndex: "2",
+      }}>
+        <div style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+          padding: "auto",
+          height: "65px",
+        }}>
+          <h1>Clubs</h1>
+          <Link href="/account">
+            <Image
+              src="/dummy-pp.png"
+              className={styles.ppdummy}
+              alt="Profile Picture Dummy"
+              height={65}
+              width={65}
+            />
+          </Link>
+        </div>
+        <div style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+          marginTop: "20px",
+        }}>
+          <h3>Explore All Clubs</h3>
+          <FilterAltIcon style={{
+            color: "#FEFEFE",
+            fontSize: "30px",
+          }} />
+        </div>
+        <Grid container spacing={2}>
+          {Array.from({ length: 10 }).map((_, i) => (
+            <Grid item xs={6} key={i}>
+              {/* <Item>xs=6</Item> */}
+              <ClubsCard />
+            </Grid>
+          ))}
+          {/* <Grid item xs={4}>
+            <Item>xs=4</Item>
+          </Grid>
+          <Grid item xs={4}>
+            <Item>xs=4</Item>
+          </Grid>
+          <Grid item xs={8}>
+            <Item>xs=8</Item>
+          </Grid> */}
+        </Grid>
+      </main >
+    </div >
   );
 }
