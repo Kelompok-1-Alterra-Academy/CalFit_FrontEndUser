@@ -8,8 +8,9 @@ import {
 } from "@mui/material";
 import { useStyles } from "./CardStyles";
 
-export default function ClassesCard() {
+export default function ClassesCard({ slide }) {
   const styles = useStyles();
+  console.log(slide)
   return (
     <Card sx={{ maxWidth: 220, maxHeight: 220 }}>
       <CardActionArea>
@@ -18,16 +19,16 @@ export default function ClassesCard() {
           <CardMedia
             component="img"
             height="220"
-            image="/classes-example.png"
-            alt="Gelud Gym"
+            image={slide.card_picture_url}
+            alt={slide.name}
           />
         </div>
         <CardContent className={styles.cardContent}>
-          <Typography variant="subtitle3">DANCE</Typography>
+          <Typography variant="subtitle3">{slide.category}</Typography>
           <Typography variant="h3" component="div">
-            Zumba
+            {slide.name}
           </Typography>
-          <Typography variant="body3">60 mins</Typography>
+          {/* <Typography variant="body3">60 mins</Typography> */}
         </CardContent>
       </CardActionArea>
     </Card>

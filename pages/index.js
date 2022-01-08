@@ -3,8 +3,9 @@ import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import Link from "next/link";
 import { Button } from "@mui/material";
-import ClassesCard from "../src/components/card/ClassesCard";
+// import ClassesCard from "../src/components/card/ClassesCard";
 import ClubsCardSlides from "../src/components/card/ClubsCardSlides";
+import ClassesCardSlides from "../src/components/card/ClassesCardSlides";
 
 export default function Home() {
   return (
@@ -60,7 +61,8 @@ export default function Home() {
             <div className={styles.viewall}>View All</div>
           </Link>
         </div>
-        <div className={styles.slides}>
+        <ClassesCardSlides count={5} />
+        {/* <div className={styles.slides}>
           <div name="classslide-1" id="classslide-1">
             <ClassesCard />
           </div>
@@ -76,7 +78,7 @@ export default function Home() {
           <div name="classslide-5" id="classslide-5">
             <ClassesCard />
           </div>
-        </div>
+        </div> */}
       </main>
       <br /><br />
     </div>
