@@ -2,18 +2,9 @@
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { Grid, Paper, Typography } from "@mui/material";
-import { styled } from "@mui/material/styles";
-import FilterAltIcon from "@mui/icons-material/FilterAlt";
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import ClubsCardGrid from "../../src/components/Card/ClubsCardGrid";
 import styles from "../../styles/clubs/Index.module.css";
-
-const Item = styled(Paper)(({ theme }) => ({
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-}));
 
 export default function Clubs() {
   return (
@@ -24,26 +15,8 @@ export default function Clubs() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          color: "#FEFEFE",
-          minHeight: "100vh",
-          zIndex: "2",
-          paddingBottom: "25px",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
-            padding: "auto",
-            height: "65px",
-          }}
-        >
+      <main className={styles.main}>
+        <div className={styles.pagetitle}>
           <h1>Clubs</h1>
           <Link href="/account">
             <Image
@@ -55,22 +28,9 @@ export default function Clubs() {
             />
           </Link>
         </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
-            marginTop: "20px",
-          }}
-        >
+        <div className={styles.description}>
           <h3>Explore All Clubs</h3>
-          <FilterAltIcon
-            style={{
-              color: "#FEFEFE",
-              fontSize: "30px",
-            }}
-          />
+          <FilterAltIcon className={styles.filtericon} />
         </div>
         <ClubsCardGrid />
       </main>
