@@ -20,7 +20,7 @@ export default function ClubsCardGrid() {
       ) : (
         gyms.map((gym) => (
           <Grid item xs={12} sm={6} md={6} lg={6} key={gym.id}>
-            <ClubsCard slide={gym} />
+            <ClubsCard club={gym} />
           </Grid>
         ))
       )}
