@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import { useStyles } from "./CardStyles";
 
-export default function ClubsCard({ slide }) {
+export default function ClubsCard({ club }) {
   const styles = useStyles();
 
   return (
@@ -19,17 +19,17 @@ export default function ClubsCard({ slide }) {
           <CardMedia
             component="img"
             height="220"
-            image={slide.picture}
-            alt={slide.name}
+            image={club.picture}
+            alt={club.name}
           />
         </div>
         <CardContent className={styles.cardContent}>
           {/* <Typography variant="subtitle3">MON-SUN, 07.00 - 21.30</Typography> */}
           <Typography variant="h3" component="div">
-            {slide.name}
+            {club.name}
           </Typography>
           <Typography variant="body3">
-            {`${slide.address.address}, ${slide.address.district}`}
+            {`${club.address.address}, ${club.address.district}`}
           </Typography>
         </CardContent>
       </CardActionArea>
