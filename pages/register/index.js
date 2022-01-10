@@ -78,7 +78,7 @@ export default function Register() {
       });
     } else {
       axios
-        .post(`${process.env.BASE_URL}/auth/register`, {
+        .post(`${process.env.NEXT_PUBLIC_SERVER_API_URL}/auth/register`, {
           email: data.email,
           password: data.password,
         })
