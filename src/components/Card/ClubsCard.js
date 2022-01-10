@@ -19,17 +19,17 @@ export default function ClubsCard({ club }) {
           <CardMedia
             component="img"
             height="220"
-            image={club.picture}
-            alt={club.name}
+            image={club?.picture}
+            alt={club?.name}
           />
         </div>
         <CardContent className={styles.cardContent}>
           {/* <Typography variant="subtitle3">MON-SUN, 07.00 - 21.30</Typography> */}
           <Typography variant="h3" component="div">
-            {club.name}
+            {club?.name}
           </Typography>
           <Typography variant="body3">
-            {`${club.address.address}, ${club.address.district}`}
+            {`${club?.address?.address}, ${club?.address?.district}`}
           </Typography>
         </CardContent>
       </CardActionArea>

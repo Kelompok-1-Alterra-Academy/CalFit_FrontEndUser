@@ -19,14 +19,14 @@ export default function ClassesCard({ slide }) {
           <CardMedia
             component="img"
             height="220"
-            image={slide.card_picture_url}
-            alt={slide.name}
+            image={slide?.card_picture_url}
+            alt={slide?.name}
           />
         </div>
         <CardContent className={styles.cardContent}>
-          <Typography variant="subtitle3">{slide.category}</Typography>
+          <Typography variant="subtitle3">{slide?.category}</Typography>
           <Typography variant="h3" component="div">
-            {slide.name}
+            {slide?.name}
           </Typography>
           {/* <Typography variant="body3">60 mins</Typography> */}
         </CardContent>
