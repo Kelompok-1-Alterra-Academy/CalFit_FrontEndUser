@@ -189,7 +189,7 @@ export default function AuthForm({ path }) {
               startIcon={<Google />}
               onClick={() =>
                 signIn("google", {
-                  callbackUrl: `http://localhost:3000/`,
+                  callbackUrl: process.env.NEXTAUTH_URL,
                 })
               }
             >
