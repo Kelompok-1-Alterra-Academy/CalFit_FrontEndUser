@@ -13,7 +13,7 @@ export default function ClubsCard({ club }) {
 
   return (
     <Card sx={{ maxWidth: 220, maxHeight: 220 }}>
-      <CardActionArea>
+      <CardActionArea href={`/clubs/${club.id}`}>
         <div>
           <div className={styles.darkFilter} />
           <CardMedia
