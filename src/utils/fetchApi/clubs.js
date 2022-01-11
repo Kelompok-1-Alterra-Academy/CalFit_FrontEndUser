@@ -18,3 +18,17 @@ export const getAllGyms = async (setLoadingState, setData, { limit, page }) => {
       })
   );
 };
+
+export const getGymById = async (setLoadingState, setData, id) => {
+  setLoadingState(true);
+  return (
+    baseApi
+      .get(`/gyms/${id}`)
+      .then((res) => {
+        setData(res.data.data ?? []);
+      })
+      .finally(() => {
+        setLoadingState(false);
+      })
+  );
+}

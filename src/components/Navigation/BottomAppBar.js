@@ -45,7 +45,7 @@ export const BottomAppBar = () => {
   const router = useRouter();
   const [value, setValue] = useState(
     routeIndex.findIndex((route) => route.selected.includes(router.pathname)) +
-      1
+    1
   );
 
   useEffect(() => {
