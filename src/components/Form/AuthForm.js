@@ -79,17 +79,24 @@ export default function AuthForm({ path }) {
         message: "please fill all fields",
       });
     } else {
-      const res = await auth(setAlert, path.toLowerCase(), data);
-      setData({ ...data, password: "" });
-      switch (res.status) {
-        case 201:
-          router.push("/login");
-          break;
-        case 200:
-          router.push("/");
-          break;
-        default:
-          break;
+      try {
+        const res = await auth(path.toLowerCase(), data);
+        setData({ ...data, password: "" });
+        switch (res.status) {
+          case 201:
+            router.push("/login");
+            break;
+          case 200:
+            router.push("/");
+            break;
+          default:
+            break;
+        }
+      } catch (error) {
+        setAlert({
+          status: true,
+          message: error.message,
+        });
       }
     }
   };
