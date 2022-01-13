@@ -4,7 +4,7 @@ import { Grid } from "@mui/material";
 import { useStyles } from "./ClubsCardGridStyles";
 import ClubsCard from "./ClubsCard";
 import { getAllGyms } from "../../utils/fetchApi/clubs";
-import loadingSVG from '../../../public/ripple-loading.svg';
+import loadingSVG from "../../../public/ripple-loading.svg";
 
 export default function ClubsCardGrid() {
   const styles = useStyles();
@@ -19,7 +19,7 @@ export default function ClubsCardGrid() {
     <Grid container spacing={2}>
       {loading ? (
         <div className={styles.loading}>
-          <Image src={loadingSVG} width={200} height={200} alt='loading' />
+          <Image src={loadingSVG} width={200} height={200} alt="loading" />
         </div>
       ) : (
         gyms.map((gym) => (

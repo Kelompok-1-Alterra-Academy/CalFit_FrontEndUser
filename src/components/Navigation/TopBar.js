@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { Box, Button, Typography } from "@mui/material";
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import PropTypes from "prop-types";
 import useStyles from "./TopBarStyles";
 
@@ -14,7 +14,9 @@ export const TopBar = ({ label }) => {
         <Button onClick={() => router.back()}>
           <ArrowBackIcon className={classes.arrowBackIcon} />
         </Button>
-        <Typography className={classes.pageTitle}>{label ? label : 'CalFit'}</Typography>
+        <Typography className={classes.pageTitle}>
+          {label ? label : "CalFit"}
+        </Typography>
       </Box>
     </Box>
   );
