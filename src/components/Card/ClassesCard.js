@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import { useStyles } from "./CardStyles";
 
-export default function ClassesCard({ slide }) {
+export default function ClassesCard({ content }) {
   const styles = useStyles();
 
   return (
@@ -19,14 +19,14 @@ export default function ClassesCard({ slide }) {
           <CardMedia
             component="img"
             height="220"
-            image={slide?.card_picture_url}
-            alt={slide?.name}
+            image={content?.card_picture_url}
+            alt={content?.name}
           />
         </div>
         <CardContent className={styles.cardContent}>
-          <Typography variant="subtitle3">{slide?.category}</Typography>
+          <Typography variant="subtitle3">{content?.category}</Typography>
           <Typography variant="h3" component="div">
-            {slide?.name}
+            {content?.name}
           </Typography>
           {/* <Typography variant="body3">60 mins</Typography> */}
         </CardContent>

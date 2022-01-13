@@ -6,6 +6,7 @@ import styles from "../../../styles/clubs/[id]/Index.module.css";
 import { getGymById } from "../../../src/utils/fetchApi/clubs";
 import { TopBar } from "../../../src/components/navigation/TopBar";
 import Loading from "../../../src/components/page/Loading";
+import ClassesCardListGrid from "../../../src/components/card/ClassesCardListGrid";
 
 export default function ClubDetails() {
   const router = useRouter();
@@ -19,7 +20,7 @@ export default function ClubDetails() {
   }, [router.query.id]);
 
   return (
-    (loading || gym === {}) ? (
+    (loading || !gym) ? (
       <Loading />
     ) : (
       <div className={styles.container}>
@@ -43,10 +44,9 @@ export default function ClubDetails() {
 
         <main className={styles.main}>
           <h1 className={styles.sectiontitle}>About</h1>
-          <p className={styles.sectioncontent}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur lobortis laoreet nibh sit amet vulputate. Pellentesque rutrum lacinia ex, vel vehicula arcu vestibulum at. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.
-          </p>
+          <p className={styles.sectioncontent}>{gym.description}</p>
           <h1 className={styles.sectiontitle}>Available Classes</h1>
+          <ClassesCardListGrid classes={gym.classes} />
           <br /><br /><br />
         </main>
       </div>
