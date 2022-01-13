@@ -1,0 +1,129 @@
+.container {
+  background-color: #111d2c;
+}
+
+.main {
+  width: 576px;
+  background-color: #111d2c;
+  position: relative;
+  top: 360px;
+  left: -20px;
+  padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
+}
+
+.sectiontitle {
+  color: #fff;
+  font-weight: 600;
+}
+
+.sectioncontent {
+  color: #fff;
+  font-weight: 200;
+  margin-top: 0;
+  text-align: justify;
+}
+
+.bghome {
+  position: absolute;
+  top: 0;
+  margin: auto;
+}
+
+.gymcard {
+  background-color: #84b0bb;
+  border-radius: 10px;
+  top: 120px;
+  padding: 20px;
+  margin: 10px;
+  width: 264px;
+  height: 147px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #fefefe;
+}
+
+.gymcard h2 {
+  margin: 0;
+  font-weight: 500;
+}
+
+.gymaddress {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0;
+  font-size: 0.75rem;
+}
+
+.gymaddress p {
+  margin: 0;
+  font-weight: 300;
+}
+
+.gymaddress .locationicon {
+  font-size: 1rem;
+}
+
+.div1 {
+  padding: 200px 25px 60px;
+  text-align: center;
+}
+
+.div2 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #fefefe;
+}
+
+.div3 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #fefefe;
+}
+
+@media (max-width: 576px) {
+  .grid {
+    width: 100%;
+    flex-direction: column;
+  }
+  .bghome {
+    left: 0;
+    width: 100vw !important;
+    height: 400px;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .gymcard {
+    position: absolute;
+    left: 20px;
+  }
+}
+@media (min-width: 577px) {
+  .bghome {
+    margin-left: -20px;
+    height: 400px;
+    width: 576px;
+    overflow: hidden;
+  }
+  .bghome img {
+    width: 576px !important;
+    height: auto;
+    z-index: 0;
+  }
+  .main {
+    /* min-height: 100vh; */
+    display: flex;
+    flex-direction: column;
+    z-index: 10;
+  }
+  .gymcard {
+    position: relative;
+    left: 30px;
+  }
+}
