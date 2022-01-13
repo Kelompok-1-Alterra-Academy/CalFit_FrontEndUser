@@ -7,7 +7,7 @@ const useStyles = makeStyles((theme) => ({
     top: 0,
     right: 0,
     left: 0,
-    zIndex: 2,
+    zIndex: 100,
     backgroundColor: "#111D2C85",
     display: "flex",
     justifyContent: "center",

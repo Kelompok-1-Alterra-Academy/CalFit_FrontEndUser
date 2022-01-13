@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useRouter } from "next/router";
 import {
   Card,
   CardContent,
@@ -10,10 +11,11 @@ import { useStyles } from "./CardStyles";
 
 export default function ClassesCard({ content }) {
   const styles = useStyles();
+  const router = useRouter();
 
   return (
     <Card sx={{ maxWidth: 220, maxHeight: 220 }}>
-      <CardActionArea>
+      <CardActionArea onClick={() => router.push(`/classes/${content.id}`)}>
         <div>
           <div className={styles.darkFilter} />
           <CardMedia
