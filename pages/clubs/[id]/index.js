@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
 import Head from "next/head";
-import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import styles from "../../../styles/clubs/[id]/Index.module.css";
@@ -19,9 +17,6 @@ export default function ClubDetails() {
     if (id)
       getGymById(setLoading, setGym, id);
   }, [router.query.id]);
-
-  // if (gym == {})
-  console.log(gym);
 
   return (
     (loading || gym === {}) ? (
@@ -47,16 +42,11 @@ export default function ClubDetails() {
         </div>
 
         <main className={styles.main}>
-          <h1 style={{ color: "#fff", fontWeight: 600 }}>About</h1>
-          <p style={{
-            color: "#fff",
-            marginTop: 0,
-            fontWeight: 200,
-            position: "relative",
-            textAlign: "justify",
-          }}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur lobortis laoreet nibh sit amet vulputate. Pellentesque rutrum lacinia ex, vel vehicula arcu vestibulum at. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae
+          <h1 className={styles.sectiontitle}>About</h1>
+          <p className={styles.sectioncontent}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur lobortis laoreet nibh sit amet vulputate. Pellentesque rutrum lacinia ex, vel vehicula arcu vestibulum at. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.
           </p>
+          <h1 className={styles.sectiontitle}>Available Classes</h1>
           <br /><br /><br />
         </main>
       </div>
