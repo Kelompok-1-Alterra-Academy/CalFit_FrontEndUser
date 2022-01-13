@@ -2,7 +2,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import FilterAltIcon from '@mui/icons-material/FilterAlt';
+import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import ClubsCardGrid from "../../src/components/Card/ClubsCardGrid";
 import styles from "../../styles/clubs/Index.module.css";
 
