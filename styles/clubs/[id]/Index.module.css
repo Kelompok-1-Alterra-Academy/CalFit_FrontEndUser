@@ -88,6 +88,9 @@
 }
 
 @media (max-width: 576px) {
+  .main {
+    max-width: 100vw;
+  }
   .grid {
     width: 100%;
     flex-direction: column;
@@ -117,7 +120,6 @@
     z-index: 0;
   }
   .main {
-    /* min-height: 100vh; */
     display: flex;
     flex-direction: column;
     z-index: 10;
