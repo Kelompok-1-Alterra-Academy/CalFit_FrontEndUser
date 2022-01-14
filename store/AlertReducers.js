@@ -3,11 +3,11 @@ import { createSlice } from "@reduxjs/toolkit";
 const AlertReducers = createSlice({
   name: "alert",
   initialState: {
-    isLogin: false,
+    alertContent: {},
   },
   reducers: {
     showAlert: (state, action) => {
-      state.isLogin = action.isLogin;
+      state.alertContent = action.payload.alertContent;
     },
   },
 });

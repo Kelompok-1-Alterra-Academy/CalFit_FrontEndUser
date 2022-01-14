@@ -87,10 +87,25 @@ export default function AuthForm({ path }) {
         setData({ ...data, password: "" });
         switch (res.status) {
           case 201:
+            dispatch(
+              showAlert({
+                alertContent: {
+                  message: "Please login to continue",
+                  status: "true",
+                },
+              })
+            );
             router.push("/login");
             break;
           case 200:
-            dispatch(showAlert({ isLogin: true }));
+            dispatch(
+              showAlert({
+                alertContent: {
+                  message: "Login success",
+                  status: "true",
+                },
+              })
+            );
             router.push("/");
             break;
           default:
