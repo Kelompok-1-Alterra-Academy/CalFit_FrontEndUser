@@ -23,6 +23,8 @@ import {
 } from "../../utils/validation/validation";
 import { useDispatch } from "react-redux";
 import { showAlert } from "../../../store/AlertReducers";
+import { setCookie, parseCookies } from "nookies";
+import jwtDecode from "../../utils/jwtDecode/jwtDecode";
 
 export default function AuthForm({ path }) {
   const classes = useStyles();
@@ -84,6 +86,9 @@ export default function AuthForm({ path }) {
     } else {
       try {
         const res = await auth(path.toLowerCase(), data);
+        setCookie(null, "token", res.data.token);
+        const cookie = parseCookies();
+        const user = jwtDecode(cookie.token);
         setData({ ...data, password: "" });
         switch (res.status) {
           case 201:
@@ -101,7 +106,7 @@ export default function AuthForm({ path }) {
             dispatch(
               showAlert({
                 alertContent: {
-                  message: "Login success",
+                  message: `Welcome ${user.Email}`,
                   status: "true",
                 },
               })
