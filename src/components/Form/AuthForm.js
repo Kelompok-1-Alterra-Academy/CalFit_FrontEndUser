@@ -14,8 +14,8 @@ import {
   Link as MaterialLink,
 } from "@mui/material";
 import { VisibilityOff, Visibility, Google } from "@mui/icons-material";
-import { CustomAlert } from "../alert/Alert";
-import { useStyles } from "../../../styles/Auth.style";
+import { CustomAlert } from "../../../src/components/Alert/Alert";
+import { useStyles } from "./Auth.style";
 import auth from "../../utils/fetchApi/auth";
 import {
   emailValidation,
@@ -56,22 +56,22 @@ export default function AuthForm({ path }) {
         emailValidation(e.target.value)
           ? setError({ ...error, email: { status: false, message: "" } })
           : setError({
-            ...error,
-            email: { status: true, message: "wrong email format" },
-          });
+              ...error,
+              email: { status: true, message: "wrong email format" },
+            });
         break;
       case "password":
         setData({ ...data, password: e.target.value });
         passwordValidation(e.target.value)
           ? setError({ ...error, password: { status: false, message: "" } })
           : setError({
-            ...error,
-            password: {
-              status: true,
-              message:
-                "password must be at least 6 char contain number, lowercase and uppercase letter",
-            },
-          });
+              ...error,
+              password: {
+                status: true,
+                message:
+                  "password must be at least 6 char contain number, lowercase and uppercase letter",
+              },
+            });
     }
   };
   const handleOnSubmit = async (e) => {
