@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Grid } from "@mui/material";
-import { useStyles } from "./CardStyles";
+import { useStyles } from "./ClubsCardGridStyles";
 import ClubsCard from "./ClubsCard";
 import { getAllGyms } from "../../utils/fetchApi/clubs";
-import loadingSVG from '../../../public/ripple-loading.svg';
+import loadingSVG from "../../../public/ripple-loading.svg";
 
 export default function ClubsCardGrid() {
   const styles = useStyles();
@@ -18,7 +18,9 @@ export default function ClubsCardGrid() {
   return (
     <Grid container spacing={2}>
       {loading ? (
-        <Image src={loadingSVG} width={200} height={200} alt='loading' />
+        <div className={styles.loading}>
+          <Image src={loadingSVG} width={200} height={200} alt="loading" />
+        </div>
       ) : (
         gyms.map((gym) => (
           <Grid item xs={12} sm={6} md={6} lg={6} key={gym.id}>

@@ -8,7 +8,7 @@ export default function ClubsCardSlides({ count }) {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    getAllGyms(setLoading, setSlides, { limit: count, page: 3 });
+    getAllGyms(setLoading, setSlides, { limit: count, page: 1 });
   }, [count]);
 
   return (
