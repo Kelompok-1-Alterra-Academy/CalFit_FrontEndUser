@@ -21,10 +21,13 @@ import {
   emailValidation,
   passwordValidation,
 } from "../../utils/validation/validation";
+import { useDispatch } from "react-redux";
+import { showAlert } from "../../../store/AlertReducers";
 
 export default function AuthForm({ path }) {
   const classes = useStyles();
   const router = useRouter();
+  const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
   const [data, setData] = useState({
     email: "",
@@ -87,6 +90,7 @@ export default function AuthForm({ path }) {
             router.push("/login");
             break;
           case 200:
+            dispatch(showAlert({ isLogin: true }));
             router.push("/");
             break;
           default:
