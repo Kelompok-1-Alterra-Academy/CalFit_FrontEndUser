@@ -6,8 +6,11 @@ import Link from "next/link";
 import { Button } from "@mui/material";
 import ClubsCardSlides from "../src/components/card/ClubsCardSlides";
 import ClassesCardSlides from "../src/components/card/ClassesCardSlides";
+import { useSelector } from "react-redux";
+import { CustomAlert } from "../src/components/Alert/Alert";
 
 export default function Home() {
+  const alertContent = useSelector((state) => state.alert.alertContent);
   return (
     <div className={styles.root}>
       <Head>
@@ -67,6 +70,7 @@ export default function Home() {
       </main>
       <br />
       <br />
+      {alertContent.open ?? <CustomAlert data={alertContent} />}
     </div>
   );
 }

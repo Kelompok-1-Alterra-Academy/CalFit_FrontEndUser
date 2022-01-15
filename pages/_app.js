@@ -13,6 +13,8 @@ import { RootLayout } from "../src/components/Layout/RootLayout";
 import Login from "./login";
 import { SessionProvider } from "next-auth/react";
 import Register from "./register";
+import { Provider } from "react-redux";
+import store from "../app/store";
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -25,27 +27,29 @@ export default function MyApp({
   const router = useRouter();
   return (
     <CacheProvider value={emotionCache}>
-      <Head>
-        <title>Spill</title>
-        <meta name="viewport" content="initial-scale=1, width=device-width" />
-      </Head>
-      <SessionProvider session={session}>
-        <ThemeProvider theme={theme}>
-          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-          <CssBaseline />
-          <LocalizationProvider dateAdapter={DateAdapter}>
-            {router.pathname === "/login" ? (
-              <Login />
-            ) : router.pathname === "/register" ? (
-              <Register />
-            ) : (
-              <RootLayout>
-                <Component {...pageProps} />
-              </RootLayout>
-            )}
-          </LocalizationProvider>
-        </ThemeProvider>
-      </SessionProvider>
+      <Provider store={store}>
+        <Head>
+          <title>Spill</title>
+          <meta name="viewport" content="initial-scale=1, width=device-width" />
+        </Head>
+        <SessionProvider session={session}>
+          <ThemeProvider theme={theme}>
+            {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+            <CssBaseline />
+            <LocalizationProvider dateAdapter={DateAdapter}>
+              {router.pathname === "/login" ? (
+                <Login />
+              ) : router.pathname === "/register" ? (
+                <Register />
+              ) : (
+                <RootLayout>
+                  <Component {...pageProps} />
+                </RootLayout>
+              )}
+            </LocalizationProvider>
+          </ThemeProvider>
+        </SessionProvider>
+      </Provider>
     </CacheProvider>
   );
 }

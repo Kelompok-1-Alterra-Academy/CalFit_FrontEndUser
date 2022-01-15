@@ -14,17 +14,22 @@ import {
   Link as MaterialLink,
 } from "@mui/material";
 import { VisibilityOff, Visibility, Google } from "@mui/icons-material";
-import { CustomAlert } from "../alert/Alert";
-import { useStyles } from "../../../styles/Auth.style";
+import { CustomAlert } from "../../../src/components/Alert/Alert";
+import { useStyles } from "./Auth.style";
 import auth from "../../utils/fetchApi/auth";
 import {
   emailValidation,
   passwordValidation,
 } from "../../utils/validation/validation";
+import { useDispatch } from "react-redux";
+import { showAlert } from "../../../store/AlertReducers";
+import { setCookie } from "nookies";
+import jwtDecode from "../../utils/jwtDecode/jwtDecode";
 
 export default function AuthForm({ path }) {
   const classes = useStyles();
   const router = useRouter();
+  const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
   const [data, setData] = useState({
     email: "",
@@ -53,22 +58,22 @@ export default function AuthForm({ path }) {
         emailValidation(e.target.value)
           ? setError({ ...error, email: { status: false, message: "" } })
           : setError({
-            ...error,
-            email: { status: true, message: "wrong email format" },
-          });
+              ...error,
+              email: { status: true, message: "wrong email format" },
+            });
         break;
       case "password":
         setData({ ...data, password: e.target.value });
         passwordValidation(e.target.value)
           ? setError({ ...error, password: { status: false, message: "" } })
           : setError({
-            ...error,
-            password: {
-              status: true,
-              message:
-                "password must be at least 6 char contain number, lowercase and uppercase letter",
-            },
-          });
+              ...error,
+              password: {
+                status: true,
+                message:
+                  "password must be at least 6 char contain number, lowercase and uppercase letter",
+              },
+            });
     }
   };
   const handleOnSubmit = async (e) => {
@@ -79,17 +84,42 @@ export default function AuthForm({ path }) {
         message: "please fill all fields",
       });
     } else {
-      const res = await auth(setAlert, path.toLowerCase(), data);
-      setData({ ...data, password: "" });
-      switch (res.status) {
-        case 201:
-          router.push("/login");
-          break;
-        case 200:
-          router.push("/");
-          break;
-        default:
-          break;
+      try {
+        const res = await auth(path.toLowerCase(), data);
+        setCookie(null, "token", res.data.token);
+        const user = jwtDecode(res.data.token);
+        setData({ ...data, password: "" });
+        switch (res.status) {
+          case 201:
+            dispatch(
+              showAlert({
+                alertContent: {
+                  message: "Please login to continue",
+                  status: "true",
+                },
+              })
+            );
+            router.push("/login");
+            break;
+          case 200:
+            dispatch(
+              showAlert({
+                alertContent: {
+                  message: `Welcome ${user.Email}`,
+                  status: "true",
+                },
+              })
+            );
+            router.push("/");
+            break;
+          default:
+            break;
+        }
+      } catch (error) {
+        setAlert({
+          status: true,
+          message: error.message,
+        });
       }
     }
   };
