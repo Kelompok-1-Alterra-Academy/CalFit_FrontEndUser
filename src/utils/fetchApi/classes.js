@@ -15,3 +15,11 @@ export const getAllClasses = async (
       setLoadingState(false);
     });
 };
+
+export const getClassById = async (setLoadingState, setData, id) => {
+  setLoadingState(true);
+  return baseApi
+    .get(`/classes/${id}`)
+    .then((res) => setData(res.data.data))
+    .finally(() => setLoadingState(false));
+};
