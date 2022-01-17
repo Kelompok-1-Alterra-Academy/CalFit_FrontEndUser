@@ -37,6 +37,7 @@ export default function ClassDetails() {
       <main className={styles.main}>
         <div className={styles.classheader}>
           <h3>{classes?.name}</h3>
+          <h3>Rp. {classes?.price}</h3>
           <h3>{classes?.gym_name}</h3>
         </div>
         <h5>{classes?.schedules[0].time_schedule}</h5>
