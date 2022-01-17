@@ -1,4 +1,4 @@
-export const emailValidation = (email, password) => {
+export const emailValidation = (email) => {
   const emailValidation = /\S+@\S+\.\S+/;
   return emailValidation.test(email);
 };
