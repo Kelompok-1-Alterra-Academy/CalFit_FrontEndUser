@@ -39,7 +39,7 @@ export default function ClassDetails() {
           <h3>{classes?.name}</h3>
           <h3>{classes?.gym_name}</h3>
         </div>
-        <h5>{classes?.schedules[0].TimeSchedule}</h5>
+        <h5>{classes?.schedules[0].time_schedule}</h5>
         <Typography className={styles.description}>
           {classes?.description}
         </Typography>
