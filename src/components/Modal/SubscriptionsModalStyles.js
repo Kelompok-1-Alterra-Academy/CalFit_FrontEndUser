@@ -9,4 +9,7 @@ export const style = {
     borderRadius: '10px',
     boxShadow: 24,
     p: 4,
+    buttonSubs: {
+      margin: '100px'
+    }
   };

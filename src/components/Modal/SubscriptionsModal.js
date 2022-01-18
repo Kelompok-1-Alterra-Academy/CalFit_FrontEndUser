@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Box , Button, Typography, Modal } from '@mui/material';
 import { style } from './SubscriptionsModalStyles';
 import Image from 'next/image';
+import SubscriptionsRadio from './SubscriptionsRadio';
 
 export default function SubscriptionModal() {
     const [open, setOpen] = React.useState(false);
@@ -31,7 +32,8 @@ export default function SubscriptionModal() {
                     <Typography id="modal-modal-description" sx={{ mt : 1 }}>
                         Choose your subscription now, you can cancel or change your subscription later.
                     </Typography>
-                    <div className='button-subs' sx={{ mt : 1 }}>
+                    <div className='buttonSubs' sx={{ mt : 1 }}>
+                        <SubscriptionsRadio/>
                         <Button variant ="contained">
                             Continue
                         </Button>
