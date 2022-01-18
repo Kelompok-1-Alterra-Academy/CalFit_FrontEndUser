@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Box , Button, Typography, Modal } from '@mui/material';
-import { useStyles } from './SubscriptionsModalStyles';
+import { style } from './SubscriptionsModalStyles';
+import Image from 'next/image';
 
 export default function SubscriptionModal() {
     const [open, setOpen] = React.useState(false);
@@ -16,13 +17,28 @@ export default function SubscriptionModal() {
             onClose={handleClose}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description">
-                <Box sx={ useStyles }>
-                    <Typography id="modal-modal-title" variant="h6" component="h2">
-                        Text in a modal
+                <Box sx={ style }>
+                    <Image
+                        src="/backdrop-subs.png"
+                        className='bdsubs'
+                        alt="Backdrop Subscription"
+                        width={293}
+                        height={199}
+                    />
+                    <Typography id="modal-modal-title" sx={{mt: 1}} variant="h3" component="h2">
+                        Our Subscriptions
                     </Typography>
-                    <Typography id="modal-modal-description" sx={{ mt : 2 }}>
-                        Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+                    <Typography id="modal-modal-description" sx={{ mt : 1 }}>
+                        Choose your subscription now, you can cancel or change your subscription later.
                     </Typography>
+                    <div className='button-subs' sx={{ mt : 1 }}>
+                        <Button variant ="contained">
+                            Continue
+                        </Button>
+                        <Button onClick={handleClose}>
+                            Cancel
+                        </Button>
+                    </div>
                 </Box>
         </Modal>
         </>
