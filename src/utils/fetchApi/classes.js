@@ -24,10 +24,10 @@ export const getClassById = async (setLoadingState, setData, id) => {
     .finally(() => setLoadingState(false));
 };
 
-export const bookingClass = async (setLoadingState, classID, data) => {
+export const bookingClass = async (setLoadingState, data) => {
   setLoadingState(true);
   try {
-    return await baseApi.post(`classes/${classID}/bookings`, data);
+    return await baseApi.post(`classes/${data.class_id}/bookings`, data);
   } finally {
     return setLoadingState(false);
   }

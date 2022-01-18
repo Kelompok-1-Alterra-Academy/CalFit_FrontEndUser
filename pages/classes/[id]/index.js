@@ -4,12 +4,10 @@ import { useRouter } from "next/router";
 import { parseCookies } from "nookies";
 import { useEffect } from "react";
 import { useState } from "react";
+import CustomDialog from "../../../src/components/Dialog/Dialog";
 import { TopBar } from "../../../src/components/navigation/TopBar";
 import Loading from "../../../src/components/page/Loading";
-import {
-  bookingClass,
-  getClassById,
-} from "../../../src/utils/fetchApi/classes";
+import { getClassById } from "../../../src/utils/fetchApi/classes";
 import jwtDecode from "../../../src/utils/jwtDecode/jwtDecode";
 import styles from "../../../styles/classes/[id]/Index.module.css";
 
@@ -17,23 +15,29 @@ export default function ClassDetails() {
   const router = useRouter();
   const [classes, setClasses] = useState();
   const [loading, setLoading] = useState(false);
+  const [dialog, setDialog] = useState({ isOpen: false });
+  const [bookingData, setBookingData] = useState();
 
   useEffect(() => {
     const id = router.query.id;
     if (id) getClassById(setLoading, setClasses, id);
+    return () => {
+      setClasses({});
+      setLoading({});
+    };
   }, [router.query.id]);
 
   const handleOnClick = () => {
     const { token } = parseCookies();
-    const userdata = jwtDecode(token);
-    const bookingData = {
+    const { Id } = jwtDecode(token);
+    setBookingData({
       amount: classes.price,
-      user_id: userdata.Id,
+      user_id: Id,
       class_id: classes.id,
-      payment_id: 1,
-    };
-    bookingClass(setLoading, classes.id, bookingData);
-    router.push("/");
+    });
+    setDialog({
+      isOpen: true,
+    });
   };
 
   return loading || !classes ? (
@@ -69,6 +73,14 @@ export default function ClassDetails() {
         >
           Booking Now
         </Button>
+        {dialog.isOpen && (
+          <CustomDialog
+            setDialog={setDialog}
+            setLoading={setLoading}
+            type="payment"
+            data={bookingData}
+          />
+        )}
       </main>
     </div>
   );
