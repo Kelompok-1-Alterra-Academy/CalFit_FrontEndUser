@@ -21,8 +21,8 @@ import {
   emailValidation,
   passwordValidation,
 } from "../../utils/validation/validation";
-import { useDispatch } from "react-redux";
-import { showAlert } from "../../../store/AlertReducers";
+import { useDispatch, useSelector } from "react-redux";
+import { showAlert } from "../../store/AlertReducers";
 import { setCookie } from "nookies";
 import jwtDecode from "../../utils/jwtDecode/jwtDecode";
 
@@ -45,10 +45,7 @@ export default function AuthForm({ path }) {
       message: "",
     },
   });
-  const [alert, setAlert] = useState({
-    status: false,
-    message: "",
-  });
+  const alert = useSelector((state) => state.alert.alertContent);
 
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const handleOnChange = (e) => {
@@ -79,10 +76,14 @@ export default function AuthForm({ path }) {
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     if (data.email === "" || data.password == "") {
-      setAlert({
-        status: true,
-        message: "please fill all fields",
-      });
+      dispatch(
+        showAlert({
+          alertContent: {
+            message: "please fill all fields",
+            status: true,
+          },
+        })
+      );
     } else {
       try {
         const res = await auth(path.toLowerCase(), data);
@@ -95,7 +96,7 @@ export default function AuthForm({ path }) {
               showAlert({
                 alertContent: {
                   message: "Please login to continue",
-                  status: "true",
+                  status: true,
                 },
               })
             );
@@ -106,7 +107,7 @@ export default function AuthForm({ path }) {
               showAlert({
                 alertContent: {
                   message: `Welcome ${user.Email}`,
-                  status: "true",
+                  status: true,
                 },
               })
             );
@@ -116,25 +117,21 @@ export default function AuthForm({ path }) {
             break;
         }
       } catch (error) {
-        setAlert({
-          status: true,
-          message: error.message,
-        });
+        dispatch(
+          showAlert({
+            alertContent: {
+              message: error.message,
+              status: true,
+            },
+          })
+        );
       }
     }
   };
 
-  useEffect(() => {
-    setTimeout(() => {
-      setAlert({
-        status: false,
-      });
-    }, 10000);
-  }, [alert.status]);
-
   return (
     <div className={classes.root}>
-      <CustomAlert data={alert} />
+      {alert.status && <CustomAlert data={alert} />}
       <Head>
         <title>{path} page</title>
       </Head>
