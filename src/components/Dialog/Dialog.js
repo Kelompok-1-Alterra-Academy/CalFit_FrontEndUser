@@ -19,7 +19,7 @@ export default function CustomDialog({ setDialog, type, data, setLoading }) {
 
   const handleClose = () => {
     setOpen(false);
-    setDialog({ isOpen: false });
+    setDialog(false);
   };
 
   const handleListItemClick = (id) => {

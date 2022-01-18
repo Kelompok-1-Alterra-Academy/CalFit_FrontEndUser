@@ -20,7 +20,7 @@ export default function ClassDetails() {
   const alert = useSelector((state) => state.alert.alertContent);
   const [classes, setClasses] = useState();
   const [loading, setLoading] = useState(false);
-  const [dialog, setDialog] = useState({ isOpen: false });
+  const [dialog, setDialog] = useState(false);
   const [bookingData, setBookingData] = useState();
 
   useEffect(() => {
@@ -50,9 +50,7 @@ export default function ClassDetails() {
         user_id: Id,
         class_id: classes.id,
       });
-      setDialog({
-        isOpen: true,
-      });
+      setDialog(true);
     }
   };
 
@@ -90,7 +88,7 @@ export default function ClassDetails() {
         >
           Booking Now
         </Button>
-        {dialog.isOpen && (
+        {dialog && (
           <CustomDialog
             setDialog={setDialog}
             setLoading={setLoading}
