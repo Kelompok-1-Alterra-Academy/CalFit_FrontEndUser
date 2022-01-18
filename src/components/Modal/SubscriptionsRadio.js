@@ -8,7 +8,7 @@ import { Button } from '@mui/material';
 import { useRouter } from 'next/router';
 
 export default function SubscriptionsRadio() {
-    const [value, setValue] = React.useState('false')
+    const [value, setValue] = React.useState({})
     const handleChange = (event) => {
         setValue(event.target.value);
     };
@@ -28,11 +28,11 @@ export default function SubscriptionsRadio() {
             <FormControl>
                 <RadioGroup 
                     aria-labelledby='demo-controlled-radio-buttons-group' 
-                    name='controlled-radio-buttons-group'
+                    name='subscription'
                     value={value}
                     onChange={handleChange} key={membership.id}>
                         <FormControlLabel
-                        value={membership.name}
+                        value={membership.id}
                         control={<Radio />}
                         label={membership.name}/>
                 </RadioGroup>
@@ -45,14 +45,3 @@ export default function SubscriptionsRadio() {
         </>
     )
 }
-
-{/* <FormControlLabel
-                    value="pro"
-                    control={<Radio />}
-                    label="Pro"
-                    />
-                <FormControlLabel
-                    value="plus"
-                    control={<Radio />}
-                    label="Plus"
-                    /> */}

@@ -3,11 +3,22 @@ import { Box , Button, Typography, Modal } from '@mui/material';
 import { style } from './SubscriptionsModalStyles';
 import Image from 'next/image';
 import SubscriptionsRadio from './SubscriptionsRadio';
+import { getAllMemberships } from '../../utils/fetchApi/memberships';
+import { useRouter } from 'next/router';
 
 export default function SubscriptionModal() {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+
+    const [memberships, setMemberships] = React.useState([]);
+
+    React.useEffect(() => {
+        getAllMemberships(setMemberships);
+    }, []);
+
+    const router = useRouter();
+
     return (
         <>
         <Button onClick={handleOpen} variant="contained">
