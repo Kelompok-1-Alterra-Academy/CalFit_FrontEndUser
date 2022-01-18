@@ -38,7 +38,7 @@ export function CustomAlert({ data: { status, message } }) {
       message={message}
       action={action}
       anchorOrigin={{
-        vertical: "center",
+        vertical: "bottom",
         horizontal: "center",
       }}
     />
