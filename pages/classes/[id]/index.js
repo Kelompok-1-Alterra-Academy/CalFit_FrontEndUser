@@ -43,6 +43,16 @@ export default function ClassDetails() {
           },
         })
       );
+      setTimeout(() => {
+        dispatch(
+          showAlert({
+            alertContent: {
+              status: false,
+            },
+          })
+        );
+        router.push("/login");
+      }, 2000);
     } else {
       const { Id } = jwtDecode(token);
       setBookingData({
