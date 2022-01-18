@@ -4,15 +4,20 @@ import { useRouter } from "next/router";
 import { parseCookies } from "nookies";
 import { useEffect } from "react";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import CustomDialog from "../../../src/components/Dialog/Dialog";
 import { TopBar } from "../../../src/components/navigation/TopBar";
 import Loading from "../../../src/components/page/Loading";
 import { getClassById } from "../../../src/utils/fetchApi/classes";
 import jwtDecode from "../../../src/utils/jwtDecode/jwtDecode";
 import styles from "../../../styles/classes/[id]/Index.module.css";
+import { showAlert } from "../../../src/store/AlertReducers";
+import { CustomAlert } from "../../../src/components/Alert/Alert";
 
 export default function ClassDetails() {
   const router = useRouter();
+  const dispatch = useDispatch();
+  const alert = useSelector((state) => state.alert.alertContent);
   const [classes, setClasses] = useState();
   const [loading, setLoading] = useState(false);
   const [dialog, setDialog] = useState({ isOpen: false });
@@ -29,15 +34,26 @@ export default function ClassDetails() {
 
   const handleOnClick = () => {
     const { token } = parseCookies();
-    const { Id } = jwtDecode(token);
-    setBookingData({
-      amount: classes.price,
-      user_id: Id,
-      class_id: classes.id,
-    });
-    setDialog({
-      isOpen: true,
-    });
+    if (!token) {
+      dispatch(
+        showAlert({
+          alertContent: {
+            message: "Please login to continue",
+            status: true,
+          },
+        })
+      );
+    } else {
+      const { Id } = jwtDecode(token);
+      setBookingData({
+        amount: classes.price,
+        user_id: Id,
+        class_id: classes.id,
+      });
+      setDialog({
+        isOpen: true,
+      });
+    }
   };
 
   return loading || !classes ? (
@@ -50,6 +66,7 @@ export default function ClassDetails() {
       </Head>
 
       <TopBar label={"Home"} />
+      {alert.status && <CustomAlert data={alert} />}
 
       <div
         className={styles.bghome}
