@@ -2,20 +2,40 @@ import Snackbar from "@mui/material/Snackbar";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { showAlert } from "../../store/AlertReducers";
 
-export function CustomAlert({ data: { status, message } }) {
-  const [open, setOpen] = useState(false);
+export function CustomAlert({ data: { message } }) {
+  const dispatch = useDispatch();
+  const alertContent = useSelector((state) => state.alert.alertContent);
+  const [open, setOpen] = useState(true);
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
     }
-    setOpen(false);
+    dispatch(
+      showAlert({
+        alertContent: {
+          status: false,
+        },
+      })
+    );
   };
 
   useEffect(() => {
-    setOpen(status);
-  }, [status]);
+    setTimeout(
+      () =>
+        dispatch(
+          showAlert({
+            alertContent: {
+              status: false,
+            },
+          })
+        ),
+      10000
+    );
+  }, [alertContent.status]);
 
   const action = (
     <>
@@ -33,7 +53,6 @@ export function CustomAlert({ data: { status, message } }) {
   return (
     <Snackbar
       open={open}
-      autoHideDuration={6000}
       onClose={handleClose}
       message={message}
       action={action}
