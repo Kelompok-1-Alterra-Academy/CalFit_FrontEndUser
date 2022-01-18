@@ -103,15 +103,17 @@ export default function AuthForm({ path }) {
             router.push("/login");
             break;
           case 200:
-            dispatch(
-              showAlert({
-                alertContent: {
-                  message: `Welcome ${user.Email}`,
-                  status: true,
-                },
-              })
-            );
             router.push("/");
+            setTimeout(() => {
+              dispatch(
+                showAlert({
+                  alertContent: {
+                    message: `Welcome ${user.Email}`,
+                    status: true,
+                  },
+                })
+              );
+            }, 500);
             break;
           default:
             break;

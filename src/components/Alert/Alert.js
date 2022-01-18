@@ -33,7 +33,7 @@ export function CustomAlert({ data: { message } }) {
             },
           })
         ),
-      10000
+      5000
     );
   }, [alertContent.status]);
 
