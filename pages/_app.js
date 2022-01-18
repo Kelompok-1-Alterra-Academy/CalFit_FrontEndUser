@@ -14,7 +14,7 @@ import Login from "./login";
 import { SessionProvider } from "next-auth/react";
 import Register from "./register";
 import { Provider } from "react-redux";
-import store from "../app/store";
+import store from "../src/app/store";
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -28,10 +28,6 @@ export default function MyApp({
   return (
     <CacheProvider value={emotionCache}>
       <Provider store={store}>
-        <Head>
-          <title>Spill</title>
-          <meta name="viewport" content="initial-scale=1, width=device-width" />
-        </Head>
         <SessionProvider session={session}>
           <ThemeProvider theme={theme}>
             {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
