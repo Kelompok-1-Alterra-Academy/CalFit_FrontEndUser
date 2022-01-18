@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/link-passhref */
+import { useState } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
@@ -8,9 +9,14 @@ import ClubsCardSlides from "../src/components/card/ClubsCardSlides";
 import ClassesCardSlides from "../src/components/card/ClassesCardSlides";
 import { useSelector } from "react-redux";
 import { CustomAlert } from "../src/components/Alert/Alert";
+import SubscriptionModal from "../src/components/Modal/SubscriptionsModal";
+// import SubscriptionModal from "../src/components/Modal/SubscriptionsModal";
 
 export default function Home() {
   const alertContent = useSelector((state) => state.alert.alertContent);
+  // const [open, setOpen] = useState(false);
+  // const handleOpen = () => setOpen(true);
+  // const handleClose = () => setOpen(false);
   return (
     <div className={styles.root}>
       <Head>
@@ -47,11 +53,16 @@ export default function Home() {
       </header>
       <main className={styles.main}>
         <div className={styles.div1}>
-          <Link href="/subscription" passHref>
+          {/* <Link href="/subscription" passHref>
             <Button className={styles.subsbutton} variant="contained">
               Our Membership Plan
             </Button>
-          </Link>
+          </Link> */}
+          {/* <Button onClick={handleOpen} variant="contained">
+              Our Membership Plan
+          </Button>
+          <SubscriptionModal open={open} onClose={handleClose} /> */}
+          <SubscriptionModal/>
         </div>
         <div className={styles.div2}>
           <h2>Explore Clubs</h2>
