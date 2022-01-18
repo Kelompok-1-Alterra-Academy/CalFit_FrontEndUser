@@ -22,7 +22,7 @@ import {
   passwordValidation,
 } from "../../utils/validation/validation";
 import { useDispatch } from "react-redux";
-import { showAlert } from "../../../store/AlertReducers";
+import { showAlert } from "../../store/AlertReducers";
 import { setCookie } from "nookies";
 import jwtDecode from "../../utils/jwtDecode/jwtDecode";
 

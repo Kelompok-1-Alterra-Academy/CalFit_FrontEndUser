@@ -1,11 +1,16 @@
 import { Button, Typography } from "@mui/material";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import { parseCookies } from "nookies";
 import { useEffect } from "react";
 import { useState } from "react";
 import { TopBar } from "../../../src/components/navigation/TopBar";
 import Loading from "../../../src/components/page/Loading";
-import { getClassById } from "../../../src/utils/fetchApi/classes";
+import {
+  bookingClass,
+  getClassById,
+} from "../../../src/utils/fetchApi/classes";
+import jwtDecode from "../../../src/utils/jwtDecode/jwtDecode";
 import styles from "../../../styles/classes/[id]/Index.module.css";
 
 export default function ClassDetails() {
@@ -17,6 +22,19 @@ export default function ClassDetails() {
     const id = router.query.id;
     if (id) getClassById(setLoading, setClasses, id);
   }, [router.query.id]);
+
+  const handleOnClick = () => {
+    const { token } = parseCookies();
+    const userdata = jwtDecode(token);
+    const bookingData = {
+      amount: classes.price,
+      user_id: userdata.Id,
+      class_id: classes.id,
+      payment_id: 1,
+    };
+    bookingClass(setLoading, classes.id, bookingData);
+    router.push("/");
+  };
 
   return loading || !classes ? (
     <Loading></Loading>
@@ -44,7 +62,11 @@ export default function ClassDetails() {
         <Typography className={styles.description}>
           {classes?.description}
         </Typography>
-        <Button variant="contained" className={styles.button}>
+        <Button
+          variant="contained"
+          className={styles.button}
+          onClick={handleOnClick}
+        >
           Booking Now
         </Button>
       </main>
