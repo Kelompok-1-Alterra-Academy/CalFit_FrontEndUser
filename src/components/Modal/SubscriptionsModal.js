@@ -32,15 +32,10 @@ export default function SubscriptionModal() {
                     <Typography id="modal-modal-description" sx={{ mt : 1 }}>
                         Choose your subscription now, you can cancel or change your subscription later.
                     </Typography>
-                    <div className='buttonSubs' sx={{ mt : 1 }}>
-                        <SubscriptionsRadio/>
-                        <Button variant ="contained">
-                            Continue
-                        </Button>
-                        <Button onClick={handleClose}>
-                            Cancel
-                        </Button>
-                    </div>
+                    <SubscriptionsRadio/>
+                    <Button onClick={handleClose}>
+                        Cancel
+                    </Button>
                 </Box>
         </Modal>
         </>

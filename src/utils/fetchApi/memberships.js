@@ -1,7 +1,7 @@
 import baseApi from "./api";
 
-export const getAllMemberships = async (setLoadingState, setData, { limit, page }) => {
-  setLoadingState(true);
+export const getAllMemberships = async (setData) => {
+//   setLoadingState(true);
   return (
     baseApi
       .get(`/memberships`)
@@ -13,9 +13,9 @@ export const getAllMemberships = async (setLoadingState, setData, { limit, page 
       //   dispatch(alertSetError(true));
       //   dispatch(alertSetSuccess(false));
       // })
-      .finally(() => {
-        setLoadingState(false);
-      })
+    //   .finally(() => {
+    //     setLoadingState(false);
+    //   })
   );
 };
 
