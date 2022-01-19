@@ -26,6 +26,7 @@ export const getClassById = async (setLoadingState, setData, id) => {
 };
 
 export const bookingClass = async (setLoadingState, data) => {
+  console.log(data);
   setLoadingState(true);
   try {
     return await baseApi.post(`classes/${data.class_id}/bookings`, data);

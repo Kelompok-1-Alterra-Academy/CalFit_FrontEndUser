@@ -19,11 +19,14 @@ export default function MyBookings() {
         <title>My Bookings</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <TopBar label={"Account"} />
+      <TopBar label={"My Bookings"} />
       <main className={styles.main}>
         <h1 className={styles.title}>My Bookings</h1>
         {data?.map((d) => (
-          <MyBookingsCard data={d} />
+          <>
+            <MyBookingsCard data={d} />
+            <hr />
+          </>
         ))}
       </main>
     </div>
