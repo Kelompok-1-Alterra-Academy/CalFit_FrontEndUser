@@ -54,7 +54,7 @@ export default function ClassDetails() {
         router.push("/login");
       }, 2000);
     } else {
-      const { Id } = jwtDecode(token);
+      const { Id } = jwtDecode();
       setBookingData({
         amount: classes.price,
         user_id: Id,

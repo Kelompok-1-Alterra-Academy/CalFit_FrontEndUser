@@ -43,7 +43,7 @@ export const mybookings = async (setData, id) => {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((res) => setData(res));
+      .then((res) => setData(res.data.data));
   } catch (error) {
     console.log(error.message);
   }

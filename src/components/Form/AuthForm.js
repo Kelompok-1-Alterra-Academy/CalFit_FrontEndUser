@@ -88,7 +88,7 @@ export default function AuthForm({ path }) {
       try {
         const res = await auth(path.toLowerCase(), data);
         setCookie(null, "token", res.data.token);
-        const user = jwtDecode(res.data.token);
+        const { Email } = jwtDecode();
         setData({ ...data, password: "" });
         switch (res.status) {
           case 201:
@@ -103,6 +103,14 @@ export default function AuthForm({ path }) {
             router.push("/login");
             break;
           case 200:
+            dispatch(
+              showAlert({
+                alertContent: {
+                  message: `Welcome ${Email}`,
+                  status: true,
+                },
+              })
+            );
             router.push("/");
             setTimeout(() => {
               dispatch(
