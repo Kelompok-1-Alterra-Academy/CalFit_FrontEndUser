@@ -1,3 +1,4 @@
+import { parseCookies } from "nookies";
 import baseApi from "./api";
 
 export const getAllClasses = async (
@@ -30,5 +31,20 @@ export const bookingClass = async (setLoadingState, data) => {
     return await baseApi.post(`classes/${data.class_id}/bookings`, data);
   } finally {
     return setLoadingState(false);
+  }
+};
+
+export const mybookings = async (setData, id) => {
+  const { token } = parseCookies();
+  try {
+    return await baseApi
+      .get(`account/${id}/mybookings`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => setData(res));
+  } catch (error) {
+    console.log(error.message);
   }
 };

@@ -1,9 +1,14 @@
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
+import { useEffect } from "react";
+import { mybookings } from "../../../src/utils/fetchApi/classes";
 import styles from "../../../styles/Home.module.css";
 
 export default function MyBookings() {
+  const [data, setData] = useState();
+  useEffect(() => mybookings(setData, 1), []);
   return (
     <div className={styles.container}>
       <Head>
