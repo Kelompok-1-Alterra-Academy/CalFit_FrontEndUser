@@ -6,6 +6,7 @@ import jwtDecode from "../../../src/utils/jwtDecode/jwtDecode";
 import styles from "../../../styles/account/bookings/Index.module.css";
 import MyBookingsCard from "../../../src/components/Card/MyBookingsCard";
 import { TopBar } from "../../../src/components/navigation/TopBar";
+import { Box } from "@mui/material";
 
 export default function MyBookings() {
   const [data, setData] = useState([]);
@@ -22,11 +23,10 @@ export default function MyBookings() {
       <TopBar label={"My Bookings"} />
       <main className={styles.main}>
         <h1 className={styles.title}>My Bookings</h1>
-        {data?.map((d) => (
-          <>
+        {data?.map((d, i) => (
+          <Box component="div" key={i}>
             <MyBookingsCard data={d} />
-            <hr />
-          </>
+          </Box>
         ))}
       </main>
     </div>
