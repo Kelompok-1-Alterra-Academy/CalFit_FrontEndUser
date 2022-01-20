@@ -44,6 +44,11 @@ const theme = createTheme({
       fontSize: '11px',
       fontWeight: 400,
     },
+    subtitle4: {
+      fontSize: '11px',
+      fontWeight: 400,
+      fontStyle: 'italic',
+    },
     body1: {
       fontSize: '16px',
       fontWeight: 400,
