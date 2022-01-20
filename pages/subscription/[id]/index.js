@@ -20,7 +20,7 @@ export default function MembershipConfirmation() {
 
     return loading || !membership ? (
         <div className={styles.loading}>
-          <Image src={loadingSVG} width={200} height={200} alt="loading" />
+          <Image src={Loading} width={200} height={200} alt="loading" />
         </div>
     ) : (
         <div className={styles.container}>
