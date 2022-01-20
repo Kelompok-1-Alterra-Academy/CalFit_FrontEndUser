@@ -4,6 +4,7 @@ import Link from "next/link";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import ClassesCardListGrid from "../../src/components/Card/ClassesCardListGrid";
 import styles from "../../styles/classes/Index.module.css";
+import FeaturedClassesCardSlides from "../../src/components/Card/FeaturedClassesSlides";
 
 export default function Classes() {
   return (
@@ -27,6 +28,10 @@ export default function Classes() {
               />
           </Link>
         </div>
+        <div className={styles.description}>
+          <h3>Featured Classes</h3>
+        </div>
+        <FeaturedClassesCardSlides/>
         <div className={styles.description}>
           <h3>Explore All Classes</h3>
           <FilterAltIcon className={styles.filtericon} />

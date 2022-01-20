@@ -191,6 +191,50 @@
   font-size: 100px;
 }
 
+.banner {
+  display: flex;
+
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+
+  /*
+  scroll-snap-points-x: repeat(300px);
+  scroll-snap-type: mandatory;
+  */
+}
+
+.banner::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+.banner::-webkit-scrollbar-thumb {
+  background: black;
+  border-radius: 10px;
+}
+.banner::-webkit-scrollbar-track {
+  background: transparent;
+}
+.banner > div {
+  scroll-snap-align: start;
+  flex-shrink: 0;
+  width: 360px;
+  height: 360px;
+  margin-right: 50px;
+  border-radius: 10px;
+  transform-origin: center center;
+  transform: scale(1);
+  transition: transform 0.5s;
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 100px;
+}
+
 @media (max-width: 600px) {
   .grid {
     width: 100%;
