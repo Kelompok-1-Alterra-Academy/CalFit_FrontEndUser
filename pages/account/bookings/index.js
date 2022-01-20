@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { useState } from "react";
 import { useEffect } from "react";
+import { useRouter } from "next/router";
 import { mybookings } from "../../../src/utils/fetchApi/classes";
 import jwtDecode from "../../../src/utils/jwtDecode/jwtDecode";
 import styles from "../../../styles/account/bookings/Index.module.css";
@@ -9,11 +10,18 @@ import { TopBar } from "../../../src/components/navigation/TopBar";
 import { Box } from "@mui/material";
 
 export default function MyBookings() {
-  const [data, setData] = useState([]);
+  const router = useRouter();
+  const [data, setData] = useState();
   const { Id } = jwtDecode();
+
   useEffect(() => {
     mybookings(setData, Id);
   }, []);
+
+  const handleOnClick = (id) => {
+    router.push(`/account/bookings/${id}`);
+  };
+
   return (
     <div>
       <Head>
@@ -23,8 +31,8 @@ export default function MyBookings() {
       <TopBar label={"My Bookings"} />
       <main className={styles.main}>
         <h1 className={styles.title}>My Bookings</h1>
-        {data?.map((d, i) => (
-          <Box component="div" key={i}>
+        {data?.map((d) => (
+          <Box component="div" key={d.id} onClick={() => handleOnClick(d.id)}>
             <MyBookingsCard data={d} />
           </Box>
         ))}

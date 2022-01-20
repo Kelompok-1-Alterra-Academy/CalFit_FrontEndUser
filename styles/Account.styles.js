@@ -23,7 +23,6 @@ export const useStyles = makeStyles((theme) => ({
   main: {
     display: "flex",
     flexDirection: "column",
-    justifyContent: "space-between",
     color: "#fefefe",
     marginTop: "50px",
     // height: "256px",
@@ -62,7 +61,6 @@ export const useStyles = makeStyles((theme) => ({
   },
   menuList: {
     display: "flex",
-    flexDirection: "row",
     justifyContent: "space-between",
     margin: "16px auto",
     width: "100%",
