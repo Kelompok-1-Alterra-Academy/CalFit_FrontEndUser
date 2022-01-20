@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Box , Button, Typography, Modal } from '@mui/material';
-import { style } from './SubscriptionsModalStyles';
+import { style, imgdrop, button } from './SubscriptionsModalStyles';
 import Image from 'next/image';
 import SubscriptionsRadio from './SubscriptionsRadio';
 import { getAllMemberships } from '../../utils/fetchApi/memberships';
@@ -31,11 +31,12 @@ export default function SubscriptionModal() {
             aria-describedby="modal-modal-description">
                 <Box sx={ style }>
                     <Image
+                        sx={ imgdrop }
                         src="/backdrop-subs.png"
                         className='bdsubs'
                         alt="Backdrop Subscription"
-                        width={293}
-                        height={199}
+                        width={879}
+                        height={597}
                     />
                     <Typography id="modal-modal-title" sx={{mt: 1}} variant="h3" component="h2">
                         Our Subscriptions
@@ -44,7 +45,7 @@ export default function SubscriptionModal() {
                         Choose your subscription now, you can cancel or change your subscription later.
                     </Typography>
                     <SubscriptionsRadio/>
-                    <Button onClick={handleClose}>
+                    <Button sx= {button} onClick={handleClose}>
                         Cancel
                     </Button>
                 </Box>
