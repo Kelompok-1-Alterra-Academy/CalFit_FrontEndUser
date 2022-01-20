@@ -31,7 +31,7 @@ export default function Classes() {
         <div className={styles.description}>
           <h3>Featured Classes</h3>
         </div>
-        <FeaturedClassesCardSlides/>
+        {/* <FeaturedClassesCardSlides/> */}
         <div className={styles.description}>
           <h3>Explore All Classes</h3>
           <FilterAltIcon className={styles.filtericon} />

@@ -10,7 +10,4 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: "-100px",
     color: "white",
   },
-  featuredContent: {
-    
-  }
 }));
