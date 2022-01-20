@@ -54,11 +54,12 @@ export default function ClassDetails() {
         router.push("/login");
       }, 2000);
     } else {
-      const { Id } = jwtDecode(token);
+      const { Id } = jwtDecode();
       setBookingData({
         amount: classes.price,
         user_id: Id,
         class_id: classes.id,
+        schedule_id: classes.schedules[0].id,
       });
       setDialog(true);
     }
@@ -73,7 +74,7 @@ export default function ClassDetails() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <TopBar label={"Home"} />
+      <TopBar label={"Class"} />
       {alert.status && <CustomAlert data={alert} />}
 
       <div

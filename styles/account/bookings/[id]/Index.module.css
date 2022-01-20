@@ -1,0 +1,31 @@
+.main {
+  padding: 1.5rem;
+  color: white;
+}
+
+.bookingdetails {
+  margin: 1rem 0px !important;
+}
+
+.icon {
+  font-size: 50px !important;
+  margin-top: 1.5rem !important;
+}
+
+.gridDetail {
+  display: flex;
+  flex-direction: column !important;
+  margin-left: 5% !important;
+  margin-top: 1rem !important;
+}
+
+.paymentDetail {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem !important;
+}
+
+.uploadPayment {
+  margin-top: 1rem !important;
+  margin-left: 17.2rem !important;
+}

@@ -28,6 +28,7 @@ export default function CustomDialog({ setDialog, type, data, setLoading }) {
   const handleListItemClick = (id) => {
     setDialog(false);
     data = { ...data, payment_id: id };
+<<<<<<< HEAD
     if (type === "payment") {
       bookingClass(setLoading, data);
       dispatch(
@@ -49,6 +50,11 @@ export default function CustomDialog({ setDialog, type, data, setLoading }) {
         router.push("/account/bookings");
       }, 2000);
     }
+=======
+    type === "payment" && bookingClass(setLoading, data);
+    setOpen(false);
+    router.push("/account/bookings");
+>>>>>>> 39cc1aa (refactor: adding schedule_id, change redirect route)
   };
 
   return (

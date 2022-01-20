@@ -15,7 +15,7 @@ export default function Account() {
   const { token } = parseCookies();
   const [userdata, setUserdata] = useState();
   useEffect(() => {
-    token && setUserdata(jwtDecode(token));
+    token && setUserdata(jwtDecode());
   }, []);
 
   return (
