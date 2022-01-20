@@ -58,6 +58,7 @@ export const useStyles = makeStyles((theme) => ({
     margin: "auto !important",
     marginRight: "0 !important",
     color: "#fefefe",
+    cursor: "pointer",
   },
   menuList: {
     display: "flex",
@@ -65,5 +66,6 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
     margin: "16px auto",
     width: "100%",
+    cursor: "pointer",
   },
 }));
