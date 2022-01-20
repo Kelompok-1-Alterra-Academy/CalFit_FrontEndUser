@@ -44,7 +44,8 @@ export default function SubscriptionsRadio() {
                         <FormControlLabel
                         value={membership.id}
                         control={<Radio />}
-                        label={membership.name}/>
+                        label={membership.name}>
+                        </FormControlLabel>
                 </RadioGroup>
             )))}
                 <Button type='submit' variant ="contained">

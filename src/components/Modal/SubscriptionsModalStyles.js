@@ -3,6 +3,7 @@ export const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
+    maxWidth: '480px',
     width: '85%',
     height: '75%',
     bgcolor: 'background.paper',
