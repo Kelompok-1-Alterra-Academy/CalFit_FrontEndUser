@@ -29,11 +29,22 @@ export default function BookingDetails() {
   }, [id]);
 
   const handleOnClick = (type) => {
-    setOpen(true);
+    switch (type) {
+      case "viewLink":
+        setOpen({
+          status: true,
+          title: "Link Classes",
+          content: data?.class.link,
+        });
+        break;
+      case "uploadPayment":
+        setOpen({ status: true, title: "Upload Payment", content: "Link" });
+        break;
+    }
   };
 
   const handleClose = () => {
-    setOpen(false);
+    setOpen({ status: false });
   };
 
   return (
@@ -102,32 +113,38 @@ export default function BookingDetails() {
           <Typography variant="subtitle2">Total</Typography>
           <Typography variant="body2">Rp. {data?.amount}</Typography>
         </Box>
-        {data?.class.status !== "waiting" ? (
+        {data?.status === "waiting" ? (
           <Button
             variant="contained"
-            className={styles.viewLink}
-            onClick={() => {
-              handleOnClick("viewLink");
-            }}
+            className={styles.uploadPayment}
+            onClick={() => handleOnClick("uploadPayment")}
           >
-            View link class
-          </Button>
-        ) : (
-          <Button variant="contained" className={styles.uploadPayment}>
             Upload payment receipt
           </Button>
+        ) : (
+          data?.class.link !== undefined && (
+            <Button
+              variant="contained"
+              className={styles.viewLink}
+              onClick={() => {
+                handleOnClick("viewLink");
+              }}
+            >
+              View link class
+            </Button>
+          )
         )}
         {open && (
           <Dialog
-            open={open}
+            open={open.status}
             onClose={handleClose}
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
           >
-            <DialogTitle id="alert-dialog-title">{"Link Classes"}</DialogTitle>
+            <DialogTitle id="alert-dialog-title">{open.title}</DialogTitle>
             <DialogContent>
               <DialogContentText id="alert-dialog-description">
-                <a href={data?.class.link}>{data?.class.name}</a>
+                <a href={data?.class.link}>{open.content}</a>
               </DialogContentText>
             </DialogContent>
           </Dialog>
