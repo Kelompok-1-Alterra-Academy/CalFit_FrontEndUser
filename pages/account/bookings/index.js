@@ -12,9 +12,9 @@ import { Box } from "@mui/material";
 export default function MyBookings() {
   const router = useRouter();
   const [data, setData] = useState();
-  const { Id } = jwtDecode();
 
   useEffect(() => {
+    const { Id } = jwtDecode();
     mybookings(setData, Id);
   }, []);
 
