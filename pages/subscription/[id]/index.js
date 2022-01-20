@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useRouter } from 'next/router';
 import { getMembershipsById } from '../../../src/utils/fetchApi/memberships';
 import styles from "../../../styles/subscriptions/[id]/Index.module.css";
-import Loading from '../../../src/components/page/Loading';
+import Loading from '../../../public/ripple-loading.svg';
 import Head from 'next/head';
 import Image from 'next/image';
 import { Button } from '@mui/material';
@@ -19,7 +19,9 @@ export default function MembershipConfirmation() {
     }, [router.query.id]);
 
     return loading || !membership ? (
-        <Loading/>
+        <div className={styles.loading}>
+          <Image src={loadingSVG} width={200} height={200} alt="loading" />
+        </div>
     ) : (
         <div className={styles.container}>
             <Head>
@@ -44,7 +46,7 @@ export default function MembershipConfirmation() {
                 <p>
                     {membership.description}
                 </p>
-                <Button variant ="contained">
+                <Button onClick={() => router.push(`/classes/`)} variant ="contained">
                     See Classes
                 </Button>
             </div>
