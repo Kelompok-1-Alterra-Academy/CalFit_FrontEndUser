@@ -57,21 +57,25 @@ export default function BookingDetails() {
         <Typography variant="h1">
           {data?.status !== "waiting" ? "Booking Confirmed" : "Booking Waiting"}
         </Typography>
-        {data?.status !== "waiting" && (
-          <Card className={styles.bookingStatusBox} sx={{ minWidth: 275 }}>
-            <CardContent>
-              <Typography variant="h3" className={styles.typography}>
-                Congratulations!
-              </Typography>
-              <Typography variant="body1" className={styles.typography}>
-                Your class are succesfully booked
-              </Typography>
+        <Card className={styles.bookingStatusBox} sx={{ minWidth: 275 }}>
+          <CardContent>
+            <Typography variant="h3" className={styles.typography}>
+              {data?.status !== "waiting"
+                ? "Congratulations!"
+                : "Please make payment via the following method "}
+            </Typography>
+            <Typography variant="body1" className={styles.typography}>
+              {data?.status !== "waiting"
+                ? "Your class are succesfully booked!"
+                : "BCA: 12345 a/n Calfit"}
+            </Typography>
+            {data?.status !== "waiting" && (
               <Typography sx={{ mb: 1.5 }} className={styles.typography}>
                 Booked on: {data?.created_at}
               </Typography>
-            </CardContent>
-          </Card>
-        )}
+            )}
+          </CardContent>
+        </Card>
         <Typography variant="h3" className={styles.bookingdetails}>
           Booking Details
         </Typography>
@@ -144,7 +148,7 @@ export default function BookingDetails() {
             <DialogTitle id="alert-dialog-title">{open.title}</DialogTitle>
             <DialogContent>
               <DialogContentText id="alert-dialog-description">
-                <a href={data?.class.link}>{open.content}</a>
+                <a href={open.content}>{open.content}</a>
               </DialogContentText>
             </DialogContent>
           </Dialog>
