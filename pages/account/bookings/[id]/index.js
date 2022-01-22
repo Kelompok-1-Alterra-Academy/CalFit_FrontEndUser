@@ -2,25 +2,50 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useState } from "react";
-import { parseCookies } from "nookies";
-import { Grid, Typography, Box, Button } from "@mui/material";
+import {
+  Grid,
+  Typography,
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+} from "@mui/material";
 import { OndemandVideo, FitnessCenter, AccessTime } from "@mui/icons-material";
 import { TopBar } from "../../../../src/components/navigation/TopBar";
-import baseApi from "../../../../src/utils/fetchApi/api";
 import styles from "../../../../styles/account/bookings/[id]/Index.module.css";
+import { getBookingsByID } from "../../../../src/utils/fetchApi/classes";
 export default function BookingDetails() {
   const route = useRouter();
   const [data, setData] = useState();
+  const [open, setOpen] = useState();
+  const id = route.query.id;
 
   useEffect(() => {
-    const id = route.query.id;
-    const { token } = parseCookies();
-    baseApi
-      .get(`bookings/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then(({ data: { data } }) => setData(data));
-  }, []);
+    getBookingsByID(setData, id);
+  }, [id]);
+
+  const handleOnClick = (type) => {
+    switch (type) {
+      case "viewLink":
+        setOpen({
+          status: true,
+          title: "Link Classes",
+          content: data?.class.link,
+        });
+        break;
+      case "uploadPayment":
+        setOpen({ status: true, title: "Upload Payment", content: "Link" });
+        break;
+    }
+  };
+
+  const handleClose = () => {
+    setOpen({ status: false });
+  };
 
   return (
     <>
@@ -32,6 +57,25 @@ export default function BookingDetails() {
         <Typography variant="h1">
           {data?.status !== "waiting" ? "Booking Confirmed" : "Booking Waiting"}
         </Typography>
+        <Card className={styles.bookingStatusBox} sx={{ minWidth: 275 }}>
+          <CardContent>
+            <Typography variant="h3" className={styles.typography}>
+              {data?.status !== "waiting"
+                ? "Congratulations!"
+                : "Please make payment via the following method "}
+            </Typography>
+            <Typography variant="body1" className={styles.typography}>
+              {data?.status !== "waiting"
+                ? "Your class are succesfully booked!"
+                : "BCA: 12345 a/n Calfit"}
+            </Typography>
+            {data?.status !== "waiting" && (
+              <Typography sx={{ mb: 1.5 }} className={styles.typography}>
+                Booked on: {data?.created_at}
+              </Typography>
+            )}
+          </CardContent>
+        </Card>
         <Typography variant="h3" className={styles.bookingdetails}>
           Booking Details
         </Typography>
@@ -73,9 +117,42 @@ export default function BookingDetails() {
           <Typography variant="subtitle2">Total</Typography>
           <Typography variant="body2">Rp. {data?.amount}</Typography>
         </Box>
-        <Button variant="contained" className={styles.uploadPayment}>
-          Upload payment receipt
-        </Button>
+        {data?.status === "waiting" ? (
+          <Button
+            variant="contained"
+            className={styles.uploadPayment}
+            onClick={() => handleOnClick("uploadPayment")}
+          >
+            Upload payment receipt
+          </Button>
+        ) : (
+          data?.class.link !== undefined && (
+            <Button
+              variant="contained"
+              className={styles.viewLink}
+              onClick={() => {
+                handleOnClick("viewLink");
+              }}
+            >
+              View link class
+            </Button>
+          )
+        )}
+        {open && (
+          <Dialog
+            open={open.status}
+            onClose={handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogTitle id="alert-dialog-title">{open.title}</DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                <a href={open.content}>{open.content}</a>
+              </DialogContentText>
+            </DialogContent>
+          </Dialog>
+        )}
       </Box>
     </>
   );

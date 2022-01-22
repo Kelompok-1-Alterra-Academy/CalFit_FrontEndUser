@@ -7,6 +7,16 @@
   margin: 1rem 0px !important;
 }
 
+.bookingStatusBox {
+  background-color: #84b0bb !important;
+  color: white !important;
+  margin: 2rem 0 !important;
+}
+
+.typography {
+  margin: 1rem 0 !important;
+}
+
 .icon {
   font-size: 50px !important;
   margin-top: 1.5rem !important;
@@ -28,4 +38,17 @@
 .uploadPayment {
   margin-top: 1rem !important;
   margin-left: 17.2rem !important;
+}
+.viewLink {
+  margin-top: 1rem !important;
+  margin-left: 21.3rem !important;
+}
+
+@media (max-width: 600px) {
+  .uploadPayment {
+    margin-left: 6rem !important;
+  }
+  .viewLink {
+    margin-left: 10.3rem !important;
+  }
 }

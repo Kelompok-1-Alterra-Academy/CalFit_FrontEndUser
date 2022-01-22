@@ -6,11 +6,16 @@ import CreateIcon from "@mui/icons-material/Create";
 import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
 import { useStyles } from "../../styles/Account.styles";
 import dummyPP from "../../public/dummy-pp.png";
-import { parseCookies } from "nookies";
+import { parseCookies, destroyCookie } from "nookies";
 import jwtDecode from "../../src/utils/jwtDecode/jwtDecode";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
+import { showAlert } from "../../src/store/AlertReducers";
 
 export default function Account() {
+  const router = useRouter();
+  const dispatch = useDispatch();
   const classes = useStyles();
   const { token } = parseCookies();
   const [userdata, setUserdata] = useState();
@@ -66,6 +71,29 @@ export default function Account() {
                 <ArrowCircleRightIcon />
               </Box>
             </Link>
+            <Box
+              component="div"
+              className={classes.menuList}
+              onClick={() => {
+                destroyCookie(null, "token");
+                router.push("/");
+                setTimeout(
+                  () =>
+                    dispatch(
+                      showAlert({
+                        alertContent: {
+                          message: `Logout Succesfull`,
+                          status: true,
+                        },
+                      })
+                    ),
+                  500
+                );
+              }}
+            >
+              <div className={classes.newsdetail}>Logout</div>
+              <ArrowCircleRightIcon />
+            </Box>
           </>
         )}
       </main>

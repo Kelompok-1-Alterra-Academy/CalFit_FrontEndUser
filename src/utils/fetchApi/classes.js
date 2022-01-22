@@ -48,3 +48,24 @@ export const mybookings = async (setData, id) => {
     console.log(error.message);
   }
 };
+
+export const getBookingsByID = async (setData, id) => {
+  const { token } = parseCookies();
+  try {
+    return await baseApi
+      .get(`bookings/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then(({ data: { data } }) => {
+        const date = new Date(`${data.created_at}`.split("T")[0]);
+        return setData({
+          ...data,
+          created_at: `${date.getDate()}/${
+            date.getMonth() + 1
+          }/${date.getFullYear()}`,
+        });
+      });
+  } catch (error) {
+    console.log(error.message);
+  }
+};

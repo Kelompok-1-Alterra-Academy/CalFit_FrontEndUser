@@ -116,7 +116,7 @@ export default function AuthForm({ path }) {
               dispatch(
                 showAlert({
                   alertContent: {
-                    message: `Welcome ${user.Email}`,
+                    message: `Welcome ${Email}`,
                     status: true,
                   },
                 })
