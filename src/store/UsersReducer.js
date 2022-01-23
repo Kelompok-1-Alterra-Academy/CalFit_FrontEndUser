@@ -6,11 +6,11 @@ const UsersReducer = createSlice({
     userdata: {},
   },
   reducers: {
-    getUserdata: (state, action) => {
+    setUserdata: (state, action) => {
       state.userdata = action.payload.userdata;
     },
   },
 });
 
-export const { getUserdata } = UsersReducer.actions;
+export const { setUserdata } = UsersReducer.actions;
 export default UsersReducer.reducer;
