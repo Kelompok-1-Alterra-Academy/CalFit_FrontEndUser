@@ -15,3 +15,15 @@ export const getUserByUsername = async (token, setData, email) => {
     console.log(error.message);
   }
 };
+
+export const updateUser = async (token, data) => {
+  try {
+    return await baseApi.put(
+      "account",
+      { email: data.email, username: data.username, password: data.password },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+  } catch (error) {
+    console.log(error.message);
+  }
+};

@@ -1,26 +1,30 @@
 import Head from "next/head";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Box,
   Typography,
   TextField,
   InputAdornment,
   IconButton,
+  Button,
 } from "@mui/material";
 import { VisibilityOff, Visibility } from "@mui/icons-material";
 import { TopBar } from "../../../src/components/navigation/TopBar";
 import styles from "../../../styles/account/edit/Index.module.css";
 import { passwordValidation } from "../../../src/utils/validation/validation";
+import { parseCookies } from "nookies";
+import {
+  getUserByUsername,
+  updateUser,
+} from "../../../src/utils/fetchApi/users";
+import jwtDecode from "../../../src/utils/jwtDecode/jwtDecode";
 
 export default function EditAccount() {
   const [showPassword, setShowPassword] = useState({
     password: false,
     confirmPassword: false,
   });
-  const [data, setData] = useState({
-    password: "",
-    confirmPassword: "",
-  });
+  const [data, setData] = useState();
   const [error, setError] = useState({
     username: {
       status: false,
@@ -35,6 +39,14 @@ export default function EditAccount() {
       message: "",
     },
   });
+  const { token } = parseCookies();
+
+  useEffect(() => {
+    if (token) {
+      const { Email } = jwtDecode();
+      getUserByUsername(token, setData, Email);
+    }
+  }, []);
 
   const handleClickShowPassword = (type) => {
     switch (type) {
@@ -51,6 +63,9 @@ export default function EditAccount() {
   };
   const handleOnChange = (e) => {
     switch (e.target.name) {
+      case "username":
+        setData({ ...data, username: e.target.value });
+        break;
       case "password":
         setData({ ...data, password: e.target.value });
         passwordValidation(e.target.value)
@@ -66,31 +81,35 @@ export default function EditAccount() {
         break;
       case "confirmPassword":
         setData({ ...data, confirmPassword: e.target.value });
-        passwordValidation(e.target.value)
-          ? setError({
-              ...error,
-              confirmPassword: { status: false, message: "" },
-            })
-          : setError({
-              ...error,
-              confirmPassword: {
-                status: true,
-                message:
-                  "password must be at least 6 char contain number, lowercase and uppercase letter",
-              },
-            });
-        if (data.confirmPassword === data.password) {
-          setError({
-            ...error,
-            confirmPassword: {
-              status: true,
-              message: "password not match",
-            },
-          });
-        }
         break;
     }
   };
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+    if (data.password !== data.confirmPassword) {
+      setError({
+        ...error,
+        confirmPassword: {
+          status: true,
+          message: "password not match",
+        },
+      });
+    } else {
+      setError({
+        ...error,
+        confirmPassword: {
+          status: false,
+        },
+      });
+      const newData = {
+        email: data.email,
+        username: data.username,
+        password: data.password,
+      };
+      updateUser(token, newData);
+    }
+  };
+
   return (
     <div className={styles.container}>
       <Head>
@@ -99,7 +118,11 @@ export default function EditAccount() {
       </Head>
       <TopBar label="Edit Account"></TopBar>
       <main className={styles.main}>
-        <Box component="form" className={styles.loginForm}>
+        <Box
+          component="form"
+          className={styles.loginForm}
+          onSubmit={(e) => handleOnSubmit(e)}
+        >
           <Typography variant="h1">Edit Account</Typography>
           <TextField
             sx={{
@@ -113,6 +136,8 @@ export default function EditAccount() {
               },
             }}
             label="Username"
+            key={data?.username ? "notLoadedYet" : "loaded"}
+            defaultValue={data?.username}
             name="username"
             path="text"
             onChange={(e) => handleOnChange(e)}
@@ -132,7 +157,7 @@ export default function EditAccount() {
             }}
             label="Password"
             name="password"
-            value={data.password}
+            value={data?.password}
             type={showPassword.password ? "text" : "password"}
             onChange={(e) => handleOnChange(e)}
             error={error.password.status}
@@ -165,7 +190,7 @@ export default function EditAccount() {
             }}
             label="Confirm Password"
             name="confirmPassword"
-            value={data.confirmPassword}
+            value={data?.confirmPassword}
             type={showPassword.confirmPassword ? "text" : "password"}
             onChange={(e) => handleOnChange(e)}
             error={error.confirmPassword.status}
@@ -187,6 +212,13 @@ export default function EditAccount() {
               ),
             }}
           ></TextField>
+          <Button
+            variant="contained"
+            type="submit"
+            style={{ display: "block", margin: "auto", color: "white" }}
+          >
+            Save Changes
+          </Button>
         </Box>
       </main>
     </div>
