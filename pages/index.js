@@ -1,19 +1,18 @@
 /* eslint-disable @next/next/link-passhref */
-import { useState } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import Link from "next/link";
-import { Button } from "@mui/material";
 import ClubsCardSlides from "../src/components/card/ClubsCardSlides";
 import ClassesCardSlides from "../src/components/card/ClassesCardSlides";
 import { useSelector } from "react-redux";
 import { CustomAlert } from "../src/components/Alert/Alert";
 import SubscriptionModal from "../src/components/Modal/SubscriptionsModal";
+import { parseCookies } from "nookies";
 
 export default function Home() {
   const alertContent = useSelector((state) => state.alert.alertContent);
-
+  const { token } = parseCookies();
   return (
     <div className={styles.root}>
       <Head>
@@ -38,19 +37,21 @@ export default function Home() {
           width={65}
           height={12}
         />
-        <Link href="/account">
-          <Image
-            src="/dummy-pp.png"
-            className={styles.ppdummy}
-            alt="Profile Picture Dummy"
-            width={65}
-            height={65}
-          />
-        </Link>
+        {token && (
+          <Link href="/account">
+            <Image
+              src="/dummy-pp.png"
+              className={styles.ppdummy}
+              alt="Profile Picture Dummy"
+              width={65}
+              height={65}
+            />
+          </Link>
+        )}
       </header>
       <main className={styles.main}>
         <div className={styles.div1}>
-          <SubscriptionModal/>
+          <SubscriptionModal />
         </div>
         <div className={styles.div2}>
           <h2>Explore Clubs</h2>
