@@ -7,10 +7,8 @@ import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
 import { useStyles } from "../../styles/Account.styles";
 import dummyPP from "../../public/dummy-pp.png";
 import { parseCookies, destroyCookie } from "nookies";
-import jwtDecode from "../../src/utils/jwtDecode/jwtDecode";
-import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { showAlert } from "../../src/store/AlertReducers";
 
 export default function Account() {
@@ -18,10 +16,8 @@ export default function Account() {
   const dispatch = useDispatch();
   const classes = useStyles();
   const { token } = parseCookies();
-  const [userdata, setUserdata] = useState();
-  useEffect(() => {
-    token && setUserdata(jwtDecode());
-  }, []);
+
+  const userdata = useSelector((state) => state.user.userdata);
 
   const handleOnClick = () => router.push("/account/edit");
 
@@ -32,13 +28,15 @@ export default function Account() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Box className={classes.userCard}>
-        {userdata && (
+        {token && (
           <>
             <Image src={dummyPP} width={92} height={92} alt="Profile Picture" />
             <Box className={classes.userInfo}>
-              <h3 className={classes.userInfoUsername}>Username</h3>
-              <h5 className={classes.userInfoEmail}>{userdata.Email}</h5>
-              <h4 className={classes.userInfoMembership}>Membership Type</h4>
+              <h3 className={classes.userInfoUsername}>{userdata.username}</h3>
+              <h5 className={classes.userInfoEmail}>{userdata.email}</h5>
+              <h4 className={classes.userInfoMembership}>
+                {userdata.membership_name}
+              </h4>
             </Box>
             <CreateIcon
               className={classes.createIcon}
@@ -49,7 +47,7 @@ export default function Account() {
       </Box>
 
       <main className={classes.main}>
-        {!userdata ? (
+        {!token ? (
           <Link href="/login" passHref>
             <Box className={classes.menuList}>
               <div className={classes.newsdetail}>Login Account</div>
