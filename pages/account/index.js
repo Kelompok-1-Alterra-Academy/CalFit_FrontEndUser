@@ -8,16 +8,25 @@ import { useStyles } from "../../styles/Account.styles";
 import dummyPP from "../../public/dummy-pp.png";
 import { parseCookies, destroyCookie } from "nookies";
 import { useRouter } from "next/router";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { showAlert } from "../../src/store/AlertReducers";
+import { useEffect, useState } from "react";
+import { getUserByUsername } from "../../src/utils/fetchApi/users";
+import jwtDecode from "../../src/utils/jwtDecode/jwtDecode";
 
 export default function Account() {
   const router = useRouter();
   const dispatch = useDispatch();
   const classes = useStyles();
   const { token } = parseCookies();
+  const [userdata, setUserdata] = useState();
 
-  const userdata = useSelector((state) => state.user.userdata);
+  useEffect(() => {
+    if (token) {
+      const { Email } = jwtDecode();
+      getUserByUsername(token, setUserdata, Email);
+    }
+  }, []);
 
   const handleOnClick = () => router.push("/account/edit");
 
@@ -32,10 +41,10 @@ export default function Account() {
           <>
             <Image src={dummyPP} width={92} height={92} alt="Profile Picture" />
             <Box className={classes.userInfo}>
-              <h3 className={classes.userInfoUsername}>{userdata.username}</h3>
-              <h5 className={classes.userInfoEmail}>{userdata.email}</h5>
+              <h3 className={classes.userInfoUsername}>{userdata?.username}</h3>
+              <h5 className={classes.userInfoEmail}>{userdata?.email}</h5>
               <h4 className={classes.userInfoMembership}>
-                {userdata.membership_name}
+                {userdata?.membership_name}
               </h4>
             </Box>
             <CreateIcon
