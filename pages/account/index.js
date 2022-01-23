@@ -23,6 +23,8 @@ export default function Account() {
     token && setUserdata(jwtDecode());
   }, []);
 
+  const handleOnClick = () => router.push("/account/edit");
+
   return (
     <div className={classes.container}>
       <Head>
@@ -35,10 +37,13 @@ export default function Account() {
             <Image src={dummyPP} width={92} height={92} alt="Profile Picture" />
             <Box className={classes.userInfo}>
               <h3 className={classes.userInfoUsername}>Username</h3>
-              <h5 className={classes.userInfoEmail}>Email</h5>
+              <h5 className={classes.userInfoEmail}>{userdata.Email}</h5>
               <h4 className={classes.userInfoMembership}>Membership Type</h4>
             </Box>
-            <CreateIcon className={classes.createIcon} />
+            <CreateIcon
+              className={classes.createIcon}
+              onClick={() => handleOnClick()}
+            />
           </>
         )}
       </Box>
