@@ -18,8 +18,14 @@ import {
   updateUser,
 } from "../../../src/utils/fetchApi/users";
 import jwtDecode from "../../../src/utils/jwtDecode/jwtDecode";
+import { useDispatch, useSelector } from "react-redux";
+import { showAlert } from "../../../src/store/AlertReducers";
+import { CustomAlert } from "../../../src/components/Alert/Alert";
+import { useRouter } from "next/router";
 
 export default function EditAccount() {
+  const router = useRouter();
+  const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState({
     password: false,
     confirmPassword: false,
@@ -40,6 +46,7 @@ export default function EditAccount() {
     },
   });
   const { token } = parseCookies();
+  const alert = useSelector((state) => state.alert.alertContent);
 
   useEffect(() => {
     if (token) {
@@ -84,9 +91,9 @@ export default function EditAccount() {
         break;
     }
   };
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = async (e) => {
     e.preventDefault();
-    if (data.password !== data.confirmPassword) {
+    if (data?.password !== data?.confirmPassword) {
       setError({
         ...error,
         confirmPassword: {
@@ -102,11 +109,51 @@ export default function EditAccount() {
         },
       });
       const newData = {
-        email: data.email,
-        username: data.username,
-        password: data.password,
+        email: data?.email,
+        username: data?.username,
+        password: data?.password,
       };
-      updateUser(token, newData);
+      try {
+        const res = await updateUser(token, newData);
+        if (res.status === 200) {
+          dispatch(
+            showAlert({
+              alertContent: {
+                status: true,
+                message: "success edit data",
+              },
+            })
+          );
+          setTimeout(() => {
+            dispatch(
+              showAlert({
+                alertContent: {
+                  status: false,
+                },
+              })
+            );
+            router.push("/account");
+          }, 2000);
+        }
+      } catch (error) {
+        dispatch(
+          showAlert({
+            alertContent: {
+              message: error.message,
+              status: true,
+            },
+          })
+        );
+        setTimeout(() => {
+          dispatch(
+            showAlert({
+              alertContent: {
+                status: false,
+              },
+            })
+          );
+        }, 2000);
+      }
     }
   };
 
@@ -117,13 +164,16 @@ export default function EditAccount() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <TopBar label="Edit Account"></TopBar>
+      {alert.status && <CustomAlert data={alert} />}
       <main className={styles.main}>
         <Box
           component="form"
           className={styles.loginForm}
           onSubmit={(e) => handleOnSubmit(e)}
         >
-          <Typography variant="h1">Edit Account</Typography>
+          <Typography variant="h1" sx={{ marginBottom: "3%" }}>
+            Edit Account
+          </Typography>
           <TextField
             sx={{
               margin: "2% 0",
