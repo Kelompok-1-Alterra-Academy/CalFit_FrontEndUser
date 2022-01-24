@@ -11,7 +11,7 @@ import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { showAlert } from "../../src/store/AlertReducers";
 import { useEffect, useState } from "react";
-import { getUserByUsername } from "../../src/utils/fetchApi/users";
+import { getUserByID } from "../../src/utils/fetchApi/users";
 import jwtDecode from "../../src/utils/jwtDecode/jwtDecode";
 
 export default function Account() {
@@ -23,8 +23,8 @@ export default function Account() {
 
   useEffect(() => {
     if (token) {
-      const { Email } = jwtDecode();
-      getUserByUsername(token, setUserdata, Email);
+      const { Id } = jwtDecode();
+      getUserByID(token, setUserdata, Id);
     }
   }, []);
 

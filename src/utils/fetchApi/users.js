@@ -1,13 +1,9 @@
 import baseApi from "./api";
 
-export const getUserByUsername = async (token, setData, email) => {
+export const getUserByID = async (token, setData, id) => {
   try {
     return await baseApi
-      .post(
-        `account`,
-        { email },
-        { headers: { Authorization: `Bearer ${token}` } }
-      )
+      .get(`account/${id}`, { headers: { Authorization: `Bearer ${token}` } })
       .then(({ data: { data } }) => {
         return setData(data);
       });

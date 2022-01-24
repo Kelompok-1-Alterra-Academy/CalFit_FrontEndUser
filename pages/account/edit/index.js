@@ -13,10 +13,7 @@ import { TopBar } from "../../../src/components/navigation/TopBar";
 import styles from "../../../styles/account/edit/Index.module.css";
 import { passwordValidation } from "../../../src/utils/validation/validation";
 import { parseCookies } from "nookies";
-import {
-  getUserByUsername,
-  updateUser,
-} from "../../../src/utils/fetchApi/users";
+import { getUserByID, updateUser } from "../../../src/utils/fetchApi/users";
 import jwtDecode from "../../../src/utils/jwtDecode/jwtDecode";
 import { useDispatch, useSelector } from "react-redux";
 import { showAlert } from "../../../src/store/AlertReducers";
@@ -50,8 +47,8 @@ export default function EditAccount() {
 
   useEffect(() => {
     if (token) {
-      const { Email } = jwtDecode();
-      getUserByUsername(token, setData, Email);
+      const { Id } = jwtDecode();
+      getUserByID(token, setData, Id);
     }
   }, []);
 
