@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
@@ -23,6 +23,7 @@ import {
 } from "../../utils/validation/validation";
 import { useDispatch, useSelector } from "react-redux";
 import { showAlert } from "../../store/AlertReducers";
+import { setUserdata } from "../../store/UsersReducer";
 import { setCookie } from "nookies";
 import jwtDecode from "../../utils/jwtDecode/jwtDecode";
 
@@ -104,11 +105,8 @@ export default function AuthForm({ path }) {
             break;
           case 200:
             dispatch(
-              showAlert({
-                alertContent: {
-                  message: `Welcome ${Email}`,
-                  status: true,
-                },
+              setUserdata({
+                userdata: res.data,
               })
             );
             router.push("/");

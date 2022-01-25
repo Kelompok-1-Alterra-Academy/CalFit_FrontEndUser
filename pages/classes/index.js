@@ -5,8 +5,10 @@ import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import ClassesCardListGrid from "../../src/components/Card/ClassesCardListGrid";
 import styles from "../../styles/classes/Index.module.css";
 import FeaturedClassesCardSlides from "../../src/components/Card/FeaturedClassesSlides";
+import { parseCookies } from "nookies";
 
 export default function Classes() {
+  const { token } = parseCookies();
   return (
     <div className={styles.container}>
       <Head>
@@ -17,8 +19,9 @@ export default function Classes() {
 
       <main className={styles.main}>
         <div className={styles.pagetitle}>
-        <h1>Classes</h1>
-          <Link href="/account">
+          <h1>Classes</h1>
+          {token && (
+            <Link href="/account">
               <Image
                 src="/dummy-pp.png"
                 className={styles.ppdummy}
@@ -26,7 +29,8 @@ export default function Classes() {
                 height={65}
                 width={65}
               />
-          </Link>
+            </Link>
+          )}
         </div>
         <div className={styles.description}>
           <h3>Featured Classes</h3>
@@ -36,7 +40,7 @@ export default function Classes() {
           <h3>Explore All Classes</h3>
           <FilterAltIcon className={styles.filtericon} />
         </div>
-        <ClassesCardListGrid/>
+        <ClassesCardListGrid />
       </main>
     </div>
   );
