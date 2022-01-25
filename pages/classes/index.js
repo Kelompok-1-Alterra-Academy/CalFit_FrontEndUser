@@ -6,9 +6,18 @@ import ClassesCardListGrid from "../../src/components/Card/ClassesCardListGrid";
 import styles from "../../styles/classes/Index.module.css";
 import FeaturedClassesCardSlides from "../../src/components/Card/FeaturedClassesSlides";
 import { parseCookies } from "nookies";
+import { useState } from "react";
+import FilterClassModal from "../../src/components/Modal/FilterClassModal";
 
 export default function Classes() {
   const { token } = parseCookies();
+  const [openModal, setOpenModal] = useState(false);
+  const [filterOption, setFilterOption] = useState({
+    online: false,
+  });
+  const handleOnClick = () => {
+    setOpenModal(true);
+  };
   return (
     <div className={styles.container}>
       <Head>
@@ -38,9 +47,19 @@ export default function Classes() {
         {/* <FeaturedClassesCardSlides/> */}
         <div className={styles.description}>
           <h3>Explore All Classes</h3>
-          <FilterAltIcon className={styles.filtericon} />
+          <FilterAltIcon
+            className={styles.filtericon}
+            onClick={() => handleOnClick()}
+          />
         </div>
-        <ClassesCardListGrid />
+        {openModal && (
+          <FilterClassModal
+            setOpenModal={setOpenModal}
+            filter={{ online: filterOption.online }}
+            setFilterOption={setFilterOption}
+          ></FilterClassModal>
+        )}
+        <ClassesCardListGrid filter={filterOption} />
       </main>
     </div>
   );
