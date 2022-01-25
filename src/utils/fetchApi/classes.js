@@ -4,11 +4,11 @@ import baseApi from "./api";
 export const getAllClasses = async (
   setLoadingState,
   setData,
-  { limit, page, filter: { online } }
+  { limit, page, filter = undefined }
 ) => {
   let url = `/classes?limit=${limit}&page=${page}`;
-  if (online) {
-    url = `/classes?limit=${limit}&page=${page}&online=${online}`;
+  if (filter?.online === true) {
+    url = `/classes?limit=${limit}&page=${page}&online=${filter.online}`;
   }
   setLoadingState(true);
   return baseApi
