@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CustomDialog from "../../../src/components/Dialog/Dialog";
-import { TopBar } from "../../../src/components/navigation/TopBar";
+import { TopBar } from "../../../src/components/Navigation/TopBar";
 import Loading from "../../../src/components/page/Loading";
 import { getClassById } from "../../../src/utils/fetchApi/classes";
 import jwtDecode from "../../../src/utils/jwtDecode/jwtDecode";

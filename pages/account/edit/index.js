@@ -9,7 +9,7 @@ import {
   Button,
 } from "@mui/material";
 import { VisibilityOff, Visibility } from "@mui/icons-material";
-import { TopBar } from "../../../src/components/navigation/TopBar";
+import { TopBar } from "../../../src/components/Navigation/TopBar";
 import styles from "../../../styles/account/edit/Index.module.css";
 import { passwordValidation } from "../../../src/utils/validation/validation";
 import { parseCookies } from "nookies";

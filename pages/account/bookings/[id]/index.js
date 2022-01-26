@@ -15,7 +15,7 @@ import {
   DialogContentText,
 } from "@mui/material";
 import { OndemandVideo, FitnessCenter, AccessTime } from "@mui/icons-material";
-import { TopBar } from "../../../../src/components/navigation/TopBar";
+import { TopBar } from "../../../../src/components/Navigation/TopBar";
 import styles from "../../../../styles/account/bookings/[id]/Index.module.css";
 import { getBookingsByID } from "../../../../src/utils/fetchApi/classes";
 export default function BookingDetails() {

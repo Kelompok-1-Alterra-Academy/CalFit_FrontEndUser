@@ -4,9 +4,9 @@ import { useRouter } from "next/router";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import styles from "../../../styles/clubs/[id]/Index.module.css";
 import { getGymById } from "../../../src/utils/fetchApi/clubs";
-import { TopBar } from "../../../src/components/navigation/TopBar";
+import { TopBar } from "../../../src/components/Navigation/TopBar";
 import Loading from "../../../src/components/page/Loading";
-import ClassesCardListGrid from "../../../src/components/card/ClassesCardListGrid";
+import ClassesCardListGrid from "../../../src/components/Card/ClassesCardListGrid";
 
 export default function ClubDetails() {
   const router = useRouter();

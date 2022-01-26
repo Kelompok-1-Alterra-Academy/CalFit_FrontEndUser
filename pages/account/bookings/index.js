@@ -6,7 +6,7 @@ import { mybookings } from "../../../src/utils/fetchApi/classes";
 import jwtDecode from "../../../src/utils/jwtDecode/jwtDecode";
 import styles from "../../../styles/account/bookings/Index.module.css";
 import MyBookingsCard from "../../../src/components/Card/MyBookingsCard";
-import { TopBar } from "../../../src/components/navigation/TopBar";
+import { TopBar } from "../../../src/components/Navigation/TopBar";
 import { Box } from "@mui/material";
 
 export default function MyBookings() {
