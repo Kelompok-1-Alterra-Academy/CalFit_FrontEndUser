@@ -25,18 +25,11 @@ const routeIndex = [
     index: 3,
   },
   {
-    selected: ["/schedule"],
-    path: "/schedule",
-    label: "Schedule",
-    icon: <DateRangeIcon />,
-    index: 4,
-  },
-  {
     selected: ["/account"],
     path: "/account",
     label: "Account",
     icon: <PersonIcon />,
-    index: 5,
+    index: 4,
   },
 ];
 
