@@ -41,7 +41,7 @@ export default function Account() {
           <>
             <Image src={dummyPP} width={92} height={92} alt="Profile Picture" />
             <Box className={classes.userInfo}>
-              <h3 className={classes.userInfoUsername}>{userdata?.username}</h3>
+              <h3 className={classes.userInfoUsername}>{userdata?.fullname}</h3>
               <h5 className={classes.userInfoEmail}>{userdata?.email}</h5>
               <h4 className={classes.userInfoMembership}>
                 {userdata?.membership_name}
