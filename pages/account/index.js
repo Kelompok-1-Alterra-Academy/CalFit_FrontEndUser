@@ -26,7 +26,7 @@ export default function Account() {
       const { Id } = jwtDecode();
       getUserByID(token, setUserdata, Id);
     }
-  }, []);
+  }, [token]);
 
   const handleOnClick = () => router.push("/account/edit");
 

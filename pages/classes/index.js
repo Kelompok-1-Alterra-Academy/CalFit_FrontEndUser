@@ -30,7 +30,7 @@ export default function Classes() {
         <div className={styles.pagetitle}>
           <h1>Classes</h1>
           {token && (
-            <Link href="/account">
+            <Link href="/account" passHref>
               <Image
                 src="/dummy-pp.png"
                 className={styles.ppdummy}

@@ -50,7 +50,7 @@ export default function EditAccount() {
       const { Id } = jwtDecode();
       getUserByID(token, setData, Id);
     }
-  }, []);
+  }, [token]);
 
   const handleClickShowPassword = (type) => {
     switch (type) {
