@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import styles from "../../../styles/Home.module.css";
+import styles from "../../../styles/Index.module.css";
 import { getAllClasses } from "../../utils/fetchApi/classes";
 import FeaturedClassesCard from "./FeaturedClassesCard";
 import loadingSVG from "../../../public/ripple-loading.svg";

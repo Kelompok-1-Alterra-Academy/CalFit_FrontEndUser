@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Box } from "@mui/material";
 import CreateIcon from "@mui/icons-material/Create";
 import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
-import { useStyles } from "../../styles/Account.styles";
+import { useStyles } from "../../styles/account/Index.styles";
 import { parseCookies, destroyCookie } from "nookies";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";

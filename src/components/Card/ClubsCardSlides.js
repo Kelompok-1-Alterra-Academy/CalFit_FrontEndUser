@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import ClubsCard from "./ClubsCard";
-import styles from "../../../styles/Home.module.css";
 import { getAllGyms } from "../../utils/fetchApi/clubs";
 import loadingSVG from "../../../public/ripple-loading.svg";
 import Image from "next/image";
@@ -20,7 +19,7 @@ export default function ClubsCardSlides({ count }) {
           <Image src={loadingSVG} width={200} height={200} alt="loading" />
         </div>
       ) : (
-        <div className={styles.slides}>
+        <div>
           {/* loop card slides with count */}
           {slides.map((slide, index) => (
             <ClubsCard key={index} index={index} club={slide} />
