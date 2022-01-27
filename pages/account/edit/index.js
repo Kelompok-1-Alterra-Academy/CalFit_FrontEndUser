@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import {
   Box,
@@ -7,6 +8,7 @@ import {
   InputAdornment,
   IconButton,
   Button,
+  InputLabel,
 } from "@mui/material";
 import { VisibilityOff, Visibility } from "@mui/icons-material";
 import { TopBar } from "../../../src/components/Navigation/TopBar";
@@ -19,6 +21,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { showAlert } from "../../../src/store/AlertReducers";
 import { CustomAlert } from "../../../src/components/Alert/Alert";
 import { useRouter } from "next/router";
+import { cloudinaryUploadApi } from "../../../src/utils/fetchApi/api";
 
 export default function EditAccount() {
   const router = useRouter();
@@ -28,6 +31,7 @@ export default function EditAccount() {
     confirmPassword: false,
   });
   const [data, setData] = useState();
+  const [photoURL, setPhotoURL] = useState();
   const [error, setError] = useState({
     fullname: {
       status: false,
@@ -38,6 +42,10 @@ export default function EditAccount() {
       message: "",
     },
     confirmPassword: {
+      status: false,
+      message: "",
+    },
+    photo: {
       status: false,
       message: "",
     },
@@ -105,10 +113,12 @@ export default function EditAccount() {
           status: false,
         },
       });
+
       const newData = {
         email: data?.email,
         fullname: data?.fullname,
         password: data?.password,
+        photo: photoURL,
       };
       try {
         const res = await updateUser(token, newData);
@@ -154,6 +164,36 @@ export default function EditAccount() {
     }
   };
 
+  const handleChangePhoto = async (e) => {
+    if (!e.target.files[0]) return;
+    if (e.target.files[0].size > 5000000) {
+      setError({
+        ...error,
+        photo: {
+          status: true,
+          message: "picture size must be less than 5MB",
+        },
+      });
+      return;
+    }
+    if (
+      e.target.files[0].type !== "image/jpeg" &&
+      e.target.files[0].type !== "image/png" &&
+      e.target.files[0].type !== "image/jpg"
+    ) {
+      setError({
+        ...error,
+        photo: {
+          status: true,
+          message: "picture must be a jpeg, jpg, or png",
+        },
+      });
+      return;
+    }
+    const url = await cloudinaryUploadApi(e.target.files[0]);
+    setPhotoURL(url);
+  };
+
   return (
     <div className={styles.container}>
       <Head>
@@ -163,14 +203,48 @@ export default function EditAccount() {
       <TopBar label="Edit Account"></TopBar>
       {alert.status && <CustomAlert data={alert} />}
       <main className={styles.main}>
-        <Box
-          component="form"
-          className={styles.loginForm}
-          onSubmit={(e) => handleOnSubmit(e)}
-        >
+        <Box component="form" onSubmit={(e) => handleOnSubmit(e)}>
           <Typography variant="h1" sx={{ marginBottom: "3%" }}>
             Edit Account
           </Typography>
+          <Box
+            component="div"
+            style={{ display: "block", textAlign: "center" }}
+          >
+            <Image
+              src={
+                data?.photo
+                  ? data.photo
+                  : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+              }
+              width={92}
+              height={92}
+              alt="Profile Picture"
+            />
+          </Box>
+          <InputLabel id="card-label" style={{ color: "white" }}>
+            Card Picture
+          </InputLabel>
+          <TextField
+            sx={{
+              margin: "2% 0",
+              width: "100%",
+              "& label.MuiInputLabel-root": {
+                color: "white",
+              },
+              "& .MuiOutlinedInput-root": {
+                color: "white",
+              },
+            }}
+            labelId="card-label"
+            style={{ marginTop: 0 }}
+            type="file"
+            name="photo"
+            onChange={(e) => handleChangePhoto(e)}
+            error={error.photo.status}
+            helperText={error.photo.message}
+          ></TextField>
+
           <TextField
             sx={{
               margin: "2% 0",

@@ -1,5 +1,5 @@
 import { parseCookies } from "nookies";
-import baseApi from "./api";
+import { baseApi } from "./api";
 
 export const getAllClasses = async (
   setLoadingState,

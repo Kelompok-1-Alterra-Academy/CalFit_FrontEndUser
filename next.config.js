@@ -5,6 +5,8 @@ module.exports = {
       "unsplash.com",
       "img-s-msn-com.akamaized.net",
       "lh3.googleusercontent.com",
+      "cdn.pixabay.com",
+      "res.cloudinary.com",
     ],
   },
   env: {

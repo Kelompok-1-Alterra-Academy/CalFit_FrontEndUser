@@ -37,11 +37,16 @@ export default function Account() {
         {userdata && (
           <>
             <Image
-              src={userdata?.photo}
+              src={
+                userdata.photo
+                  ? userdata.photo
+                  : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+              }
               width={92}
               height={92}
               alt="Profile Picture"
             />
+
             <Box className={classes.userInfo}>
               <h3 className={classes.userInfoUsername}>{userdata?.fullname}</h3>
               <h5 className={classes.userInfoEmail}>{userdata?.email}</h5>
