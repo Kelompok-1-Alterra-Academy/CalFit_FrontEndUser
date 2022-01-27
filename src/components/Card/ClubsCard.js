@@ -14,13 +14,13 @@ export default function ClubsCard({ club }) {
   const router = useRouter();
 
   return (
-    <Card>
+    <Card sx={{ maxWidth: 220, maxHeight: 220 }}>
       <CardActionArea onClick={() => router.push(`/clubs/${club.id}`)}>
         <div>
           <div className={styles.darkFilter} />
           <CardMedia
             component="img"
-            height="240"
+            height="220"
             image={club?.picture}
             alt={club?.name}
           />

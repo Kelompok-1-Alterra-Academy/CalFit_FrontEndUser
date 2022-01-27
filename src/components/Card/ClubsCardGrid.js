@@ -12,7 +12,7 @@ export default function ClubsCardGrid() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getAllGyms(setLoading, setGyms, { limit: 100, page: 1 });
+    getAllGyms(setLoading, setGyms, { limit: 10, page: 1 });
   }, []);
 
   return (

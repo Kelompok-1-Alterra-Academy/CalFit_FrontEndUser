@@ -1,8 +1,4 @@
-/* eslint-disable @next/next/link-passhref */
 import Head from "next/head";
-import Image from "next/image";
-import Link from "next/link";
-import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import ClubsCardGrid from "../../src/components/Card/ClubsCardGrid";
 import styles from "../../styles/clubs/Index.module.css";
 
@@ -18,19 +14,9 @@ export default function Clubs() {
       <main className={styles.main}>
         <div className={styles.pagetitle}>
           <h1>Clubs</h1>
-          <Link href="/account">
-            <Image
-              src="/dummy-pp.png"
-              className={styles.ppdummy}
-              alt="Profile Picture Dummy"
-              height={65}
-              width={65}
-            />
-          </Link>
         </div>
         <div className={styles.description}>
           <h3>Explore All Clubs</h3>
-          <FilterAltIcon className={styles.filtericon} />
         </div>
         <ClubsCardGrid />
       </main>
