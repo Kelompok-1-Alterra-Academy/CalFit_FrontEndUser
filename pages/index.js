@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/link-passhref */
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
@@ -8,11 +7,34 @@ import ClassesCardSlides from "../src/components/Card/ClassesCardSlides";
 import { useSelector } from "react-redux";
 import { CustomAlert } from "../src/components/Alert/Alert";
 import SubscriptionModal from "../src/components/Modal/SubscriptionsModal";
+import { useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
+import auth from "../src/utils/fetchApi/auth";
 import { parseCookies } from "nookies";
+import jwtDecode from "../src/utils/jwtDecode/jwtDecode";
+import { getUserByID } from "../src/utils/fetchApi/users";
 
 export default function Home() {
   const alertContent = useSelector((state) => state.alert.alertContent);
+  const [data, setData] = useState();
   const { token } = parseCookies();
+  const { data: session } = useSession();
+  useEffect(() => {
+    if (session) {
+      auth(
+        "loginOAuth",
+        {
+          email: session?.user.email,
+          photo: session?.user.image,
+        },
+        setData
+      );
+    }
+    if (token) {
+      const { Id } = jwtDecode();
+      getUserByID(token, setData, Id);
+    }
+  }, [session, token]);
   return (
     <div className={styles.root}>
       <Head>
@@ -37,10 +59,14 @@ export default function Home() {
           width={65}
           height={12}
         />
-        {token && (
+        {data && (
           <Link href="/account">
             <Image
-              src="/dummy-pp.png"
+              src={
+                data?.photo
+                  ? data.photo
+                  : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+              }
               className={styles.ppdummy}
               alt="Profile Picture Dummy"
               width={65}

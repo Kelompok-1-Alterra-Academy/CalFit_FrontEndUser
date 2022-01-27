@@ -10,5 +10,24 @@ const baseApi = axios.create({
   },
 });
 
-export default baseApi;
-// export { baseApi};
+const cloudinaryUploadApi = async (picture) => {
+  if (!picture) return;
+  const formData = new FormData();
+  formData.append("file", picture);
+  formData.append(
+    "upload_preset",
+    process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET
+  );
+  formData.append("cloud_name", process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME);
+
+  return await fetch(process.env.NEXT_PUBLIC_CLOUDINARY_API_URL, {
+    method: "post",
+    body: formData,
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      return data.secure_url;
+    })
+    .catch((err) => err);
+};
+export { baseApi, cloudinaryUploadApi };

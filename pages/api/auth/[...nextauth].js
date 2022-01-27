@@ -9,12 +9,4 @@ export default NextAuth({
     }),
   ],
   secret: process.env.SECRET,
-  callbacks: {
-    async jwt(params) {
-      if (params?.account?.access_token) {
-        params.token.acesssToken = params.account.access_token;
-      }
-      return params.token;
-    },
-  },
 });

@@ -23,7 +23,6 @@ import {
 } from "../../utils/validation/validation";
 import { useDispatch, useSelector } from "react-redux";
 import { showAlert } from "../../store/AlertReducers";
-import { setUserdata } from "../../store/UsersReducer";
 import { setCookie } from "nookies";
 import jwtDecode from "../../utils/jwtDecode/jwtDecode";
 
@@ -76,7 +75,7 @@ export default function AuthForm({ path }) {
   };
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-    if (data.email === "" || data.password == "") {
+    if (data?.email === "" || data?.password == "") {
       dispatch(
         showAlert({
           alertContent: {
@@ -87,10 +86,9 @@ export default function AuthForm({ path }) {
       );
     } else {
       try {
-        const res = await auth(path.toLowerCase(), data);
+        const res = await auth(path.toLowerCase(), data, setData);
         setCookie(null, "token", res.data.token);
         const { Email } = jwtDecode();
-        setData({ ...data, password: "" });
         switch (res.status) {
           case 201:
             dispatch(
@@ -104,11 +102,6 @@ export default function AuthForm({ path }) {
             router.push("/login");
             break;
           case 200:
-            dispatch(
-              setUserdata({
-                userdata: res.data,
-              })
-            );
             router.push("/");
             setTimeout(() => {
               dispatch(
@@ -180,7 +173,7 @@ export default function AuthForm({ path }) {
           className={classes.textField}
           label="Password"
           name="password"
-          value={data.password}
+          value={data?.password}
           type={showPassword ? "text" : "password"}
           onChange={(e) => handleOnChange(e)}
           error={error.password.status}
@@ -224,7 +217,7 @@ export default function AuthForm({ path }) {
               startIcon={<Google />}
               onClick={() =>
                 signIn("google", {
-                  callbackUrl: process.env.NEXTAUTH_URL,
+                  callbackUrl: `${process.env.NEXTAUTH_URL}`,
                 })
               }
             >
