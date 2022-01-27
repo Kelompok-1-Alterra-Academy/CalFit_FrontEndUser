@@ -35,7 +35,7 @@ export function CustomAlert({ data: { message } }) {
         ),
       5000
     );
-  }, [alertContent.status]);
+  }, [alertContent.status, dispatch]);
 
   const action = (
     <>

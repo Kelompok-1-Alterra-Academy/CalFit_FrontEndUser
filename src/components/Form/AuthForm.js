@@ -201,7 +201,7 @@ export default function AuthForm({ path }) {
         {path === "Register" ? (
           <>
             <h4>Already Have An Account?</h4>
-            <Link href="/login">
+            <Link href="/login" passHref>
               <Button variant="contained" className={classes.button}>
                 Login
               </Button>
@@ -211,7 +211,7 @@ export default function AuthForm({ path }) {
           <>
             <h4>
               Dont have account?{" "}
-              <Link href="/register">
+              <Link href="/register" passHref>
                 <MaterialLink variant="contained" className={classes.link}>
                   Register here
                 </MaterialLink>

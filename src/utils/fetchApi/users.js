@@ -16,7 +16,7 @@ export const updateUser = (token, data) => {
   return baseApi
     .put(
       "account",
-      { email: data.email, username: data.username, password: data.password },
+      { email: data.email, fullname: data.fullname, password: data.password },
       { headers: { Authorization: `Bearer ${token}` } }
     )
     .then((data) => data);

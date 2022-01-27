@@ -9,7 +9,7 @@ import {
   Button,
 } from "@mui/material";
 import { VisibilityOff, Visibility } from "@mui/icons-material";
-import { TopBar } from "../../../src/components/navigation/TopBar";
+import { TopBar } from "../../../src/components/Navigation/TopBar";
 import styles from "../../../styles/account/edit/Index.module.css";
 import { passwordValidation } from "../../../src/utils/validation/validation";
 import { parseCookies } from "nookies";
@@ -29,7 +29,7 @@ export default function EditAccount() {
   });
   const [data, setData] = useState();
   const [error, setError] = useState({
-    username: {
+    fullname: {
       status: false,
       message: "",
     },
@@ -50,7 +50,7 @@ export default function EditAccount() {
       const { Id } = jwtDecode();
       getUserByID(token, setData, Id);
     }
-  }, []);
+  }, [token]);
 
   const handleClickShowPassword = (type) => {
     switch (type) {
@@ -67,8 +67,8 @@ export default function EditAccount() {
   };
   const handleOnChange = (e) => {
     switch (e.target.name) {
-      case "username":
-        setData({ ...data, username: e.target.value });
+      case "fullname":
+        setData({ ...data, fullname: e.target.value });
         break;
       case "password":
         setData({ ...data, password: e.target.value });
@@ -107,7 +107,7 @@ export default function EditAccount() {
       });
       const newData = {
         email: data?.email,
-        username: data?.username,
+        fullname: data?.fullname,
         password: data?.password,
       };
       try {
@@ -182,14 +182,14 @@ export default function EditAccount() {
                 color: "white",
               },
             }}
-            label="Username"
-            key={data?.username ? "notLoadedYet" : "loaded"}
-            defaultValue={data?.username}
-            name="username"
+            label="Fullname"
+            key={data?.fullname ? "notLoadedYet" : "loaded"}
+            defaultValue={data?.fullname}
+            name="fullname"
             path="text"
             onChange={(e) => handleOnChange(e)}
-            error={error.username.status}
-            helperText={error.username.message}
+            error={error.fullname.status}
+            helperText={error.fullname.message}
           ></TextField>
           <TextField
             sx={{
