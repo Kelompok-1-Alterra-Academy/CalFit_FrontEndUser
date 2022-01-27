@@ -10,10 +10,14 @@ import SubscriptionModal from "../src/components/Modal/SubscriptionsModal";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import auth from "../src/utils/fetchApi/auth";
+import { parseCookies } from "nookies";
+import jwtDecode from "../src/utils/jwtDecode/jwtDecode";
+import { getUserByID } from "../src/utils/fetchApi/users";
 
 export default function Home() {
   const alertContent = useSelector((state) => state.alert.alertContent);
   const [data, setData] = useState();
+  const { token } = parseCookies();
   const { data: session } = useSession();
   useEffect(() => {
     if (session) {
@@ -25,8 +29,11 @@ export default function Home() {
         },
         setData
       );
+    } else {
+      const { Id } = jwtDecode();
+      getUserByID(token, setData, Id);
     }
-  }, [session]);
+  }, [session, token]);
   return (
     <div className={styles.root}>
       <Head>

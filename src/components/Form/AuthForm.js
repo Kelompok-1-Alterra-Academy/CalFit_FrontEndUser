@@ -75,7 +75,7 @@ export default function AuthForm({ path }) {
   };
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-    if (data.email === "" || data.password == "") {
+    if (data?.email === "" || data?.password == "") {
       dispatch(
         showAlert({
           alertContent: {
@@ -86,10 +86,9 @@ export default function AuthForm({ path }) {
       );
     } else {
       try {
-        const res = await auth(path.toLowerCase(), data);
+        const res = await auth(path.toLowerCase(), data, setData);
         setCookie(null, "token", res.data.token);
         const { Email } = jwtDecode();
-        setData({ ...data, password: "" });
         switch (res.status) {
           case 201:
             dispatch(
@@ -174,7 +173,7 @@ export default function AuthForm({ path }) {
           className={classes.textField}
           label="Password"
           name="password"
-          value={data.password}
+          value={data?.password}
           type={showPassword ? "text" : "password"}
           onChange={(e) => handleOnChange(e)}
           error={error.password.status}

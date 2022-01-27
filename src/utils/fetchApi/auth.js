@@ -14,8 +14,12 @@ export default async function auth(path, { email, password, photo }, setData) {
     }
   );
   const data = await res.json();
-  setData(data.data);
-  setCookie(null, "token", data.data.token);
+  if (path === "loginOAuth") {
+    setData(data.data);
+    setCookie(null, "token", data.data?.token);
+  } else {
+    setData({ password: "" });
+  }
   if (data.success === false) throw new Error(data.message);
   return data;
 }
