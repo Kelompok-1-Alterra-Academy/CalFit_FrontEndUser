@@ -8,11 +8,23 @@ import ClassesCardSlides from "../src/components/Card/ClassesCardSlides";
 import { useSelector } from "react-redux";
 import { CustomAlert } from "../src/components/Alert/Alert";
 import SubscriptionModal from "../src/components/Modal/SubscriptionsModal";
-import { parseCookies } from "nookies";
+import { parseCookies, setCookie } from "nookies";
+import { useSession } from "next-auth/react";
+import { useEffect } from "react";
+import auth from "../src/utils/fetchApi/auth";
 
 export default function Home() {
   const alertContent = useSelector((state) => state.alert.alertContent);
-  const { token } = parseCookies();
+  const token = parseCookies();
+  const { data: session } = useSession();
+  useEffect(async () => {
+    if (session) {
+      const res = await auth("loginOAuth", {
+        email: session?.user?.email,
+      });
+      setCookie(null, "token", res.data.token);
+    }
+  }, session);
   return (
     <div className={styles.root}>
       <Head>
@@ -37,7 +49,7 @@ export default function Home() {
           width={65}
           height={12}
         />
-        {token && (
+        {(token || session) && (
           <Link href="/account">
             <Image
               src="/dummy-pp.png"
