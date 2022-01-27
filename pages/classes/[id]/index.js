@@ -88,7 +88,8 @@ export default function ClassDetails() {
           <h3>Rp. {classes?.price}</h3>
           <h3>{classes?.gym_name}</h3>
         </div>
-        <h5>{classes?.schedules[0].time_schedule}</h5>
+        {console.log(classes)}
+        {classes?.schedules && <h5>{classes?.schedules[0].time_schedule}</h5>}
         <Typography className={styles.description}>
           {classes?.description}
         </Typography>
