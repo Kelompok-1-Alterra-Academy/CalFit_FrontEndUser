@@ -3,7 +3,7 @@ name: calfit_frontend
 on:
   push:
     branches:
-      - build/aws
+      - master
 
 jobs:
   build-push-docker:
