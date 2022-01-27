@@ -19,17 +19,17 @@ export default function FeaturedClassesCard({ content }) {
         <div>
           <CardMedia
             component="img"
-            height="360"
+            height="400"
             image={content?.banner_picture_url}
             alt={content?.name}
           />
         </div>
         <CardContent className={styles.cardContent}>
-            <Typography variant="h3" component="div">
-                {content?.name}
-            </Typography>
-            <Typography variant="subtitle4">{content?.description}</Typography>
-            {/* <Typography variant="body3">60 mins</Typography> */}
+          <Typography variant="h3" component="div">
+            {content?.name}
+          </Typography>
+          <Typography variant="subtitle4">{content?.description}</Typography>
+          {/* <Typography variant="body3">60 mins</Typography> */}
         </CardContent>
       </CardActionArea>
     </Card>

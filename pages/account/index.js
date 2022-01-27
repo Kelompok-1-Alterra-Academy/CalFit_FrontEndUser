@@ -84,12 +84,6 @@ export default function Account() {
                 <ArrowCircleRightIcon />
               </Box>
             </Link>
-            <Link href="/account/address" passHref>
-              <Box className={classes.menuList}>
-                <div className={classes.newsdetail}>Saved Address</div>
-                <ArrowCircleRightIcon />
-              </Box>
-            </Link>
             <Box
               component="div"
               className={classes.menuList}

@@ -1,7 +1,9 @@
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import styles from "../../../styles/Home.module.css";
 import { getAllClasses } from "../../utils/fetchApi/classes";
 import FeaturedClassesCard from "./FeaturedClassesCard";
+import loadingSVG from "../../../public/ripple-loading.svg";
 
 export default function FeaturedClassesCardSlides({ count }) {
   const [slides, setSlides] = useState([]);
@@ -12,11 +14,19 @@ export default function FeaturedClassesCardSlides({ count }) {
   }, [count]);
 
   return (
-    <div className={styles.banner}>
-      {/* loop card slides with count */}
-      {slides.map((slide, index) => (
-        <FeaturedClassesCard key={index} index={index} content={slide} />
-      ))}
-    </div>
+    <>
+      {loading ? (
+        <div>
+          <Image src={loadingSVG} width={200} height={200} alt="loading" />
+        </div>
+      ) : (
+        <div className={styles.banner}>
+          {/* loop card slides with count */}
+          {slides.map((slide, index) => (
+            <FeaturedClassesCard key={index} index={index} content={slide} />
+          ))}
+        </div>
+      )}
+    </>
   );
 }
