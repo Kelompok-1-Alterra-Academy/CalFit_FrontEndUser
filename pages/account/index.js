@@ -5,18 +5,15 @@ import { Box } from "@mui/material";
 import CreateIcon from "@mui/icons-material/Create";
 import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
 import { useStyles } from "../../styles/Account.styles";
-import dummyPP from "../../public/dummy-pp.png";
 import { parseCookies, destroyCookie } from "nookies";
 import { useRouter } from "next/router";
-import { useDispatch } from "react-redux";
-import { showAlert } from "../../src/store/AlertReducers";
 import { useEffect, useState } from "react";
 import { getUserByID } from "../../src/utils/fetchApi/users";
 import jwtDecode from "../../src/utils/jwtDecode/jwtDecode";
+import { signOut } from "next-auth/react";
 
 export default function Account() {
   const router = useRouter();
-  const dispatch = useDispatch();
   const classes = useStyles();
   const { token } = parseCookies();
   const [userdata, setUserdata] = useState();
@@ -37,9 +34,14 @@ export default function Account() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Box className={classes.userCard}>
-        {token && (
+        {userdata && (
           <>
-            <Image src={dummyPP} width={92} height={92} alt="Profile Picture" />
+            <Image
+              src={userdata?.photo}
+              width={92}
+              height={92}
+              alt="Profile Picture"
+            />
             <Box className={classes.userInfo}>
               <h3 className={classes.userInfoUsername}>{userdata?.fullname}</h3>
               <h5 className={classes.userInfoEmail}>{userdata?.email}</h5>
@@ -88,19 +90,11 @@ export default function Account() {
               className={classes.menuList}
               onClick={() => {
                 destroyCookie(null, "token");
-                router.push("/");
-                setTimeout(
-                  () =>
-                    dispatch(
-                      showAlert({
-                        alertContent: {
-                          message: `Logout Succesfull`,
-                          status: true,
-                        },
-                      })
-                    ),
-                  500
-                );
+                setTimeout(() => {
+                  signOut({
+                    callbackUrl: `${process.env.NEXTAUTH_URL}`,
+                  });
+                }, 500);
               }}
             >
               <div className={classes.newsdetail}>Logout</div>
