@@ -13,20 +13,65 @@ import {
   DialogTitle,
   DialogContent,
   DialogContentText,
+  TextField,
 } from "@mui/material";
 import { OndemandVideo, FitnessCenter, AccessTime } from "@mui/icons-material";
 import { TopBar } from "../../../../src/components/Navigation/TopBar";
 import styles from "../../../../styles/account/bookings/[id]/Index.module.css";
-import { getBookingsByID } from "../../../../src/utils/fetchApi/classes";
+import {
+  getBookingsByID,
+  updateBooking,
+} from "../../../../src/utils/fetchApi/classes";
+import { cloudinaryUploadApi } from "../../../../src/utils/fetchApi/api";
 export default function BookingDetails() {
   const route = useRouter();
   const [data, setData] = useState();
   const [open, setOpen] = useState();
+  const [invoice, setInvoice] = useState();
+  const [error, setError] = useState({
+    invoice: {
+      status: false,
+      message: "",
+    },
+  });
   const id = route.query.id;
 
   useEffect(() => {
     getBookingsByID(setData, id);
   }, [id]);
+
+  const handleInvoice = async (e) => {
+    if (!e.target.files[0]) return;
+    if (e.target.files[0].size > 5000000) {
+      setError({
+        invoice: {
+          status: true,
+          message: "picture size must be less than 5MB",
+        },
+      });
+      return;
+    }
+    if (
+      e.target.files[0].type !== "image/jpeg" &&
+      e.target.files[0].type !== "image/png" &&
+      e.target.files[0].type !== "image/jpg"
+    ) {
+      setError({
+        ...error,
+        invoice: {
+          status: true,
+          message: "picture must be a jpeg, jpg, or png",
+        },
+      });
+      return;
+    }
+    const url = await cloudinaryUploadApi(e.target.files[0]);
+    setInvoice(url);
+    await updateBooking(invoice, id);
+    setTimeout(() => {
+      setOpen(false);
+    }, 2000);
+  };
 
   const handleOnClick = (type) => {
     switch (type) {
@@ -34,11 +79,30 @@ export default function BookingDetails() {
         setOpen({
           status: true,
           title: "Link Classes",
-          content: data?.class.link,
+          content: <a href={data?.class.link}>{data?.class.link}</a>,
         });
         break;
       case "uploadPayment":
-        setOpen({ status: true, title: "Upload Payment", content: "Link" });
+        setOpen({
+          status: true,
+          title: "Upload Payment",
+          content: (
+            <>
+              <TextField
+                sx={{
+                  margin: "2% 0",
+                  width: "100%",
+                }}
+                style={{ marginTop: 0 }}
+                type="file"
+                name="invoice"
+                onChange={(e) => handleInvoice(e)}
+                error={error.invoice.status}
+                helperText={error.invoice.message}
+              ></TextField>
+            </>
+          ),
+        });
         break;
     }
   };
@@ -148,7 +212,7 @@ export default function BookingDetails() {
             <DialogTitle id="alert-dialog-title">{open.title}</DialogTitle>
             <DialogContent>
               <DialogContentText id="alert-dialog-description">
-                <a href={open.content}>{open.content}</a>
+                {open.content}
               </DialogContentText>
             </DialogContent>
           </Dialog>
