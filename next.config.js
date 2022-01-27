@@ -10,6 +10,6 @@ module.exports = {
     ],
   },
   env: {
-    BASE_URL: process.env.BASE_URL,
+    NEXTAUTH_URL: process.env.NEXTAUTH_URL,
   },
 };
