@@ -29,7 +29,8 @@ export default function Home() {
         },
         setData
       );
-    } else {
+    }
+    if (token) {
       const { Id } = jwtDecode();
       getUserByID(token, setData, Id);
     }
