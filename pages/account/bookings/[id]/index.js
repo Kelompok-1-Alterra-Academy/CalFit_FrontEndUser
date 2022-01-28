@@ -65,8 +65,7 @@ export default function BookingDetails() {
       });
       return;
     }
-    const url = await cloudinaryUploadApi(e.target.files[0]);
-    setInvoice(url);
+    const url = await cloudinaryUploadApi(e.target.files[0], setInvoice);
     await updateBooking(invoice, id);
     setTimeout(() => {
       setOpen(false);

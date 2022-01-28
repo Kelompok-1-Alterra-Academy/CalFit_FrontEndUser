@@ -190,8 +190,7 @@ export default function EditAccount() {
       });
       return;
     }
-    const url = await cloudinaryUploadApi(e.target.files[0]);
-    setPhotoURL(url);
+    await cloudinaryUploadApi(e.target.files[0], setPhotoURL);
   };
 
   return (
