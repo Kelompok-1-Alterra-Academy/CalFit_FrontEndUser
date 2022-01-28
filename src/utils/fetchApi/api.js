@@ -10,7 +10,7 @@ const baseApi = axios.create({
   },
 });
 
-const cloudinaryUploadApi = async (picture) => {
+const cloudinaryUploadApi = async (picture, setData) => {
   if (!picture) return;
   const formData = new FormData();
   formData.append("file", picture);
@@ -26,7 +26,7 @@ const cloudinaryUploadApi = async (picture) => {
   })
     .then((res) => res.json())
     .then((data) => {
-      return data.secure_url;
+      if (setData) setData(data.secure_url);
     })
     .catch((err) => err);
 };
