@@ -1,69 +1,82 @@
-import * as React from 'react';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import { getAllMemberships } from "../../utils/fetchApi/memberships"
-import { Button, Box, Typography } from '@mui/material';
-import { useRouter } from 'next/router';
-import { chooseMember, boxMember, formMember, button, price } from './SubscriptionsModalStyles';
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControl from "@mui/material/FormControl";
+import { getAllMemberships } from "../../utils/fetchApi/memberships";
+import { Button, Box, Typography } from "@mui/material";
+import { useRouter } from "next/router";
+import {
+  chooseMember,
+  boxMember,
+  formMember,
+  button,
+} from "./SubscriptionsModalStyles";
+import { useState, useEffect } from "react";
+import { parseCookies } from "nookies";
+import { updateUser } from "../../../src/utils/fetchApi/users";
+import jwtDecode from "../../utils/jwtDecode/jwtDecode";
 
 export default function SubscriptionsRadio() {
-    const [value, setValue] = React.useState(3)
-    const handleChange = (event) => {
-        setValue(event.target.value);
-    };
-    
-    const [memberships, setMemberships] = React.useState([]);
+  const { token } = parseCookies();
+  const [value, setValue] = useState();
+  const handleOnClick = (id) => {
+    setValue(id);
+  };
 
-    React.useEffect(() => {
-        getAllMemberships(setMemberships);
-    }, []);
-
-    const router = useRouter();
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const formData = new FormData();
-        Object.entries(memberships).forEach(([key, value]) => {
-            formData.append(key, value);
-        });
+  const handleButtonClick = async () => {
+    if (token) {
+      const { Email } = jwtDecode();
+      await updateUser(token, { email: Email, membershipID: value });
+      setTimeout(() => {
         router.push(`/subscription/${value}`);
+      }, 2000);
+    } else {
+      router.push("/login");
+    }
+  };
 
-    };
-    
-    var formatter = new Intl.NumberFormat('id-ID', {
-        style: 'currency',
-        currency: 'IDR',
-        minimumFractionDigits: 2
-    })
-    return (
-        <>
-        <form onSubmit={handleSubmit}>
-            <FormControl sx = { formMember }>
-                <Box sx = { chooseMember}>
-                    {(memberships.map((membership) => (
-                        <RadioGroup 
-                            sx = { boxMember }
-                            aria-labelledby='demo-controlled-radio-buttons-group' 
-                            name='subscription'
-                            value={value}
-                            onChange={handleChange} key={membership.id}>
-                                <FormControlLabel
-                                value={membership.id}
-                                control={<Radio />}
-                                label={membership.name}
-                                labelPlacement="bottom">
-                                </FormControlLabel>
-                                <Typography sx={price}>{membership.price}</Typography>
-                        </RadioGroup>
-                    )))}
-                </Box>
-                <Button sx={button, {mt: 2}} type='submit' variant ="contained">
-                    Continue
-                </Button>
-            </FormControl>
-        </form>
-        </>
-    )
+  const [memberships, setMemberships] = useState([]);
+
+  useEffect(() => {
+    getAllMemberships(setMemberships);
+  }, []);
+
+  const router = useRouter();
+
+  return (
+    <>
+      <form>
+        <FormControl sx={formMember}>
+          <Box sx={chooseMember}>
+            <RadioGroup
+              row
+              sx={boxMember}
+              aria-labelledby="demo-controlled-radio-buttons-group"
+              name="subscription"
+            >
+              {memberships.map((membership) => (
+                <>
+                  <FormControlLabel
+                    onClick={() => handleOnClick(membership.id)}
+                    key={membership.id}
+                    value={membership.id}
+                    control={<Radio />}
+                    label={`${membership.name}`}
+                    labelPlacement="bottom"
+                  ></FormControlLabel>
+                </>
+              ))}
+            </RadioGroup>
+          </Box>
+          <Button
+            sx={(button, { mt: 2 })}
+            onClick={() => handleButtonClick()}
+            variant="contained"
+          >
+            Continue
+          </Button>
+        </FormControl>
+      </form>
+    </>
+  );
 }
