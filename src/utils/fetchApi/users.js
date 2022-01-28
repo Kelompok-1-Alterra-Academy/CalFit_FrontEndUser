@@ -21,6 +21,7 @@ export const updateUser = (token, data) => {
         fullname: data.fullname,
         password: data.password,
         photo: data.photo,
+        membershipTypeId: data.membershipID,
       },
       { headers: { Authorization: `Bearer ${token}` } }
     )
