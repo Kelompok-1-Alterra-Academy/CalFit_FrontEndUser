@@ -6,7 +6,6 @@ export const getAllClasses = async (
   setData,
   { limit, page, filter = undefined }
 ) => {
-  console.log(filter);
   let url = `/classes?limit=${limit}&page=${page}`;
   if (filter?.online) {
     if (filter?.membershipID) {
