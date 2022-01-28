@@ -6,17 +6,35 @@ import ClassesCardListGrid from "../../src/components/Card/ClassesCardListGrid";
 import styles from "../../styles/classes/Index.module.css";
 import FeaturedClassesCardSlides from "../../src/components/Card/FeaturedClassesSlides";
 import { parseCookies } from "nookies";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FilterClassModal from "../../src/components/Modal/FilterClassModal";
+import { getUserByID } from "../../src/utils/fetchApi/users";
+import jwtDecode from "../../src/utils/jwtDecode/jwtDecode";
 
 export default function Classes() {
+  const { token } = parseCookies();
   const [openModal, setOpenModal] = useState(false);
   const [filterOption, setFilterOption] = useState({
     online: false,
+    membershipID: 0,
   });
+  const [userdata, setUserdata] = useState();
+
   const handleOnClick = () => {
     setOpenModal(true);
   };
+
+  useEffect(() => {
+    if (token) {
+      const { Id } = jwtDecode();
+      getUserByID(token, setUserdata, Id);
+      setFilterOption({
+        ...filterOption,
+        membershipID: userdata?.membership_type_id,
+      });
+    }
+  }, [token, userdata?.membership_type_id]);
+
   return (
     <div className={styles.container}>
       <Head>

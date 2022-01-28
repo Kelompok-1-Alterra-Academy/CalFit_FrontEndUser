@@ -5,6 +5,7 @@ export const getUserByID = async (token, setData, id) => {
     return await baseApi
       .get(`account/${id}`, { headers: { Authorization: `Bearer ${token}` } })
       .then(({ data: { data } }) => {
+        console.log(data);
         return setData(data);
       });
   } catch (error) {
