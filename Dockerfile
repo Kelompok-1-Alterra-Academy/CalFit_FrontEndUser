@@ -15,6 +15,7 @@ RUN npm run build
 # Production image, copy all the files and run next
 FROM node:14-alpine AS production
 WORKDIR /app
+COPY --from=builder /app/next.config.json ./
 COPY --from=builder /app/package.json ./package.json
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/public ./public

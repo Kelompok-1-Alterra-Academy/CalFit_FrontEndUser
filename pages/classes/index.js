@@ -10,7 +10,6 @@ import { useState } from "react";
 import FilterClassModal from "../../src/components/Modal/FilterClassModal";
 
 export default function Classes() {
-  const { token } = parseCookies();
   const [openModal, setOpenModal] = useState(false);
   const [filterOption, setFilterOption] = useState({
     online: false,
@@ -29,22 +28,11 @@ export default function Classes() {
       <main className={styles.main}>
         <div className={styles.pagetitle}>
           <h1>Classes</h1>
-          {token && (
-            <Link href="/account" passHref>
-              <Image
-                src="/dummy-pp.png"
-                className={styles.ppdummy}
-                alt="Profile Picture Dummy"
-                height={65}
-                width={65}
-              />
-            </Link>
-          )}
         </div>
         <div className={styles.description}>
-          <h3>Featured Classes</h3>
+          <h3>New Classes</h3>
         </div>
-        {/* <FeaturedClassesCardSlides/> */}
+        <FeaturedClassesCardSlides count={2} />
         <div className={styles.description}>
           <h3>Explore All Classes</h3>
           <FilterAltIcon

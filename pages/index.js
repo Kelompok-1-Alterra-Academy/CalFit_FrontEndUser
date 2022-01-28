@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
-import styles from "../styles/Home.module.css";
+import styles from "../styles/Index.module.css";
 import Link from "next/link";
 import ClubsCardSlides from "../src/components/Card/ClubsCardSlides";
 import ClassesCardSlides from "../src/components/Card/ClassesCardSlides";

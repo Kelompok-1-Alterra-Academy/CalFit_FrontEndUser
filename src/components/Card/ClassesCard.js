@@ -20,7 +20,7 @@ export default function ClassesCard({ content }) {
           <div className={styles.darkFilter} />
           <CardMedia
             component="img"
-            height="220"
+            height="250"
             image={content?.card_picture_url}
             alt={content?.name}
           />
