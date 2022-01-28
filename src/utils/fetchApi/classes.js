@@ -6,9 +6,16 @@ export const getAllClasses = async (
   setData,
   { limit, page, filter = undefined }
 ) => {
+  console.log(filter);
   let url = `/classes?limit=${limit}&page=${page}`;
-  if (filter?.online === true) {
-    url = `/classes?limit=${limit}&page=${page}&online=${filter.online}`;
+  if (filter?.online) {
+    if (filter?.membershipID) {
+      url = `/classes?limit=${limit}&page=${page}&online=${filter.online}&membershipID=${filter.membershipID}`;
+    } else {
+      url = `/classes?limit=${limit}&page=${page}&online=${filter.online}`;
+    }
+  } else if (filter?.membershipID) {
+    url = `/classes?limit=${limit}&page=${page}&membershipID=${filter.membershipID}`;
   }
   setLoadingState(true);
   return baseApi
