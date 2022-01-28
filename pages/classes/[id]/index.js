@@ -7,7 +7,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CustomDialog from "../../../src/components/Dialog/Dialog";
 import { TopBar } from "../../../src/components/Navigation/TopBar";
-import Loading from "../../../src/components/page/Loading";
+import Loading from "../../../src/components/Page/Loading";
 import { getClassById } from "../../../src/utils/fetchApi/classes";
 import jwtDecode from "../../../src/utils/jwtDecode/jwtDecode";
 import styles from "../../../styles/classes/[id]/Index.module.css";
