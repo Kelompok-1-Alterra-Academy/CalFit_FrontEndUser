@@ -79,3 +79,20 @@ export const getBookingsByID = async (setData, id) => {
     console.log(error.message);
   }
 };
+
+export const updateBooking = async (paymentProof, id) => {
+  const { token } = parseCookies();
+  try {
+    return await baseApi
+      .put(
+        `booking/${id}`,
+        {
+          payment_proof: paymentProof,
+        },
+        { headers: { Authorization: `Bearer ${token}` } }
+      )
+      .then((data) => data);
+  } catch (error) {
+    console.log(error.message);
+  }
+};
